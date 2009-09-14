@@ -470,6 +470,17 @@ namespace Ninject.Extensions.Conventions
             _autoLoadModules = true;
         }
 
+        public void IncludeAllTypesOf<T>()
+        {
+            IncludeAllTypesOf( typeof (T) );
+        }
+
+        public void IncludeAllTypesOf( Type type )
+        {
+            _bindingGenerators.Add( new RegexBindingGenerator( type.Name ) );
+            IncludeTypes( type.IsAssignableFrom );
+        }
+
         #endregion
     }
 }
