@@ -196,5 +196,17 @@ namespace Ninject.Extensions.Conventions
         /// 
         /// </summary>
         void AutoLoadModules();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        void IncludeAllTypesOf<T>();
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
+        void IncludeAllTypesOf( Type type );
     }
 }

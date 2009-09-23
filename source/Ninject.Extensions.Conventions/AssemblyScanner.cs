@@ -470,11 +470,19 @@ namespace Ninject.Extensions.Conventions
             _autoLoadModules = true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
         public void IncludeAllTypesOf<T>()
         {
             IncludeAllTypesOf( typeof (T) );
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="type"></param>
         public void IncludeAllTypesOf( Type type )
         {
             _bindingGenerators.Add( new RegexBindingGenerator( type.Name ) );
