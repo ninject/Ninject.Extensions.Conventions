@@ -1,6 +1,10 @@
+#region Using Directives
+
 using System.Linq;
 using Ninject.Extensions.Conventions.Tests.Fakes;
 using Xunit;
+
+#endregion
 
 namespace Ninject.Extensions.Conventions.Tests
 {

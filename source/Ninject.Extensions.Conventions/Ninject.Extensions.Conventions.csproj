@@ -52,6 +52,7 @@
     <Compile Include="ExtensionsForIKernel.cs" />
     <Compile Include="DefaultBindingGenerator.cs" />
     <Compile Include="ExtensionsForAssembly.cs" />
+    <Compile Include="GenericBindingGenerator.cs" />
     <Compile Include="IAssemblyScanner.cs" />
     <Compile Include="IBindingGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
