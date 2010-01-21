@@ -1,7 +1,7 @@
 ﻿#region License
 
 // 
-// Author: Ian Davis <ian.f.davis@gmail.com>
+// Author: Ian Davis <ian@innovatian.com>
 // 
 // Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 // See the file LICENSE.txt for details.

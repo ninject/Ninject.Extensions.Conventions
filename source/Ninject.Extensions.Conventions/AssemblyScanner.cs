@@ -1,7 +1,7 @@
 #region License
 
 // 
-// Author: Ian Davis <ian.f.davis@gmail.com>
+// Author: Ian Davis <ian@innovatian.com>
 // Based on StructureMap 2.5 AssemblyScanner by Jeremy Miller.
 // 
 // Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -18,6 +18,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Ninject.Activation;
+using Ninject.Infrastructure;
 
 #endregion
 
@@ -28,15 +30,29 @@ namespace Ninject.Extensions.Conventions
     /// </summary>
     public class AssemblyScanner : IAssemblyScanner
     {
-        private readonly List<Assembly> _assemblies = new List<Assembly>();
-        private readonly List<IBindingGenerator> _bindingGenerators = new List<IBindingGenerator>();
-        private readonly List<Predicate<Type>> _excludes = new List<Predicate<Type>>();
-        private readonly List<Predicate<Type>> _includes = new List<Predicate<Type>>();
         private bool _autoLoadModules;
+
+        public AssemblyScanner()
+        {
+            Includes = new List<Predicate<Type>>();
+            Excludes = new List<Predicate<Type>>();
+            BindingGenerators = new List<IBindingGenerator>();
+            TargetAssemblies = new List<Assembly>();
+        }
+
+        protected Func<IContext, object> ScopeCallback { get; set; }
+
+        protected List<Assembly> TargetAssemblies { get; private set; }
+
+        public List<IBindingGenerator> BindingGenerators { get; private set; }
+
+        protected List<Predicate<Type>> Excludes { get; private set; }
+
+        protected List<Predicate<Type>> Includes { get; private set; }
 
         internal void Process( IKernel kernel )
         {
-            _assemblies.ForEach( assembly => Process( assembly, kernel ) );
+            TargetAssemblies.ForEach( assembly => Process( assembly, kernel ) );
         }
 
         private void Process( Assembly assembly, IKernel kernel )
@@ -46,22 +62,26 @@ namespace Ninject.Extensions.Conventions
                 kernel.Load( assembly );
             }
 
+            if ( ScopeCallback == null )
+            {
+                ScopeCallback = StandardScopeCallbacks.Transient;
+            }
             foreach ( Type exportedType in assembly.GetExportedTypes() )
             {
                 Type type = exportedType;
-                bool include = _includes.Count == 0 || _includes.Exists( predicate => predicate( type ) );
+                bool include = Includes.Count == 0 || Includes.Exists( predicate => predicate( type ) );
                 if ( !include )
                 {
                     continue;
                 }
 
-                bool exclude = _excludes.Exists( predicate => predicate( type ) );
+                bool exclude = Excludes.Exists( predicate => predicate( type ) );
                 if ( exclude )
                 {
                     continue;
                 }
 
-                _bindingGenerators.ForEach( bindingGenerator => bindingGenerator.Process( type, kernel ) );
+                BindingGenerators.ForEach( bindingGenerator => bindingGenerator.Process( type, ScopeCallback, kernel ) );
             }
         }
 
@@ -136,9 +156,9 @@ namespace Ninject.Extensions.Conventions
         /// <param name="assembly">The assembly.</param>
         public void Assembly( Assembly assembly )
         {
-            if ( !_assemblies.Contains( assembly ) )
+            if ( !TargetAssemblies.Contains( assembly ) )
             {
-                _assemblies.Add( assembly );
+                TargetAssemblies.Add( assembly );
             }
         }
 
@@ -178,9 +198,9 @@ namespace Ninject.Extensions.Conventions
         {
             foreach ( Assembly assembly in assemblies )
             {
-                if ( !_assemblies.Contains( assembly ) )
+                if ( !TargetAssemblies.Contains( assembly ) )
                 {
-                    _assemblies.Add( assembly );
+                    TargetAssemblies.Add( assembly );
                 }
             }
         }
@@ -191,7 +211,7 @@ namespace Ninject.Extensions.Conventions
         /// <param name="assembly">The assembly.</param>
         public void Assembly( string assembly )
         {
-            if ( !_assemblies.Exists(
+            if ( !TargetAssemblies.Exists(
                       asm => string.Equals( asm.GetName().Name, assembly, StringComparison.OrdinalIgnoreCase ) ) )
             {
                 Assembly( AppDomain.CurrentDomain.Load( assembly ) );
@@ -353,7 +373,7 @@ namespace Ninject.Extensions.Conventions
         /// <param name="filter">The filter.</param>
         public void IncludeTypes( Predicate<Type> filter )
         {
-            _includes.Add( filter );
+            Includes.Add( filter );
         }
 
         /// <summary>
@@ -410,7 +430,7 @@ namespace Ninject.Extensions.Conventions
         /// <param name="filter">The filter.</param>
         public void ExcludeTypes( Predicate<Type> filter )
         {
-            _excludes.Add( filter );
+            Excludes.Add( filter );
         }
 
         /// <summary>
@@ -437,9 +457,9 @@ namespace Ninject.Extensions.Conventions
         /// <typeparam name="T"></typeparam>
         public void Using<T>() where T : IBindingGenerator, new()
         {
-            if ( !_bindingGenerators.Exists( bindingGenerator => bindingGenerator.GetType() == typeof (T) ) )
+            if ( !BindingGenerators.Exists( bindingGenerator => bindingGenerator.GetType() == typeof (T) ) )
             {
-                _bindingGenerators.Add( new T() );
+                BindingGenerators.Add( new T() );
             }
         }
 
@@ -448,9 +468,9 @@ namespace Ninject.Extensions.Conventions
         /// </summary>
         public void Using( IBindingGenerator generator )
         {
-            if ( !_bindingGenerators.Exists( bindingGenerator => bindingGenerator.GetType() == generator.GetType() ) )
+            if ( !BindingGenerators.Exists( bindingGenerator => bindingGenerator.GetType() == generator.GetType() ) )
             {
-                _bindingGenerators.Add( generator );
+                BindingGenerators.Add( generator );
             }
         }
 
@@ -485,9 +505,56 @@ namespace Ninject.Extensions.Conventions
         /// <param name="type"></param>
         public void IncludeAllTypesOf( Type type )
         {
-            _bindingGenerators.Add( new RegexBindingGenerator( type.Name ) );
+            BindingGenerators.Add( new RegexBindingGenerator( type.Name ) );
             IncludeTypes( type.IsAssignableFrom );
         }
+
+        /// <summary>
+        /// Indicates that instances activated via the binding should be re-used as long as the object
+        /// returned by the provided callback remains alive (that is, has not been garbage collected).
+        /// </summary>
+        /// <param name="scope">The callback that returns the scope.</param>
+        public void InScope( Func<IContext, object> scope )
+        {
+            ScopeCallback = scope;
+        }
+
+        /// <summary>
+        /// Indicates that only a single instance of the binding should be created, and then
+        /// should be re-used for all subsequent requests.
+        /// </summary>
+        public void InSingletonScope()
+        {
+            ScopeCallback = StandardScopeCallbacks.Singleton;
+        }
+
+        /// <summary>
+        /// Indicates that instances activated via the binding should not be re-used, nor have
+        /// their lifecycle managed by Ninject.
+        /// </summary>
+        public void InTransientScope()
+        {
+            ScopeCallback = StandardScopeCallbacks.Transient;
+        }
+
+        /// <summary>
+        /// Indicates that instances activated via the binding should be re-used within the same thread.
+        /// </summary>
+        public void InThreadScope()
+        {
+            ScopeCallback = StandardScopeCallbacks.Thread;
+        }
+
+        #if !NO_WEB
+        /// <summary>
+        /// Indicates that instances activated via the binding should be re-used within the same
+        /// HTTP request.
+        /// </summary>
+        public void InRequestScope()
+        {
+            ScopeCallback = StandardScopeCallbacks.Request;
+        }
+        #endif
 
         #endregion
     }

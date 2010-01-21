@@ -1,7 +1,7 @@
 #region License
 
 // 
-// Author: Ian Davis <ian.f.davis@gmail.com>
+// Author: Ian Davis <ian@innovatian.com>
 // 
 // Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 // See the file LICENSE.txt for details.
@@ -12,6 +12,7 @@
 #region Using Directives
 
 using System;
+using Ninject.Activation;
 
 #endregion
 
@@ -26,7 +27,8 @@ namespace Ninject.Extensions.Conventions
         /// Processes the specified type creating kernel bindings.
         /// </summary>
         /// <param name="type">The type to process.</param>
+        /// <param name="scopeCallback">the scope callback.</param>
         /// <param name="kernel">The kernel to configure.</param>
-        void Process( Type type, IKernel kernel );
+        void Process( Type type, Func<IContext, object> scopeCallback, IKernel kernel );
     }
 }

@@ -2,6 +2,7 @@
 
 using System.Linq;
 using Ninject.Extensions.Conventions.Tests.Fakes;
+using Ninject.Infrastructure;
 using Xunit;
 
 #endregion
@@ -16,7 +17,7 @@ namespace Ninject.Extensions.Conventions.Tests
             var regexBindingGenerator = new RegexBindingGenerator( "(I)(?<name>.+)(View)" );
             using ( IKernel kernel = new StandardKernel() )
             {
-                regexBindingGenerator.Process( typeof (DefaultView), kernel );
+                regexBindingGenerator.Process(typeof(DefaultView), StandardScopeCallbacks.Transient, kernel);
                 Assert.Equal( kernel.GetBindings( typeof (IDefaultView) ).Count(), 1 );
                 Assert.IsType( typeof (DefaultView), kernel.Get<IDefaultView>() );
             }
@@ -28,7 +29,7 @@ namespace Ninject.Extensions.Conventions.Tests
             var regexBindingGenerator = new RegexBindingGenerator( "(I)(?<name>.+)" );
             using ( IKernel kernel = new StandardKernel() )
             {
-                regexBindingGenerator.Process( typeof (DefaultView), kernel );
+                regexBindingGenerator.Process(typeof(DefaultView), StandardScopeCallbacks.Transient, kernel);
                 Assert.Equal( kernel.GetBindings( typeof (IDefaultView) ).Count(), 1 );
                 Assert.IsType( typeof (DefaultView), kernel.Get<IDefaultView>() );
                 Assert.Equal( kernel.GetBindings( typeof (IDefaultConvention) ).Count(), 1 );
@@ -42,7 +43,7 @@ namespace Ninject.Extensions.Conventions.Tests
             var regexBindingGenerator = new RegexBindingGenerator( "(IDefault)(?<name>.+)" );
             using ( IKernel kernel = new StandardKernel() )
             {
-                regexBindingGenerator.Process( typeof (DefaultView), kernel );
+                regexBindingGenerator.Process( typeof (DefaultView), StandardScopeCallbacks.Transient, kernel );
                 Assert.Equal( kernel.GetBindings( typeof (IDefaultView) ).Count(), 1 );
                 Assert.IsType( typeof (DefaultView), kernel.Get<IDefaultView>() );
                 Assert.Equal( kernel.GetBindings( typeof (IDefaultConvention) ).Count(), 1 );
