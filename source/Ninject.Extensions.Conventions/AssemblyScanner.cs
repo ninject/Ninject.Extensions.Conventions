@@ -30,17 +30,19 @@ namespace Ninject.Extensions.Conventions
     /// </summary>
     public class AssemblyScanner : IAssemblyScanner
     {
-        #if !NO_ASSEMBLY_SCANNING
+#if !NO_ASSEMBLY_SCANNING
         private bool _autoLoadModules;
-        #endif
+#endif
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AssemblyScanner"/> class.
         /// </summary>
         public AssemblyScanner()
         {
-            Includes = new List<Predicate<Type>>();
-            Excludes = new List<Predicate<Type>>();
+            Includes = new List<Type>();
+            Excludes = new List<Type>();
+            FilteredTypes = new List<Type>();
+            Filters = new List<Predicate<Type>>();
             BindingGenerators = new List<IBindingGenerator>();
             TargetAssemblies = new List<Assembly>();
         }
@@ -61,14 +63,24 @@ namespace Ninject.Extensions.Conventions
         public List<IBindingGenerator> BindingGenerators { get; private set; }
 
         /// <summary>
+        /// Used to remove specifically exclude types from processing
+        /// </summary>
+        protected List<Type> Excludes { get; private set; }
+
+        /// <summary>
         /// The filters used to remove potential binding candidates.
         /// </summary>
-        protected List<Predicate<Type>> Excludes { get; private set; }
+        protected List<Predicate<Type>> Filters { get; private set; }
 
         /// <summary>
         /// The filters used to identify potential binding candidates.
         /// </summary>
-        protected List<Predicate<Type>> Includes { get; private set; }
+        protected List<Type> Includes { get; private set; }
+
+        /// <summary>
+        /// The filters used to identify potential binding candidates.
+        /// </summary>
+        protected List<Type> FilteredTypes { get; private set; }
 
         /// <summary>
         /// Performs binding generation on all targeted assemblies.
@@ -81,28 +93,40 @@ namespace Ninject.Extensions.Conventions
 
         private void Process( Assembly assembly, IKernel kernel )
         {
-            #if !NO_ASSEMBLY_SCANNING
+#if !NO_ASSEMBLY_SCANNING
             if ( _autoLoadModules && assembly.HasNinjectModules() )
             {
                 kernel.Load( assembly );
             }
-            #endif
+#endif
 
             if ( ScopeCallback == null )
             {
                 ScopeCallback = StandardScopeCallbacks.Transient;
             }
 
-            foreach ( Type exportedType in assembly.GetExportedTypesPlatformSafe() )
+            Process( assembly.GetExportedTypesPlatformSafe(), kernel );
+            Process( FilteredTypes, kernel );
+
+            foreach ( Type exportedType in Includes )
             {
                 Type type = exportedType;
-                bool include = Includes.Count == 0 || Includes.Any( predicate => predicate( type ) );
-                if ( !include )
+                BindingGenerators.ForEach( bindingGenerator => bindingGenerator.Process( type, ScopeCallback, kernel ) );
+            }
+        }
+
+        private void Process( IEnumerable<Type> types, IKernel kernel )
+        {
+            foreach ( Type exportedType in types )
+            {
+                Type type = exportedType;
+                bool exclude = Excludes.Contains( type );
+                if ( exclude )
                 {
                     continue;
                 }
 
-                bool exclude = Excludes.Any( predicate => predicate( type ) );
+                exclude = Filters.Any( filter => !filter( type ) );
                 if ( exclude )
                 {
                     continue;
@@ -112,7 +136,66 @@ namespace Ninject.Extensions.Conventions
             }
         }
 
-        #if !NO_ASSEMBLY_SCANNING
+        #region Implementation of IAssemblyScanner
+
+        /// <summary>
+        /// Loads the specified assembly.
+        /// </summary>
+        /// <param name="assembly">The assembly.</param>
+        public void From( Assembly assembly )
+        {
+            if ( !TargetAssemblies.Contains( assembly ) )
+            {
+                TargetAssemblies.Add( assembly );
+            }
+        }
+
+#if !NETCF
+        /// <summary>
+        /// 
+        /// </summary>
+        public void FromCallingAssembly()
+        {
+            var trace = new StackTrace( false );
+
+            Assembly thisAssembly = Assembly.GetExecutingAssembly();
+            Assembly callingAssembly = null;
+            for ( int i = 0; i < trace.FrameCount; i++ )
+            {
+                StackFrame currentFrame = trace.GetFrame( i );
+                Assembly currentFrameAssembly = currentFrame.GetMethod().DeclaringType.Assembly;
+                if ( currentFrameAssembly == thisAssembly )
+                {
+                    continue;
+                }
+
+                callingAssembly = currentFrameAssembly;
+                break;
+            }
+
+            if ( callingAssembly != null )
+            {
+                From( callingAssembly );
+            }
+        }
+#endif //!NETCF
+
+        /// <summary>
+        /// Loads the specified assemblies.
+        /// </summary>
+        /// <param name="assemblies">The assemblies.</param>
+        public void From( IEnumerable<Assembly> assemblies )
+        {
+            foreach ( Assembly assembly in assemblies )
+            {
+                if ( !TargetAssemblies.Contains( assembly ) )
+                {
+                    TargetAssemblies.Add( assembly );
+                }
+            }
+        }
+
+#if !NO_ASSEMBLY_SCANNING
         private static string[] GetFilesMatchingPattern( string pattern )
         {
             string path = NormalizePath( Path.GetDirectoryName( pattern ) );
@@ -175,68 +258,7 @@ namespace Ninject.Extensions.Conventions
                 AppDomain.CurrentDomain.Evidence,
                 AppDomain.CurrentDomain.SetupInformation );
         }
-        #endif
 
-        #region Implementation of IAssemblyScanner
-
-        /// <summary>
-        /// Loads the specified assembly.
-        /// </summary>
-        /// <param name="assembly">The assembly.</param>
-        public void From( Assembly assembly )
-        {
-            if ( !TargetAssemblies.Contains( assembly ) )
-            {
-                TargetAssemblies.Add( assembly );
-            }
-        }
-
-        #if !NETCF
-        /// <summary>
-        /// 
-        /// </summary>
-        public void FromCallingAssembly()
-        {
-            var trace = new StackTrace( false );
-
-            Assembly thisAssembly = Assembly.GetExecutingAssembly();
-            Assembly callingAssembly = null;
-            for ( int i = 0; i < trace.FrameCount; i++ )
-            {
-                StackFrame currentFrame = trace.GetFrame( i );
-                Assembly currentFrameAssembly = currentFrame.GetMethod().DeclaringType.Assembly;
-                if ( currentFrameAssembly == thisAssembly )
-                {
-                    continue;
-                }
-
-                callingAssembly = currentFrameAssembly;
-                break;
-            }
-
-            if ( callingAssembly != null )
-            {
-                From( callingAssembly );
-            }
-        }
-        #endif //!NETCF
-
-        /// <summary>
-        /// Loads the specified assemblies.
-        /// </summary>
-        /// <param name="assemblies">The assemblies.</param>
-        public void From( IEnumerable<Assembly> assemblies )
-        {
-            foreach ( Assembly assembly in assemblies )
-            {
-                if ( !TargetAssemblies.Contains( assembly ) )
-                {
-                    TargetAssemblies.Add( assembly );
-                }
-            }
-        }
-
-        #if !NO_ASSEMBLY_SCANNING
         /// <summary>
         /// Loads the specified assembly.
         /// </summary>
@@ -268,45 +290,13 @@ namespace Ninject.Extensions.Conventions
         {
             IEnumerable<AssemblyName> assemblyNames = FindAssemblies( assemblies, filter );
             IEnumerable<Assembly> assemblyInstances =
-                assemblyNames.Select( name => System.Reflection.Assembly.Load( name ) );
+                assemblyNames.Select( name => Assembly.Load( name ) );
             foreach ( Assembly assembly in assemblyInstances )
             {
                 From( assembly );
             }
         }
-        #endif //!NO_ASSEMBLY_SCANNING
 
-        /// <summary>
-        /// Loads the assembly containing.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        public void FromAssemblyContaining<T>()
-        {
-            From( typeof (T).Assembly );
-        }
-
-        /// <summary>
-        /// Loads the assembly containing.
-        /// </summary>
-        /// <param name="type">The type.</param>
-        public void FromAssemblyContaining( Type type )
-        {
-            From( type.Assembly );
-        }
-
-        /// <summary>
-        /// Loads the assembly containing.
-        /// </summary>
-        /// <param name="types">The types.</param>
-        public void FromAssemblyContaining( IEnumerable<Type> types )
-        {
-            foreach ( Type type in types )
-            {
-                From( type.Assembly );
-            }
-        }
-
-        #if !NO_ASSEMBLY_SCANNING
         /// <summary>
         /// 
         /// </summary>
@@ -370,63 +360,110 @@ namespace Ninject.Extensions.Conventions
                 From( file );
             }
         }
-        #endif
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void AutoLoadModules()
+        {
+            _autoLoadModules = true;
+        }
+#endif //!NO_ASSEMBLY_SCANNING
+
+        /// <summary>
+        /// Loads the assembly containing.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public void FromAssemblyContaining<T>()
+        {
+            From( typeof (T).Assembly );
+        }
+
+        /// <summary>
+        /// Loads the assembly containing.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        public void FromAssemblyContaining( Type type )
+        {
+            From( type.Assembly );
+        }
+
+        /// <summary>
+        /// Loads the assembly containing.
+        /// </summary>
+        /// <param name="types">The types.</param>
+        public void FromAssemblyContaining( IEnumerable<Type> types )
+        {
+            foreach ( Type type in types )
+            {
+                From( type.Assembly );
+            }
+        }
+
+        /// <summary>
+        /// Uses the supplied types for processing subject to excludes and filters.
+        /// </summary>
+        /// <param name="types"></param>
+        public void From( IEnumerable<Type> types )
+        {
+            foreach ( Type type in types )
+            {
+                if ( !FilteredTypes.Contains( type ) )
+                {
+                    FilteredTypes.Add( type );
+                }
+            }
+        }
 
         /// <summary>
         /// Includes this instance.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public void Select<T>()
+        public void Including<T>()
         {
-            Select( typeof (T) );
+            Including( typeof (T) );
         }
 
         /// <summary>
         /// Includes the specified type.
         /// </summary>
         /// <param name="type">The type.</param>
-        public void Select( Type type )
+        public void Including( Type type )
         {
-            Select( scannedType => scannedType == type );
-        }
-
-        /// <summary>
-        /// Includes the specified filters.
-        /// </summary>
-        /// <param name="filters">The filters.</param>
-        public void Select( IEnumerable<Type> filters )
-        {
-            foreach ( Type type in filters )
+            if ( !Includes.Contains( type ) )
             {
-                Select( type );
+                Includes.Add( type );
             }
         }
 
         /// <summary>
-        /// Includes the specified filter.
+        /// Includes the specified types.
         /// </summary>
-        /// <param name="filter">The filter.</param>
-        public void Select( Predicate<Type> filter )
+        /// <param name="types">The types.</param>
+        public void Including( IEnumerable<Type> types )
         {
-            Includes.Add( filter );
+            foreach ( Type type in types )
+            {
+                Including( type );
+            }
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="nameSpace"></param>
-        public void SelectTypesInNamespace( string nameSpace )
+        public void WhereTypeIsInNamespace( string nameSpace )
         {
-            Select( type => type.Namespace.StartsWith( nameSpace, StringComparison.OrdinalIgnoreCase ) );
+            Where( type => type.Namespace.StartsWith( nameSpace, StringComparison.OrdinalIgnoreCase ) );
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public void SelectTypesInNamespaceOf<T>()
+        public void WhereTypeIsInNamespaceOf<T>()
         {
-            SelectTypesInNamespace( typeof (T).Namespace );
+            WhereTypeIsInNamespace( typeof (T).Namespace );
         }
 
         /// <summary>
@@ -444,7 +481,10 @@ namespace Ninject.Extensions.Conventions
         /// <param name="type">The type.</param>
         public void Excluding( Type type )
         {
-            Where( scannedType => scannedType == type );
+            if ( !Excludes.Contains( type ) )
+            {
+                Excludes.Add( type );
+            }
         }
 
         /// <summary>
@@ -465,7 +505,7 @@ namespace Ninject.Extensions.Conventions
         /// <param name="filter">The filter.</param>
         public void Where( Predicate<Type> filter )
         {
-            Excludes.Add( x => !filter( x ) );
+            Filters.Add( filter );
         }
 
         /// <summary>
@@ -474,7 +514,7 @@ namespace Ninject.Extensions.Conventions
         /// <param name="nameSpace"></param>
         public void ExcludeNamespace( string nameSpace )
         {
-            Where( type => type.Namespace.StartsWith( nameSpace, StringComparison.OrdinalIgnoreCase ) );
+            Where( type => !type.Namespace.StartsWith( nameSpace, StringComparison.OrdinalIgnoreCase ) );
         }
 
         /// <summary>
@@ -517,16 +557,6 @@ namespace Ninject.Extensions.Conventions
             BindWith<DefaultBindingGenerator>();
         }
 
-        #if !NO_ASSEMBLY_SCANNING
-        /// <summary>
-        /// 
-        /// </summary>
-        public void AutoLoadModules()
-        {
-            _autoLoadModules = true;
-        }
-        #endif
-
         /// <summary>
         /// 
         /// </summary>
@@ -543,7 +573,7 @@ namespace Ninject.Extensions.Conventions
         public void SelectAllTypesOf( Type type )
         {
             BindingGenerators.Add( new RegexBindingGenerator( type.Name ) );
-            Select( type.IsAssignableFrom );
+            Where( type.IsAssignableFrom );
         }
 
         /// <summary>
@@ -582,7 +612,7 @@ namespace Ninject.Extensions.Conventions
             ScopeCallback = StandardScopeCallbacks.Thread;
         }
 
-        #if !NO_WEB
+#if !NO_WEB
         /// <summary>
         /// Indicates that instances activated via the binding should be re-used within the same
         /// HTTP request.
@@ -591,7 +621,7 @@ namespace Ninject.Extensions.Conventions
         {
             ScopeCallback = StandardScopeCallbacks.Request;
         }
-        #endif
+#endif
 
         #endregion
     }

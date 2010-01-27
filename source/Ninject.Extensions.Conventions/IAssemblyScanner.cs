@@ -32,6 +32,12 @@ namespace Ninject.Extensions.Conventions
         /// <param name="assembly">The assembly.</param>
         void From( Assembly assembly );
 
+        /// <summary>
+        /// Uses the supplied types for processing subject to excludes and filters.
+        /// </summary>
+        /// <param name="types"></param>
+        void From(IEnumerable<Type> types);
+
         #if !NETCF
         /// <summary>
         /// 
@@ -115,37 +121,31 @@ namespace Ninject.Extensions.Conventions
         /// Includes this instance.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void Select<T>();
+        void Including<T>();
 
         /// <summary>
         /// Includes the specified type.
         /// </summary>
         /// <param name="type">The type.</param>
-        void Select( Type type );
+        void Including( Type type );
 
         /// <summary>
         /// Includes the specified filters.
         /// </summary>
         /// <param name="filters">The filters.</param>
-        void Select( IEnumerable<Type> filters );
-
-        /// <summary>
-        /// Includes the specified filter.
-        /// </summary>
-        /// <param name="filter">The filter.</param>
-        void Select( Predicate<Type> filter );
+        void Including( IEnumerable<Type> filters );
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="nameSpace"></param>
-        void SelectTypesInNamespace( string nameSpace );
+        void WhereTypeIsInNamespace( string nameSpace );
 
         /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void SelectTypesInNamespaceOf<T>();
+        void WhereTypeIsInNamespaceOf<T>();
 
         /// <summary>
         /// Excludes this instance.
