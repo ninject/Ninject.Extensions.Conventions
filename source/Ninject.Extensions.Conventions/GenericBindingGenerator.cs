@@ -18,11 +18,18 @@ using Ninject.Activation;
 
 namespace Ninject.Extensions.Conventions
 {
+    /// <summary>
+    /// Creates bindings on open generic types.
+    /// </summary>
     public class GenericBindingGenerator : IBindingGenerator
     {
         private static readonly Type TypeOfObject = typeof (object);
         private readonly Type _contractType;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GenericBindingGenerator"/> class.
+        /// </summary>
+        /// <param name="contractType">Type of the contract.</param>
         public GenericBindingGenerator( Type contractType )
         {
             if ( !( contractType.IsGenericType || contractType.ContainsGenericParameters ) )
@@ -51,6 +58,11 @@ namespace Ninject.Extensions.Conventions
 
         #endregion
 
+        /// <summary>
+        /// Resolves the closing interface.
+        /// </summary>
+        /// <param name="targetType">Type of the target.</param>
+        /// <returns></returns>
         public Type ResolveClosingInterface( Type targetType )
         {
             if ( targetType.IsInterface || targetType.IsAbstract )

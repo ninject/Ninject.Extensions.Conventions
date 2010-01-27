@@ -16,8 +16,8 @@ namespace Ninject.Extensions.Conventions.Tests
             using ( IKernel kernel = new StandardKernel() )
             {
                 var scanner = new AssemblyScanner();
-                scanner.Assembly( Assembly.GetExecutingAssembly() );
-                scanner.Using<DefaultBindingGenerator>();
+                scanner.From( Assembly.GetExecutingAssembly() );
+                scanner.BindWith<DefaultBindingGenerator>();
                 kernel.Scan( scanner );
                 var instance = kernel.Get<IDefaultConvention>();
                 Assert.NotNull( instance );
@@ -31,8 +31,8 @@ namespace Ninject.Extensions.Conventions.Tests
             using ( IKernel kernel = new StandardKernel() )
             {
                 var scanner = new AssemblyScanner();
-                scanner.Assembly( Assembly.GetExecutingAssembly() );
-                scanner.UsingDefaultConventions();
+                scanner.From( Assembly.GetExecutingAssembly() );
+                scanner.BindWithDefaultConventions();
                 kernel.Scan( scanner );
                 var instance = kernel.Get<IDefaultConvention>();
                 Assert.NotNull( instance );
@@ -47,8 +47,8 @@ namespace Ninject.Extensions.Conventions.Tests
             {
                 kernel.Scan( x =>
                              {
-                                 x.Assembly( Assembly.GetExecutingAssembly() );
-                                 x.Using<DefaultBindingGenerator>();
+                                 x.From( Assembly.GetExecutingAssembly() );
+                                 x.BindWith<DefaultBindingGenerator>();
                              }
                     );
                 var instance = kernel.Get<IDefaultConvention>();

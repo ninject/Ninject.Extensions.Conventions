@@ -17,6 +17,9 @@ using System;
 
 namespace Ninject.Extensions.Conventions
 {
+    /// <summary>
+    /// Provides extensions for the IKernel interface
+    /// </summary>
     public static class ExtensionsForIKernel
     {
         /// <summary>

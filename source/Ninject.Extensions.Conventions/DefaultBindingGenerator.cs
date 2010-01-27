@@ -12,6 +12,9 @@
 #region Using Directives
 
 using System;
+#if NETCF
+using System.Linq;
+#endif
 using Ninject.Activation;
 
 #endregion
@@ -38,7 +41,13 @@ namespace Ninject.Extensions.Conventions
                 return;
             }
 
-            Type interfaceForType = type.GetInterface( "I" + type.Name );
+#if NETCF
+            Type interfaceForType = type.GetInterfaces()
+                .Where( @interface => string.Equals( @interface.Name, "I" + type.Name, StringComparison.OrdinalIgnoreCase ) )
+                .FirstOrDefault();
+#else
+            Type interfaceForType = type.GetInterface( "I" + type.Name, false );
+#endif //NETCF
             if ( interfaceForType == null )
             {
                 return;

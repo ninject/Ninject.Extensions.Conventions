@@ -16,8 +16,8 @@ namespace Ninject.Extensions.Conventions.Tests
             kernel.Scan(
                 x =>
                 {
-                    x.CallingAssembly();
-                    x.Using( new GenericBindingGenerator( typeof (IGenericView<>) ) );
+                    x.FromCallingAssembly();
+                    x.BindWith( new GenericBindingGenerator( typeof (IGenericView<>) ) );
                 } );
             object target = kernel.Get<IGenericView<IDefaultConvention>>();
             Assert.IsAssignableFrom<DefaultConventionView>( target );

@@ -24,14 +24,19 @@ namespace Ninject.Extensions.Conventions
 {
     internal static class ExtensionsForAssembly
     {
+        /// <summary>
+        /// Used instead of Type.EmptyTypes to support netcf
+        /// </summary>
+        private static readonly Type[] EmptyTypes = new Type[0];
+
         public static bool HasNinjectModules( this Assembly assembly )
         {
-            return assembly.GetExportedTypes().Any( IsLoadableModule );
+            return assembly.GetExportedTypesPlatformSafe().Any( IsLoadableModule );
         }
 
         public static IEnumerable<INinjectModule> GetNinjectModules( this Assembly assembly )
         {
-            foreach ( Type type in assembly.GetExportedTypes().Where( IsLoadableModule ) )
+            foreach ( Type type in assembly.GetExportedTypesPlatformSafe().Where( IsLoadableModule ) )
             {
                 yield return Activator.CreateInstance( type ) as INinjectModule;
             }
@@ -42,7 +47,16 @@ namespace Ninject.Extensions.Conventions
             return typeof (INinjectModule).IsAssignableFrom( type )
                    && !type.IsAbstract
                    && !type.IsInterface
-                   && type.GetConstructor( Type.EmptyTypes ) != null;
+                   && type.GetConstructor( EmptyTypes ) != null;
+        }
+
+        public static IEnumerable<Type> GetExportedTypesPlatformSafe( this Assembly assembly )
+        {
+#if NETCF
+            return assembly.GetTypes().Where( type=> type.IsPublic );
+#else
+            return assembly.GetExportedTypes();
+#endif
         }
     }
 }

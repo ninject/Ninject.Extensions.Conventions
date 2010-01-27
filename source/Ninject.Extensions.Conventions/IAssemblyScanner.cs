@@ -30,140 +30,146 @@ namespace Ninject.Extensions.Conventions
         /// Loads the specified assembly.
         /// </summary>
         /// <param name="assembly">The assembly.</param>
-        void Assembly( Assembly assembly );
+        void From( Assembly assembly );
 
+        #if !NETCF
         /// <summary>
         /// 
         /// </summary>
-        void CallingAssembly();
+        void FromCallingAssembly();
+        #endif //!NETCF
 
         /// <summary>
         /// Loads the specified assemblies.
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
-        void Assemblies( IEnumerable<Assembly> assemblies );
+        void From( IEnumerable<Assembly> assemblies );
 
+        #if !NO_ASSEMBLY_SCANNING
         /// <summary>
         /// Loads the specified assembly.
         /// </summary>
         /// <param name="assembly">The assembly.</param>
-        void Assembly( string assembly );
+        void From( string assembly );
 
         /// <summary>
         /// Loads the specified assemblies.
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
-        void Assemblies( IEnumerable<string> assemblies );
+        void From( IEnumerable<string> assemblies );
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="assemblies"></param>
         /// <param name="filter"></param>
-        void Assemblies( IEnumerable<string> assemblies, Predicate<Assembly> filter );
-
+        void From( IEnumerable<string> assemblies, Predicate<Assembly> filter );
+        #endif //!NO_ASSEMBLY_SCANNING
+        
         /// <summary>
         /// Loads the assembly containing.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void AssemblyContaining<T>();
+        void FromAssemblyContaining<T>();
 
         /// <summary>
         /// Loads the assembly containing.
         /// </summary>
         /// <param name="type">The type.</param>
-        void AssemblyContaining( Type type );
+        void FromAssemblyContaining( Type type );
 
         /// <summary>
         /// Loads the assembly containing.
         /// </summary>
         /// <param name="types">The types.</param>
-        void AssemblyContaining( IEnumerable<Type> types );
+        void FromAssemblyContaining( IEnumerable<Type> types );
 
+        #if !NO_ASSEMBLY_SCANNING
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
-        void AssembliesFromPath( string path );
+        void FromAssembliesInPath( string path );
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="path"></param>
         /// <param name="assemblyFilter"></param>
-        void AssembliesFromPath( string path, Predicate<Assembly> assemblyFilter );
+        void FromAssembliesInPath( string path, Predicate<Assembly> assemblyFilter );
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pattern"></param>
-        void AssembliesMatching( string pattern );
+        void FomAssembliesMatching( string pattern );
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="patterns"></param>
-        void AssembliesMatching( IEnumerable<string> patterns );
-
+        void FomAssembliesMatching( IEnumerable<string> patterns );
+        #endif
+        
         /// <summary>
         /// Includes this instance.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void IncludeType<T>();
+        void Select<T>();
 
         /// <summary>
         /// Includes the specified type.
         /// </summary>
         /// <param name="type">The type.</param>
-        void IncludeType( Type type );
+        void Select( Type type );
 
         /// <summary>
         /// Includes the specified filters.
         /// </summary>
         /// <param name="filters">The filters.</param>
-        void IncludeTypes( IEnumerable<Type> filters );
+        void Select( IEnumerable<Type> filters );
 
         /// <summary>
         /// Includes the specified filter.
         /// </summary>
         /// <param name="filter">The filter.</param>
-        void IncludeTypes( Predicate<Type> filter );
+        void Select( Predicate<Type> filter );
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="nameSpace"></param>
-        void IncludeNamespace( string nameSpace );
+        void SelectTypesInNamespace( string nameSpace );
 
         /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void IncludeNamespaceContainingType<T>();
+        void SelectTypesInNamespaceOf<T>();
 
         /// <summary>
         /// Excludes this instance.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void ExcludeType<T>();
+        void Excluding<T>();
 
         /// <summary>
         /// Excludes the specified type.
         /// </summary>
         /// <param name="type">The type.</param>
-        void ExcludeType( Type type );
+        void Excluding( Type type );
 
         /// <summary>
         /// Excludes the specified filters.
         /// </summary>
         /// <param name="filters">The filters.</param>
-        void ExcludeTypes( IEnumerable<Type> filters );
+        void Excluding( IEnumerable<Type> filters );
 
         /// <summary>
         /// Excludes the specified filter.
         /// </summary>
         /// <param name="filter">The filter.</param>
-        void ExcludeTypes( Predicate<Type> filter );
+        void Where( Predicate<Type> filter );
 
         /// <summary>
         /// 
@@ -181,34 +187,36 @@ namespace Ninject.Extensions.Conventions
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void Using<T>() where T : IBindingGenerator, new();
+        void BindWith<T>() where T : IBindingGenerator, new();
 
         /// <summary>
         /// 
         /// </summary>
-        void Using( IBindingGenerator generator );
+        void BindWith( IBindingGenerator generator );
 
         /// <summary>
         /// 
         /// </summary>
-        void UsingDefaultConventions();
+        void BindWithDefaultConventions();
 
+        #if !NO_ASSEMBLY_SCANNING
         /// <summary>
         /// 
         /// </summary>
         void AutoLoadModules();
+        #endif
 
         /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void IncludeAllTypesOf<T>();
+        void SelectAllTypesOf<T>();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="type"></param>
-        void IncludeAllTypesOf( Type type );
+        void SelectAllTypesOf( Type type );
 
         /// <summary>
         /// Indicates that instances activated via the binding should be re-used as long as the object
