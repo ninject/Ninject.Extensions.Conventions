@@ -16,9 +16,19 @@
             </summary>
             <param name="parent">The parent resolution root.</param>
         </member>
+        <member name="E:Ninject.Activation.Blocks.ActivationBlock.Disposed">
+            <summary>
+            Occurs when the object is disposed.
+            </summary>
+        </member>
         <member name="P:Ninject.Activation.Blocks.ActivationBlock.Parent">
             <summary>
             Gets or sets the parent resolution root (usually the kernel).
+            </summary>
+        </member>
+        <member name="M:Ninject.Activation.Blocks.ActivationBlock.Dispose(System.Boolean)">
+            <summary>
+            Releases resources held by the object.
             </summary>
         </member>
         <member name="M:Ninject.Activation.Blocks.ActivationBlock.CanResolve(Ninject.Activation.IRequest)">
@@ -37,7 +47,7 @@
             <param name="request">The request to resolve.</param>
             <returns>An enumerator of instances that match the request.</returns>
         </member>
-        <member name="M:Ninject.Activation.Blocks.ActivationBlock.CreateRequest(System.Type,System.Func{Ninject.Planning.Bindings.IBindingMetadata,System.Boolean},System.Collections.Generic.IEnumerable{Ninject.Parameters.IParameter},System.Boolean)">
+        <member name="M:Ninject.Activation.Blocks.ActivationBlock.CreateRequest(System.Type,System.Func{Ninject.Planning.Bindings.IBindingMetadata,System.Boolean},System.Collections.Generic.IEnumerable{Ninject.Parameters.IParameter},System.Boolean,System.Boolean)">
             <summary>
             Creates a request for the specified service.
             </summary>
@@ -46,6 +56,8 @@
             <param name="parameters">The parameters to pass to the resolution.</param>
             <param name="isOptional">
                 <c>True</c> if the request is optional; otherwise, <c>false</c>.</param>
+            <param name="isUnique">
+                <c>True</c> if the request should return a unique result; otherwise, <c>false</c>.</param>
             <returns>The created request.</returns>
         </member>
         <member name="T:Ninject.Activation.Blocks.IActivationBlock">
@@ -95,10 +107,25 @@
             <param name="context">The context that is being activated.</param>
             <returns>The instance for re-use, or <see langword="null" /> if none has been stored.</returns>
         </member>
+        <member name="M:Ninject.Activation.Caching.Cache.Release(System.Object)">
+            <summary>
+            Deactivates and releases the specified instance from the cache.
+            </summary>
+            <param name="instance">The instance to release.</param>
+            <returns>
+                <see langword="True" /> if the instance was found and released; otherwise <see langword="false" />.</returns>
+        </member>
         <member name="M:Ninject.Activation.Caching.Cache.Prune">
             <summary>
             Removes instances from the cache which should no longer be re-used.
             </summary>
+        </member>
+        <member name="M:Ninject.Activation.Caching.Cache.Clear(System.Object)">
+            <summary>
+            Immediately deactivates and removes all instances in the cache that are owned by
+            the specified scope.
+            </summary>
+            <param name="scope">The scope whose instances should be deactivated.</param>
         </member>
         <member name="M:Ninject.Activation.Caching.Cache.Clear">
             <summary>
@@ -156,10 +183,25 @@
             <param name="context">The context that is being activated.</param>
             <returns>The instance for re-use, or <see langword="null" /> if none has been stored.</returns>
         </member>
+        <member name="M:Ninject.Activation.Caching.ICache.Release(System.Object)">
+            <summary>
+            Deactivates and releases the specified instance from the cache.
+            </summary>
+            <param name="instance">The instance to release.</param>
+            <returns>
+                <see langword="True" /> if the instance was found and released; otherwise <see langword="false" />.</returns>
+        </member>
         <member name="M:Ninject.Activation.Caching.ICache.Prune">
             <summary>
             Removes instances from the cache which should no longer be re-used.
             </summary>
+        </member>
+        <member name="M:Ninject.Activation.Caching.ICache.Clear(System.Object)">
+            <summary>
+            Immediately deactivates and removes all instances in the cache that are owned by
+            the specified scope.
+            </summary>
+            <param name="scope">The scope whose instances should be deactivated.</param>
         </member>
         <member name="M:Ninject.Activation.Caching.ICache.Clear">
             <summary>
@@ -190,7 +232,7 @@
         </member>
         <member name="M:Ninject.Activation.Providers.CallbackProvider`1.#ctor(System.Func{Ninject.Activation.IContext,`0})">
             <summary>
-            Initializes a new instance of the class.
+            Initializes a new instance of the CallbackProvider&lt;T&gt; class.
             </summary>
             <param name="method">The callback method that will be called to create instances.</param>
         </member>
@@ -214,7 +256,7 @@
         </member>
         <member name="M:Ninject.Activation.Providers.ConstantProvider`1.#ctor(`0)">
             <summary>
-            Initializes a new instance of the class.
+            Initializes a new instance of the ConstantProvider&lt;T&gt; class.
             </summary>
             <param name="value">The value that the provider should return.</param>
         </member>
@@ -710,6 +752,11 @@
             Gets or sets value indicating whether the request is optional.
             </summary>
         </member>
+        <member name="P:Ninject.Activation.IRequest.IsUnique">
+            <summary>
+            Gets or sets value indicating whether the request should return a unique result.
+            </summary>
+        </member>
         <member name="M:Ninject.Activation.IRequest.Matches(Ninject.Planning.Bindings.IBinding)">
             <summary>
             Determines whether the specified binding satisfies the constraint defined on this request.
@@ -793,7 +840,7 @@
             Describes the request for a service resolution.
             </summary>
         </member>
-        <member name="M:Ninject.Activation.Request.#ctor(System.Type,System.Func{Ninject.Planning.Bindings.IBindingMetadata,System.Boolean},System.Collections.Generic.IEnumerable{Ninject.Parameters.IParameter},System.Func{System.Object},System.Boolean)">
+        <member name="M:Ninject.Activation.Request.#ctor(System.Type,System.Func{Ninject.Planning.Bindings.IBindingMetadata,System.Boolean},System.Collections.Generic.IEnumerable{Ninject.Parameters.IParameter},System.Func{System.Object},System.Boolean,System.Boolean)">
             <summary>
             Initializes a new instance of the <see cref="T:Ninject.Activation.Request" /> class.
             </summary>
@@ -803,6 +850,8 @@
             <param name="scopeCallback">The scope callback, if an external scope was specified.</param>
             <param name="isOptional">
                 <c>True</c> if the request is optional; otherwise, <c>false</c>.</param>
+            <param name="isUnique">
+                <c>True</c> if the request should return a unique result; otherwise, <c>false</c>.</param>
         </member>
         <member name="M:Ninject.Activation.Request.#ctor(Ninject.Activation.IContext,System.Type,Ninject.Planning.Targets.ITarget,System.Func{System.Object})">
             <summary>
@@ -856,6 +905,11 @@
         <member name="P:Ninject.Activation.Request.IsOptional">
             <summary>
             Gets or sets value indicating whether the request is optional.
+            </summary>
+        </member>
+        <member name="P:Ninject.Activation.Request.IsUnique">
+            <summary>
+            Gets or sets value indicating whether the request is for a single service.
             </summary>
         </member>
         <member name="P:Ninject.Activation.Request.ScopeCallback">
@@ -1078,11 +1132,6 @@
             An object that notifies when it is disposed.
             </summary>
         </member>
-        <member name="E:Ninject.Infrastructure.Disposal.DisposableObject.Disposed">
-            <summary>
-            Occurs when the object is disposed.
-            </summary>
-        </member>
         <member name="P:Ninject.Infrastructure.Disposal.DisposableObject.IsDisposed">
             <summary>
             Gets a value indicating whether this instance is disposed.
@@ -1103,6 +1152,16 @@
             Releases resources before the object is reclaimed by garbage collection.
             </summary>
         </member>
+        <member name="T:Ninject.Infrastructure.Disposal.IDisposableObject">
+            <summary>
+            An object that can report whether or not it is disposed.
+            </summary>
+        </member>
+        <member name="P:Ninject.Infrastructure.Disposal.IDisposableObject.IsDisposed">
+            <summary>
+            Gets a value indicating whether this instance is disposed.
+            </summary>
+        </member>
         <member name="T:Ninject.Infrastructure.Disposal.INotifyWhenDisposed">
             <summary>
             An object that fires an event when it is disposed.
@@ -1113,11 +1172,6 @@
             Occurs when the object is disposed.
             </summary>
         </member>
-        <member name="P:Ninject.Infrastructure.Disposal.INotifyWhenDisposed.IsDisposed">
-            <summary>
-            Gets a value indicating whether this instance is disposed.
-            </summary>
-        </member>
         <member name="T:Ninject.Infrastructure.Future`1">
             <summary>
             Represents a future value.
@@ -1126,7 +1180,7 @@
         </member>
         <member name="M:Ninject.Infrastructure.Future`1.#ctor(System.Func{`0})">
             <summary>
-            Initializes a new instance of the class.
+            Initializes a new instance of the Future&lt;T&gt; class.
             </summary>
             <param name="callback">The callback that will be triggered to read the value.</param>
         </member>
@@ -1241,6 +1295,26 @@
             Returns an enumerator that iterates through a the multimap.
             </summary>
             <returns>An <see cref="T:System.Collections.IEnumerator" /> object that can be used to iterate through the multimap.</returns>
+        </member>
+        <member name="T:Ninject.Infrastructure.RequestFlags">
+            <summary>
+            Defines the style of request (single or multi-injection, whether it is optional, etc.)
+            </summary>
+        </member>
+        <member name="F:Ninject.Infrastructure.RequestFlags.Single">
+            <summary>
+            Indicates a request for a single instance of a service.
+            </summary>
+        </member>
+        <member name="F:Ninject.Infrastructure.RequestFlags.Multiple">
+            <summary>
+            Indicates a request for multiple instances of a service.
+            </summary>
+        </member>
+        <member name="F:Ninject.Infrastructure.RequestFlags.Optional">
+            <summary>
+            Indicates that null should be returned (instead of throwing) if the service cannot be resolved.
+            </summary>
         </member>
         <member name="T:Ninject.Infrastructure.StandardScopeCallbacks">
             <summary>
@@ -1404,11 +1478,6 @@
             A pluggable unit that can be loaded into an <see cref="T:Ninject.IKernel" />.
             </summary>
         </member>
-        <member name="P:Ninject.Modules.INinjectModule.Kernel">
-            <summary>
-            Gets or the kernel that the module is loaded into.
-            </summary>
-        </member>
         <member name="P:Ninject.Modules.INinjectModule.Name">
             <summary>
             Gets the module's name.
@@ -1512,6 +1581,14 @@
             Unregisters the specified binding.
             </summary>
             <param name="binding">The binding to remove.</param>
+        </member>
+        <member name="M:Ninject.Modules.NinjectModule.CreateBindingBuilder``1(Ninject.Planning.Bindings.IBinding)">
+            <summary>
+            Creates a new builder for the specified binding.
+            </summary>
+            <typeparam name="T">The type restriction to apply to the binding builder.</typeparam>
+            <param name="binding">The binding that will be built.</param>
+            <returns>The created builder.</returns>
         </member>
         <member name="T:Ninject.Parameters.ConstructorArgument">
             <summary>
@@ -1638,6 +1715,45 @@
             <param name="name">The name of the property to override.</param>
             <param name="valueCallback">The callback to invoke to get the value that should be injected.</param>
         </member>
+        <member name="T:Ninject.Planning.Bindings.Resolvers.IBindingResolver">
+            <summary>
+            Contains logic about which bindings to use for a given service request.
+            </summary>
+        </member>
+        <member name="M:Ninject.Planning.Bindings.Resolvers.IBindingResolver.Resolve(Ninject.Infrastructure.Multimap{System.Type,Ninject.Planning.Bindings.IBinding},System.Type)">
+            <summary>
+            Returns any bindings from the specified collection that match the specified service.
+            </summary>
+            <param name="bindings">The multimap of all registered bindings.</param>
+            <param name="service">The service in question.</param>
+            <returns>The series of matching bindings.</returns>
+        </member>
+        <member name="T:Ninject.Planning.Bindings.Resolvers.OpenGenericBindingResolver">
+            <summary>
+            Resolves bindings for open generic types.
+            </summary>
+        </member>
+        <member name="M:Ninject.Planning.Bindings.Resolvers.OpenGenericBindingResolver.Resolve(Ninject.Infrastructure.Multimap{System.Type,Ninject.Planning.Bindings.IBinding},System.Type)">
+            <summary>
+            Returns any bindings from the specified collection that match the specified service.
+            </summary>
+            <param name="bindings">The multimap of all registered bindings.</param>
+            <param name="service">The service in question.</param>
+            <returns>The series of matching bindings.</returns>
+        </member>
+        <member name="T:Ninject.Planning.Bindings.Resolvers.StandardBindingResolver">
+            <summary>
+            Resolves bindings that have been registered directly for the service.
+            </summary>
+        </member>
+        <member name="M:Ninject.Planning.Bindings.Resolvers.StandardBindingResolver.Resolve(Ninject.Infrastructure.Multimap{System.Type,Ninject.Planning.Bindings.IBinding},System.Type)">
+            <summary>
+            Returns any bindings from the specified collection that match the specified service.
+            </summary>
+            <param name="bindings">The multimap of all registered bindings.</param>
+            <param name="service">The service in question.</param>
+            <returns>The series of matching bindings.</returns>
+        </member>
         <member name="T:Ninject.Planning.Bindings.Binding">
             <summary>
             Contains information about a service registration.
@@ -1738,15 +1854,21 @@
             Provides a root for the fluent syntax associated with an <see cref="T:Ninject.Planning.Bindings.Binding" />.
             </summary>
         </member>
-        <member name="M:Ninject.Planning.Bindings.BindingBuilder`1.#ctor(Ninject.Planning.Bindings.IBinding)">
+        <member name="M:Ninject.Planning.Bindings.BindingBuilder`1.#ctor(Ninject.Planning.Bindings.IBinding,Ninject.IKernel)">
             <summary>
-            Initializes a new instance of the class.
+            Initializes a new instance of the BindingBuilder&lt;T&gt; class.
             </summary>
             <param name="binding">The binding to build.</param>
+            <param name="kernel">The kernel.</param>
         </member>
         <member name="P:Ninject.Planning.Bindings.BindingBuilder`1.Binding">
             <summary>
             Gets the binding being built.
+            </summary>
+        </member>
+        <member name="P:Ninject.Planning.Bindings.BindingBuilder`1.Kernel">
+            <summary>
+            Gets the kernel.
             </summary>
         </member>
         <member name="M:Ninject.Planning.Bindings.BindingBuilder`1.ToSelf">
@@ -2193,7 +2315,7 @@
         </member>
         <member name="M:Ninject.Planning.Directives.MethodInjectionDirectiveBase`2.#ctor(`0,`1)">
             <summary>
-            Initializes a new instance of the class.
+            Initializes a new instance of the MethodInjectionDirectiveBase&lt;TMethod, TInjector&gt; class.
             </summary>
             <param name="method">The method this directive represents.</param>
             <param name="injector">The injector that will be triggered.</param>
@@ -2430,7 +2552,7 @@
         </member>
         <member name="M:Ninject.Planning.Targets.Target`1.#ctor(System.Reflection.MemberInfo,`0)">
             <summary>
-            Initializes a new instance of the class.
+            Initializes a new instance of the Target&lt;T&gt; class.
             </summary>
             <param name="member">The member that contains the target.</param>
             <param name="site">The site represented by the target.</param>
@@ -2837,6 +2959,19 @@
             </summary>
             <param name="binding">The binding to remove.</param>
         </member>
+        <member name="M:Ninject.Syntax.BindingRoot.CreateBindingBuilder``1(Ninject.Planning.Bindings.IBinding)">
+            <summary>
+            Creates a new builder for the specified binding.
+            </summary>
+            <typeparam name="T">The type restriction to apply to the binding builder.</typeparam>
+            <param name="binding">The binding that will be built.</param>
+            <returns>The created builder.</returns>
+        </member>
+        <member name="T:Ninject.Syntax.IBindingSyntax">
+            <summary>
+            Used to define a basic binding syntax builder.
+            </summary>
+        </member>
         <member name="T:Ninject.Syntax.IBindingToSyntax`1">
             <summary>
             Used to define the target of a binding.
@@ -3116,7 +3251,7 @@
         </member>
         <member name="M:Ninject.Syntax.IBindingRoot.Bind(System.Type)">
             <summary>
-            Declares a binding for the specified service.
+            Declares a binding from the service to itself.
             </summary>
             <param name="service">The service to bind.</param>
         </member>
@@ -3195,7 +3330,7 @@
             <param name="request">The request to resolve.</param>
             <returns>An enumerator of instances that match the request.</returns>
         </member>
-        <member name="M:Ninject.Syntax.IResolutionRoot.CreateRequest(System.Type,System.Func{Ninject.Planning.Bindings.IBindingMetadata,System.Boolean},System.Collections.Generic.IEnumerable{Ninject.Parameters.IParameter},System.Boolean)">
+        <member name="M:Ninject.Syntax.IResolutionRoot.CreateRequest(System.Type,System.Func{Ninject.Planning.Bindings.IBindingMetadata,System.Boolean},System.Collections.Generic.IEnumerable{Ninject.Parameters.IParameter},System.Boolean,System.Boolean)">
             <summary>
             Creates a request for the specified service.
             </summary>
@@ -3204,6 +3339,8 @@
             <param name="parameters">The parameters to pass to the resolution.</param>
             <param name="isOptional">
                 <c>True</c> if the request is optional; otherwise, <c>false</c>.</param>
+            <param name="isUnique">
+                <c>True</c> if the request should return a unique result; otherwise, <c>false</c>.</param>
             <returns>The created request.</returns>
         </member>
         <member name="T:Ninject.ModuleLoadExtensions">
@@ -3518,6 +3655,14 @@
             <param name="instance">The instance to inject.</param>
             <param name="parameters">The parameters to pass to the request.</param>
         </member>
+        <member name="M:Ninject.IKernel.Release(System.Object)">
+            <summary>
+            Deactivates and releases the specified instance if it is currently managed by Ninject.
+            </summary>
+            <param name="instance">The instance to release.</param>
+            <returns>
+                <see langword="True" /> if the instance was found and released; otherwise <see langword="false" />.</returns>
+        </member>
         <member name="M:Ninject.IKernel.GetBindings(System.Type)">
             <summary>
             Gets the bindings registered for the specified service.
@@ -3707,6 +3852,14 @@
             <param name="instance">The instance to inject.</param>
             <param name="parameters">The parameters to pass to the request.</param>
         </member>
+        <member name="M:Ninject.KernelBase.Release(System.Object)">
+            <summary>
+            Deactivates and releases the specified instance if it is currently managed by Ninject.
+            </summary>
+            <param name="instance">The instance to release.</param>
+            <returns>
+                <see langword="True" /> if the instance was found and released; otherwise <see langword="false" />.</returns>
+        </member>
         <member name="M:Ninject.KernelBase.CanResolve(Ninject.Activation.IRequest)">
             <summary>
             Determines whether the specified request can be resolved.
@@ -3723,7 +3876,7 @@
             <param name="request">The request to resolve.</param>
             <returns>An enumerator of instances that match the request.</returns>
         </member>
-        <member name="M:Ninject.KernelBase.CreateRequest(System.Type,System.Func{Ninject.Planning.Bindings.IBindingMetadata,System.Boolean},System.Collections.Generic.IEnumerable{Ninject.Parameters.IParameter},System.Boolean)">
+        <member name="M:Ninject.KernelBase.CreateRequest(System.Type,System.Func{Ninject.Planning.Bindings.IBindingMetadata,System.Boolean},System.Collections.Generic.IEnumerable{Ninject.Parameters.IParameter},System.Boolean,System.Boolean)">
             <summary>
             Creates a request for the specified service.
             </summary>
@@ -3732,6 +3885,8 @@
             <param name="parameters">The parameters to pass to the resolution.</param>
             <param name="isOptional">
                 <c>True</c> if the request is optional; otherwise, <c>false</c>.</param>
+            <param name="isUnique">
+                <c>True</c> if the request should return a unique result; otherwise, <c>false</c>.</param>
             <returns>The created request.</returns>
         </member>
         <member name="M:Ninject.KernelBase.GetBindings(System.Type)">
@@ -3746,6 +3901,14 @@
             Begins a new activation block, which can be used to deterministically dispose resolved instances.
             </summary>
             <returns>The new activation block.</returns>
+        </member>
+        <member name="M:Ninject.KernelBase.CreateBindingBuilder``1(Ninject.Planning.Bindings.IBinding)">
+            <summary>
+            Creates a new builder for the specified binding.
+            </summary>
+            <typeparam name="T">The type restriction to apply to the binding builder.</typeparam>
+            <param name="binding">The binding that will be built.</param>
+            <returns>The created builder.</returns>
         </member>
         <member name="M:Ninject.KernelBase.AddComponents">
             <summary>
@@ -3827,6 +3990,34 @@
             </summary>
             <param name="key">The setting's key.</param>
             <param name="value">The setting's value.</param>
+        </member>
+        <member name="T:Ninject.OnePerRequestModule">
+            <summary>
+            Provides callbacks to more aggressively collect objects scoped to HTTP requests.
+            </summary>
+        </member>
+        <member name="M:Ninject.OnePerRequestModule.Init(System.Web.HttpApplication)">
+            <summary>
+            Initializes the module.
+            </summary>
+            <param name="application">The <see cref="T:System.Web.HttpApplication" /> whose instances will be managed.</param>
+        </member>
+        <member name="M:Ninject.OnePerRequestModule.StartManaging(Ninject.IKernel)">
+            <summary>
+            Start managing instances for the specified kernel.
+            </summary>
+            <param name="kernel">The kernel.</param>
+        </member>
+        <member name="M:Ninject.OnePerRequestModule.StopManaging(Ninject.IKernel)">
+            <summary>
+            Stops managing instances for the specified kernel.
+            </summary>
+            <param name="kernel">The kernel.</param>
+        </member>
+        <member name="M:Ninject.OnePerRequestModule.DeactivateInstancesForCurrentHttpRequest">
+            <summary>
+            Deactivates instances owned by the current <see cref="T:System.Web.HttpContext" />.
+            </summary>
         </member>
         <member name="T:Ninject.StandardKernel">
             <summary>
