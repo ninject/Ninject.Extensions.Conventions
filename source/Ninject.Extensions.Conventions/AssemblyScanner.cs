@@ -512,7 +512,7 @@ namespace Ninject.Extensions.Conventions
         /// 
         /// </summary>
         /// <param name="nameSpace"></param>
-        public void ExcludeNamespace( string nameSpace )
+        public void WhereTypeIsNotInNamespace( string nameSpace )
         {
             Where( type => !type.Namespace.StartsWith( nameSpace, StringComparison.OrdinalIgnoreCase ) );
         }
@@ -521,9 +521,9 @@ namespace Ninject.Extensions.Conventions
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public void ExcludeNamespaceContainingType<T>()
+        public void WhereTypeIsNotInNamespaceOf<T>()
         {
-            ExcludeNamespace( typeof (T).Namespace );
+            WhereTypeIsNotInNamespace( typeof (T).Namespace );
         }
 
         /// <summary>
@@ -561,16 +561,16 @@ namespace Ninject.Extensions.Conventions
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public void SelectAllTypesOf<T>()
+        public void WhereTypeInheritsFrom<T>()
         {
-            SelectAllTypesOf( typeof (T) );
+            WhereTypeInheritsFrom( typeof (T) );
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="type"></param>
-        public void SelectAllTypesOf( Type type )
+        public void WhereTypeInheritsFrom( Type type )
         {
             BindingGenerators.Add( new RegexBindingGenerator( type.Name ) );
             Where( type.IsAssignableFrom );

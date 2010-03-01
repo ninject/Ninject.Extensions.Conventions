@@ -175,13 +175,13 @@ namespace Ninject.Extensions.Conventions
         /// 
         /// </summary>
         /// <param name="nameSpace"></param>
-        void ExcludeNamespace( string nameSpace );
+        void WhereTypeIsNotInNamespace( string nameSpace );
 
         /// <summary>
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void ExcludeNamespaceContainingType<T>();
+        void WhereTypeIsNotInNamespaceOf<T>();
 
         /// <summary>
         /// 
@@ -210,13 +210,13 @@ namespace Ninject.Extensions.Conventions
         /// 
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        void SelectAllTypesOf<T>();
+        void WhereTypeInheritsFrom<T>();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="type"></param>
-        void SelectAllTypesOf( Type type );
+        void WhereTypeInheritsFrom( Type type );
 
         /// <summary>
         /// Indicates that instances activated via the binding should be re-used as long as the object

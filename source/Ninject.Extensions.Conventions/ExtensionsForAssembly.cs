@@ -36,10 +36,7 @@ namespace Ninject.Extensions.Conventions
 
         public static IEnumerable<INinjectModule> GetNinjectModules( this Assembly assembly )
         {
-            foreach ( Type type in assembly.GetExportedTypesPlatformSafe().Where( IsLoadableModule ) )
-            {
-                yield return Activator.CreateInstance( type ) as INinjectModule;
-            }
+            return assembly                .GetExportedTypesPlatformSafe()                .Where( IsLoadableModule )                .Select( type => Activator.CreateInstance( type ) as INinjectModule );
         }
 
         private static bool IsLoadableModule( Type type )
@@ -53,7 +50,7 @@ namespace Ninject.Extensions.Conventions
         public static IEnumerable<Type> GetExportedTypesPlatformSafe( this Assembly assembly )
         {
 #if NETCF
-            return assembly.GetTypes().Where( type=> type.IsPublic );
+            return assembly.GetTypes().Where( type => type.IsPublic );
 #else
             return assembly.GetExportedTypes();
 #endif
