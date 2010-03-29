@@ -219,6 +219,12 @@ namespace Ninject.Extensions.Conventions
         void WhereTypeInheritsFrom( Type type );
 
         /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="types"></param>
+        void WhereTypeInheritsFromAny( IEnumerable<Type> types );
+
+        /// <summary>
         /// Indicates that instances activated via the binding should be re-used as long as the object
         /// returned by the provided callback remains alive (that is, has not been garbage collected).
         /// </summary>

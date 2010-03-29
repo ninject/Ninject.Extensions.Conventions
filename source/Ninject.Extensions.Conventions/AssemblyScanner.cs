@@ -581,6 +581,18 @@ namespace Ninject.Extensions.Conventions
         }
 
         /// <summary>
+        /// </summary>
+        /// <param name="types"></param>
+        public void WhereTypeInheritsFromAny( IEnumerable<Type> types )
+        {
+            foreach ( Type type in types )
+            {
+                BindingGenerators.Add( new RegexBindingGenerator( type.Name ) );
+            }
+            Where( type => types.Any( t => t.IsAssignableFrom( type ) ) );
+        }
+
+        /// <summary>
         /// Indicates that instances activated via the binding should be re-used as long as the object
         /// returned by the provided callback remains alive (that is, has not been garbage collected).
         /// </summary>
