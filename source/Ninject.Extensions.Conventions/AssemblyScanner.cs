@@ -186,17 +186,14 @@ namespace Ninject.Extensions.Conventions
         /// <param name="assemblies">The assemblies.</param>
         public void From( IEnumerable<Assembly> assemblies )
         {
-            foreach ( Assembly assembly in assemblies )
+            foreach ( Assembly assembly in assemblies.Where( assembly => !TargetAssemblies.Contains( assembly ) ) )
             {
-                if ( !TargetAssemblies.Contains( assembly ) )
-                {
-                    TargetAssemblies.Add( assembly );
-                }
+                TargetAssemblies.Add( assembly );
             }
         }
 
 #if !NO_ASSEMBLY_SCANNING
-        private static string[] GetFilesMatchingPattern( string pattern )
+        private static IEnumerable<string> GetFilesMatchingPattern( string pattern )
         {
             string path = NormalizePath( Path.GetDirectoryName( pattern ) );
             string glob = Path.GetFileName( pattern );
@@ -266,7 +263,7 @@ namespace Ninject.Extensions.Conventions
         public void From( string assembly )
         {
             if ( !TargetAssemblies.Any(
-                      asm => string.Equals( asm.GetName().Name, assembly, StringComparison.OrdinalIgnoreCase ) ) )
+                asm => string.Equals( asm.GetName().Name, assembly, StringComparison.OrdinalIgnoreCase ) ) )
             {
                 From( AppDomain.CurrentDomain.Load( assembly ) );
             }
@@ -313,50 +310,47 @@ namespace Ninject.Extensions.Conventions
         /// <param name="assemblyFilter"></param>
         public void FromAssembliesInPath( string path, Predicate<Assembly> assemblyFilter )
         {
-            const StringComparison comparison = StringComparison.OrdinalIgnoreCase;
-            IEnumerable<string> assemblies = Directory.GetFiles( path ).Where( file =>
-                                                                               {
-                                                                                   string extension =
-                                                                                       Path.GetExtension( file );
-                                                                                   bool match =
-                                                                                       string.Equals( extension, ".dll",
-                                                                                                      comparison ) ||
-                                                                                       string.Equals( extension, ".exe",
-                                                                                                      comparison );
-                                                                                   return match;
-                                                                               } );
+            IEnumerable<string> assemblies =
+                Directory.GetFiles( path )
+                    .Where( IsAssemblyFile );
             From( assemblies, assemblyFilter );
+        }
+
+        private static bool IsAssemblyFile( string fileName )
+        {
+            string extension = Path.GetExtension( fileName );
+            return HasAssemblyExtension( extension );
+        }
+
+        private static bool HasAssemblyExtension( string extension )
+        {
+            const StringComparison comparison = StringComparison.OrdinalIgnoreCase;
+            return string.Equals( extension, ".dll", comparison ) ||
+                   string.Equals( extension, ".exe", comparison );
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="pattern"></param>
-        public void FomAssembliesMatching( string pattern )
+        public void FromAssembliesMatching( string pattern )
         {
-            FomAssembliesMatching( new[] {pattern} );
+            FromAssembliesMatching( new[] {pattern} );
         }
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="patterns"></param>
-        public void FomAssembliesMatching( IEnumerable<string> patterns )
+        public void FromAssembliesMatching( IEnumerable<string> patterns )
         {
-            const StringComparison comparison = StringComparison.OrdinalIgnoreCase;
             IEnumerable<string> files = patterns
                 .SelectMany( pattern => GetFilesMatchingPattern( pattern ) );
 
-            foreach ( string file in files )
+            foreach ( string file in from file in files
+                                     where IsAssemblyFile( file )
+                                     select file )
             {
-                string extension = Path.GetExtension( file );
-                bool match =
-                    string.Equals( extension, ".dll", comparison ) ||
-                    string.Equals( extension, ".exe", comparison );
-                if ( !match )
-                {
-                    continue;
-                }
                 From( file );
             }
         }
@@ -406,12 +400,9 @@ namespace Ninject.Extensions.Conventions
         /// <param name="types"></param>
         public void From( IEnumerable<Type> types )
         {
-            foreach ( Type type in types )
+            foreach ( Type type in types.Where( type => !FilteredTypes.Contains( type ) ) )
             {
-                if ( !FilteredTypes.Contains( type ) )
-                {
-                    FilteredTypes.Add( type );
-                }
+                FilteredTypes.Add( type );
             }
         }
 
@@ -454,7 +445,20 @@ namespace Ninject.Extensions.Conventions
         /// <param name="nameSpace"></param>
         public void WhereTypeIsInNamespace( string nameSpace )
         {
-            Where( type => type.Namespace.StartsWith( nameSpace, StringComparison.OrdinalIgnoreCase ) );
+            Where( type => NamespacesMatch( type.Namespace, nameSpace ) );
+        }
+
+        /// <summary>
+        /// Deternmines whether two namespaces match.
+        /// </summary>
+        /// <param name="lhs">The target namespace.</param>
+        /// <param name="rhs">The namespace template to match against.</param>
+        /// <returns></returns>
+        private static bool NamespacesMatch( string lhs, string rhs )
+        {
+            return string.IsNullOrEmpty( lhs )
+                       ? string.IsNullOrEmpty( rhs )
+                       : lhs.StartsWith( rhs, StringComparison.OrdinalIgnoreCase );
         }
 
         /// <summary>
@@ -514,7 +518,7 @@ namespace Ninject.Extensions.Conventions
         /// <param name="nameSpace"></param>
         public void WhereTypeIsNotInNamespace( string nameSpace )
         {
-            Where( type => !type.Namespace.StartsWith( nameSpace, StringComparison.OrdinalIgnoreCase ) );
+            Where( type => !NamespacesMatch( type.Namespace, nameSpace ) );
         }
 
         /// <summary>
