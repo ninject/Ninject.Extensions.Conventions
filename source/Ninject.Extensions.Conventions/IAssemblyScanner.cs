@@ -108,13 +108,13 @@ namespace Ninject.Extensions.Conventions
         /// 
         /// </summary>
         /// <param name="pattern"></param>
-        void FomAssembliesMatching( string pattern );
+        void FromAssembliesMatching( string pattern );
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="patterns"></param>
-        void FomAssembliesMatching( IEnumerable<string> patterns );
+        void FromAssembliesMatching( IEnumerable<string> patterns );
         #endif
         
         /// <summary>
