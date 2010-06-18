@@ -265,7 +265,7 @@ namespace Ninject.Extensions.Conventions
             if ( !TargetAssemblies.Any(
                 asm => string.Equals( asm.GetName().Name, assembly, StringComparison.OrdinalIgnoreCase ) ) )
             {
-                From( AppDomain.CurrentDomain.Load( assembly ) );
+                From( new[] {assembly} );
             }
         }
 
@@ -347,12 +347,7 @@ namespace Ninject.Extensions.Conventions
             IEnumerable<string> files = patterns
                 .SelectMany( pattern => GetFilesMatchingPattern( pattern ) );
 
-            foreach ( string file in from file in files
-                                     where IsAssemblyFile( file )
-                                     select file )
-            {
-                From( file );
-            }
+            From( files.Where( IsAssemblyFile ) );
         }
 
         /// <summary>
