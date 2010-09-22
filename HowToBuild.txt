@@ -1,0 +1,3 @@
+1. Copy the zipped ninject files to lib/Ninject
+2. Run UnzipDependencies.cmd
+3. Run build-release.cmd

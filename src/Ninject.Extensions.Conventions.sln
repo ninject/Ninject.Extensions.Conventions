@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Conventions", "Ninject.Extensions.Conventions\Ninject.Extensions.Conventions.csproj", "{C9016F7B-68CE-46A7-80A7-A4592B6F0EAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Conventions.Tests", "Ninject.Extensions.Conventions.Test\Ninject.Extensions.Conventions.Tests.csproj", "{861737AD-F1E6-4D67-9A6C-26642BA9F267}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Conventions.SilverlightTests", "Ninject.Extensions.Conventions.SilverlightTests\Ninject.Extensions.Conventions.SilverlightTests.csproj", "{934DCAA8-F266-4B4E-B7DF-5753694539BB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C9016F7B-68CE-46A7-80A7-A4592B6F0EAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9016F7B-68CE-46A7-80A7-A4592B6F0EAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9016F7B-68CE-46A7-80A7-A4592B6F0EAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9016F7B-68CE-46A7-80A7-A4592B6F0EAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{861737AD-F1E6-4D67-9A6C-26642BA9F267}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{861737AD-F1E6-4D67-9A6C-26642BA9F267}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{861737AD-F1E6-4D67-9A6C-26642BA9F267}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{861737AD-F1E6-4D67-9A6C-26642BA9F267}.Release|Any CPU.Build.0 = Release|Any CPU
+		{934DCAA8-F266-4B4E-B7DF-5753694539BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{934DCAA8-F266-4B4E-B7DF-5753694539BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{934DCAA8-F266-4B4E-B7DF-5753694539BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{934DCAA8-F266-4B4E-B7DF-5753694539BB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
