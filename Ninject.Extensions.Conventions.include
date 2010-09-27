@@ -18,9 +18,9 @@
 	<property name="path.tools.unitdriven" value="${path.tools}/unitdriven"/>
 
 	<property name="product.name" value="Ninject.Extensions.Conventions" overwrite="false"/>
-	<property name="product.company" value="bbv Software Services AG" overwrite="false"/>
+	<property name="product.company" value="Innovatian Software, LLC" overwrite="false"/>
 	<property name="product.duration" value="2009-2010" overwrite="false"/>
-	<property name="product.description" value="Named Scope Extension for Ninject" overwrite="false"/>
+	<property name="product.description" value="Convention based binding configuration" overwrite="false"/>
 	<property name="product.keyfile" value="Ninject.snk" overwrite="false"/>
 	<property name="product.docfile" value="${product.name}.xml" overwrite="false"/>
 	<property name="product.assembly" value="${product.name}.dll" overwrite="false"/>
@@ -122,7 +122,7 @@
 			<attributes>
 				<attribute type="AssemblyProductAttribute" value="${product.name}: ${product.description}"/>
 				<attribute type="AssemblyCompanyAttribute" value="${product.company}"/>
-				<attribute type="AssemblyCopyrightAttribute" value="Copyright © ${product.duration} ${product.company}"/>
+				<attribute type="AssemblyCopyrightAttribute" value="Copyright © ${product.duration} ${product.company} and contributors"/>
 				<attribute type="AssemblyVersionAttribute" value="${build.version}"/>
 				<attribute type="ComVisibleAttribute" value="false"/>
 				<attribute type="CLSCompliantAttribute" value="true"/>
@@ -320,6 +320,5 @@
 		<regex pattern=".*-(?&lt;gitrevisionnumber&gt;\d+)-.*" input="${actual.git.revision}"/>
 		<property name="version.revision" value="${gitrevisionnumber}" overwrite="true" />
 		<delete file="${temp.revision.file}" failonerror="false"/>
-	</target>
-	
+	</target>	
 </project>
