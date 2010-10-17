@@ -1,9 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project name="Ninject" default="all">
-	<include buildfile="Ninject.Extensions.Conventions.include" />
-
 	<property name="version" value="2.1.0.0" overwrite="true"/>
+	<property name="product.name" value="Ninject.Extensions.Conventions" overwrite="false"/>
+	<property name="product.company" value="Innovatian Software, LLC" overwrite="false"/>
+	<property name="product.duration" value="2009-2010" overwrite="false"/>
+	<property name="product.description" value="Conventions extension for Ninject" overwrite="false"/>
+	<property name="product.platforms" value="net-3.5,net-3.5-no-web,net-4.0,net-4.0-no-web,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7,mono-2.0,mono-2.0-no-web,netcf-3.5"  overwrite="false"/>
+	<property name="product.buildserverPlatforms" value="net-3.5,net-3.5-no-web,net-4.0,net-4.0-no-web,silverlight-4.0,silverlight-3.0,silverlight-2.0,mono-2.0,mono-2.0-no-web,netcf-3.5"  overwrite="false"/>
+	<property name="dependencies" value="Ninject,Ninject.Extensions.ContextPreservation,Ninject,Ninject.Extensions.NamedScope"  overwrite="false"/>
 
+	<include buildfile="Ninject.include" />
 	<target name="all" depends="core test silverlight-test"/>
 
 	<target name="core" depends="init">
@@ -37,9 +43,9 @@
 			</fileset>
 		</copy>
 		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
-         output="${current.path.test}/Ninject.Extensions.Conventions.Test.dll">
+         output="${current.path.test}/${product.assembly.test}">
 			<sources basedir="${path.src}">
-				<include name="Ninject.Extensions.Conventions.Test/**/*.cs"/>
+				<include name="${product.name}.Test/**/*.cs"/>
 			</sources>
 			<references basedir="${current.path.test}">
 				<include name="mscorlib.dll"/>
@@ -71,9 +77,9 @@
         <csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
          output="${current.path.test}/${product.assembly.silverlighttestdll}">
             <sources basedir="${path.src}">
-                <include name="Ninject.Extensions.Conventions.Test/**/*.cs"/>
-                <include name="Ninject.Extensions.Conventions.SilverlightTests/*.cs"/>
-				<exclude name="Ninject.Extensions.Conventions.Test/MSTestAttributes/*.cs"/>
+                <include name="${product.name}.Test/**/*.cs"/>
+                <include name="${product.name}.SilverlightTests/*.cs"/>
+				<exclude name="${product.name}.Test/MSTestAttributes/*.cs"/>
             </sources>
             <references basedir="${current.path.test}">
                 <include name="mscorlib.dll"/>
@@ -93,11 +99,11 @@
                 <warning number="1584"/>
             </nowarn>
         </csc>
-		<zip zipfile="${current.path.test}/Ninject.Extensions.Conventions.SilverlightTests.xap">
+		<zip zipfile="${current.path.test}/${product.assembly.silverlighttest}">
 			<fileset basedir="${current.path.test}">
 				<include name="*.dll" />
 			</fileset>
-            <fileset basedir="${path.src}/Ninject.Extensions.Conventions.SilverlightTests">
+            <fileset basedir="${path.src}/${product.name}.SilverlightTests">
                 <include name="AppManifest.xaml"/>
             </fileset>
 		</zip>

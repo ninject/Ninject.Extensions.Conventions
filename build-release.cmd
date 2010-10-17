@@ -1,8 +1,8 @@
 @echo off
-set nantfile=Ninject.Extensions.Conventions.build
+set nantfile=Ninject.build
 set nantexe=tools\nant\nant.exe
-set buildlog=Ninject.Extensions.Conventions-Nant-Build.log
-set unittestlog=Ninject.Extensions.Conventions-Nant-unit-tests.log
+set buildlog=Ninject.Extensions.ContextPreservation-Nant-Build.log
+set unittestlog=Ninject.Extensions.ContextPreservation-Nant-unit-tests.log
 
 %nantexe% -buildfile:%nantfile% clean %1 %2 %3 %4 %5 %6 %7 %8
 IF ERRORLEVEL 1 GOTO Failed

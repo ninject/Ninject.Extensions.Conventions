@@ -17,10 +17,6 @@
 	<property name="path.tools.statlight" value="${path.tools}/statlight/statlight.exe"/>
 	<property name="path.tools.unitdriven" value="${path.tools}/unitdriven"/>
 
-	<property name="product.name" value="Ninject.Extensions.Conventions" overwrite="false"/>
-	<property name="product.company" value="Innovatian Software, LLC" overwrite="false"/>
-	<property name="product.duration" value="2009-2010" overwrite="false"/>
-	<property name="product.description" value="Convention based binding configuration" overwrite="false"/>
 	<property name="product.keyfile" value="Ninject.snk" overwrite="false"/>
 	<property name="product.docfile" value="${product.name}.xml" overwrite="false"/>
 	<property name="product.assembly" value="${product.name}.dll" overwrite="false"/>
@@ -28,7 +24,6 @@
 	<property name="product.assembly.silverlighttest" value="${product.name}.SilverlightTests.xap" overwrite="false"/>
 	<property name="product.assembly.silverlighttestdll" value="${product.name}.SilverlightTests.dll" overwrite="false"/>
 
-	<property name="version" value="1.0.0.0" overwrite="false"/>
 	<property name="version.major" value="${version::get-major(version::parse(version))}" dynamic="true"/>
 	<property name="version.minor" value="${version::get-minor(version::parse(version))}" dynamic="true"/>
 	<property name="version.build" value="${version::get-build(version::parse(version))}" dynamic="true"/>
@@ -139,6 +134,8 @@
 		<call target="config-platform-${build.platform}"/>
 
 		<property name="current.path.ninject.lib" value="${path.lib}/Ninject/${build.platform}"/>
+		<property name="current.path.context.lib" value="${path.lib}/Ninject.Extensions.ContextPreservation/${build.platform}"/>
+		<property name="current.path.namedscope.lib" value="${path.lib}/Ninject.Extensions.NamedScope/${build.platform}"/>
 		<property name="current.path.build" value="${path.build}/${build.platform}/${build.config}"/>
 		<property name="current.path.build.lib" value="${path.build}/${build.platform}/${build.config}/lib"/>
 		<property name="current.path.test" value="${path.build}/${build.platform}/tests" />
@@ -154,6 +151,20 @@
 		
 		<copy todir="${current.path.build.lib}">
 			<fileset basedir="${current.path.ninject.lib}">
+				<include name="**/*.dll"/>
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${current.path.build.lib}">
+			<fileset basedir="${current.path.context.lib}">
+				<include name="**/*.dll"/>
+				<include name="**/*.xml"/>
+			</fileset>
+		</copy>
+		
+		<copy todir="${current.path.build.lib}">
+			<fileset basedir="${current.path.namedscope.lib}">
 				<include name="**/*.dll"/>
 				<include name="**/*.xml"/>
 			</fileset>
@@ -242,26 +253,28 @@
 	</target>
 
 	<target name="UnzipDependencies">
-		<foreach item="File" property="filepath">
-			<in>
-				<items>
-					<include name="${path.lib}/Ninject/*release*.zip"/>
-				</items>
-			</in>
-			<do>
-				<property name="filename" value="${path::get-file-name-without-extension(filepath)}"/>
-				<property name="index" value="${string::index-of(filename, 'release')}"/>
-				<property name="destinationDir" value="${string::substring(filename, string::index-of(filename, 'release') + 8, string::get-length(filename) - string::index-of(filename, 'release') - 8)}"/>
-				
-				<unzip zipfile="${filepath}" todir="${path.lib}/Ninject/${destinationDir}"/>
-			</do>
-		</foreach>	
+		<foreach item="String" in="${dependencies}" delim="," property="dependency">
+			<foreach item="File" property="filepath">
+				<in>
+					<items>
+						<include name="${path.lib}/${dependency}/*release*.zip"/>
+					</items>
+				</in>
+				<do>
+					<property name="filename" value="${path::get-file-name-without-extension(filepath)}"/>
+					<property name="index" value="${string::index-of(filename, 'release')}"/>
+					<property name="destinationDir" value="${string::substring(filename, string::index-of(filename, 'release') + 8, string::get-length(filename) - string::index-of(filename, 'release') - 8)}"/>
+					
+					<unzip zipfile="${filepath}" todir="${path.lib}/${dependency}/${destinationDir}"/>
+				</do>
+			</foreach>
+		</foreach>
 	</target>
 	
 	<target name="package-all" depends="all package-bin package-source" />
 	
 	<target name="buildServerPlatforms">
-		<foreach item="String" in="net-3.5,net-3.5-no-web,net-4.0,net-4.0-no-web,silverlight-4.0,silverlight-3.0,silverlight-2.0,mono-2.0,mono-2.0-no-web,netcf-3.5" delim="," property="platform">
+		<foreach item="String" in="${product.buildserverPlatforms}" delim="," property="platform">
 			<property name="build.platform" value="${platform}"/>
 			<call target="package-bin"/>
 		</foreach>
@@ -269,7 +282,7 @@
 	</target>
 
 	<target name="allPlatforms">
-		<foreach item="String" in="net-3.5,net-3.5-no-web,net-4.0,net-4.0-no-web,silverlight-4.0,silverlight-3.0,silverlight-2.0,silverlight-4.0-wp7,mono-2.0,mono-2.0-no-web,netcf-3.5" delim="," property="platform">
+		<foreach item="String" in="${product.platforms}" delim="," property="platform">
 			<property name="build.platform" value="${platform}"/>
 			<call target="package-bin"/>
 		</foreach>
@@ -320,5 +333,5 @@
 		<regex pattern=".*-(?&lt;gitrevisionnumber&gt;\d+)-.*" input="${actual.git.revision}"/>
 		<property name="version.revision" value="${gitrevisionnumber}" overwrite="true" />
 		<delete file="${temp.revision.file}" failonerror="false"/>
-	</target>	
+	</target>
 </project>
