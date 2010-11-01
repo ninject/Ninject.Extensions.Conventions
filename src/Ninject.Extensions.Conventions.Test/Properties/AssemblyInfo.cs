@@ -1,9 +1,5 @@
-﻿#region Using Directives
-
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.InteropServices;
-
-#endregion
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -12,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly : AssemblyTitle( "Ninject.Extensions.Conventions.Tests" )]
 [assembly : AssemblyDescription( "" )]
 [assembly : AssemblyConfiguration( "" )]
-[assembly : AssemblyCompany( "Microsoft" )]
+[assembly : AssemblyCompany("Innovatian Software, LLC")]
 [assembly : AssemblyProduct( "Ninject.Extensions.Conventions.Tests" )]
-[assembly : AssemblyCopyright( "Copyright © Microsoft 2009" )]
+[assembly : AssemblyCopyright("Copyright © Innovatian Software, LLC 2009")]
 [assembly : AssemblyTrademark( "" )]
 [assembly : AssemblyCulture( "" )]
 

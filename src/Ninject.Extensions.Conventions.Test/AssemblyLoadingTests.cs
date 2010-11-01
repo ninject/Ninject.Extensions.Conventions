@@ -1,7 +1,7 @@
-namespace Ninject.Extensions.Conventions.Tests
+namespace Ninject.Extensions.Conventions
 {
     using System.Reflection;
-    using Ninject.Extensions.Conventions.Tests.Fakes;
+    using Ninject.Extensions.Conventions.Fakes;
 #if SILVERLIGHT
 #if SILVERLIGHT_MSTEST
     using MsTest.Should;
@@ -17,6 +17,7 @@ namespace Ninject.Extensions.Conventions.Tests
     using Xunit;
     using Xunit.Should;
 #endif
+
     [TestClass]
     public class AssemblyLoadingTests
     {

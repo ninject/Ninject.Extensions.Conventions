@@ -1,4 +1,4 @@
-namespace Ninject.Extensions.Conventions.Tests.Fakes
+namespace Ninject.Extensions.Conventions.Fakes
 {
     public class StringView : IGenericView<string>
     {

@@ -1,9 +1,8 @@
-namespace Ninject.Extensions.Conventions.Tests
+namespace Ninject.Extensions.Conventions
 {
     using System.Linq;
-    using Ninject.Extensions.Conventions.Tests.Fakes;
+    using Ninject.Extensions.Conventions.Fakes;
     using Ninject.Infrastructure;
-
 #if SILVERLIGHT
 #if SILVERLIGHT_MSTEST
     using MsTest.Should;

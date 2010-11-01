@@ -1,14 +1,14 @@
-namespace Ninject.Extensions.Conventions.Tests
+namespace Ninject.Extensions.Conventions
 {
-    using Ninject.Extensions.Conventions.Tests.Fakes;
+    using Ninject.Extensions.Conventions.Fakes;
 #if SILVERLIGHT
 #if SILVERLIGHT_MSTEST
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Assert = Ninject.SilverlightTests.AssertXUnitWrapper;
+    using Assert = AssertWithThrows;
     using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
 #else
     using UnitDriven;
-    using Assert = Ninject.SilverlightTests.AssertXUnitWrapper;
+    using Assert = AssertWithThrows;
     using Fact = UnitDriven.TestMethodAttribute;
 #endif
 #else

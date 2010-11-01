@@ -8,7 +8,7 @@
     <ProjectGuid>{861737AD-F1E6-4D67-9A6C-26642BA9F267}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ninject.Extensions.Conventions.Tests</RootNamespace>
+    <RootNamespace>Ninject.Extensions.Conventions</RootNamespace>
     <AssemblyName>Ninject.Extensions.Conventions.Tests</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

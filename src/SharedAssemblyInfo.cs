@@ -12,10 +12,10 @@ using System.Runtime.InteropServices;
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: AssemblyProductAttribute("Ninject.Extensions.Conventions: Convention based binding configuration")]
+[assembly: AssemblyProductAttribute("Ninject.Extensions.Conventions: Conventions extension for Ninject")]
 [assembly: AssemblyCompanyAttribute("Innovatian Software, LLC")]
 [assembly: AssemblyCopyrightAttribute("Copyright © 2009-2010 Innovatian Software, LLC and contributors")]
-[assembly: AssemblyVersionAttribute("0.0.0.0")]
+[assembly: AssemblyVersionAttribute("2.1.0.20")]
 [assembly: ComVisibleAttribute(false)]
 [assembly: CLSCompliantAttribute(true)]
 
