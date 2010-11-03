@@ -230,15 +230,22 @@ namespace Ninject.Extensions.Conventions
             {
                 Assembly assembly;
 
-                try
+                if (File.Exists(file))
                 {
-                    var name = new AssemblyName {CodeBase = file};
-                    assembly = temporaryDomain.Load( name );
+                    try
+                    {
+                        var name = new AssemblyName { CodeBase = file };
+                        assembly = temporaryDomain.Load(name);
+                    }
+                    catch (BadImageFormatException)
+                    {
+                        // Ignore native assemblies
+                        continue;
+                    }
                 }
-                catch ( BadImageFormatException )
+                else
                 {
-                    // Ignore native assemblies
-                    continue;
+                    assembly = temporaryDomain.Load(file);
                 }
 
                 if ( filter( assembly ) )

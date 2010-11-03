@@ -69,5 +69,25 @@ namespace Ninject.Extensions.Conventions
                 instance.ShouldBeInstanceOf<DefaultConvention>();
             }
         }
+
+#if !SILVERLIGHT
+        [Fact]
+        public void LoadAssemblyByFullQualifiedName()
+        {
+            using (IKernel kernel = new StandardKernel())
+            {
+                kernel.Scan(x =>
+                {
+                    x.From("TestPlugin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null");
+                    x.BindWith<DefaultBindingGenerator>();
+                });
+                
+                var instance = kernel.Get<IDefaultConvention>();
+
+                instance.ShouldNotBeNull();
+                instance.Name.ShouldBe("DefaultConventionFromPlugin");
+            }
+        }
+#endif
     }
 }

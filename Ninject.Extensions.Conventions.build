@@ -60,6 +60,21 @@
 				<warning number="1584"/>
 			</nowarn>
 		</csc>
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+         output="${current.path.test}/TestPlugin.dll">
+			<sources basedir="${path.src}">
+				<include name="TestPlugin/**/*.cs"/>
+			</sources>
+			<references basedir="${current.path.test}">
+				<include name="mscorlib.dll"/>
+				<include name="System.dll"/>
+				<include name="System.Core.dll"/>
+				<include name="${product.assembly.test}"/>
+			</references>
+			<nowarn>
+				<warning number="1584"/>
+			</nowarn>
+		</csc>		
 	</target>
 	
     <target name="compile-silverlight-tests" depends="core" unless="${skip.tests or skip.silverlightTests}" if="${string::contains(build.platform, 'silverlight')}">
