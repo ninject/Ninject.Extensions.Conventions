@@ -580,7 +580,6 @@ namespace Ninject.Extensions.Conventions
         /// <param name="type"></param>
         public void WhereTypeInheritsFrom( Type type )
         {
-            BindingGenerators.Add( new RegexBindingGenerator( type.Name ) );
             Where( type.IsAssignableFrom );
         }
 
@@ -589,10 +588,6 @@ namespace Ninject.Extensions.Conventions
         /// <param name="types"></param>
         public void WhereTypeInheritsFromAny( IEnumerable<Type> types )
         {
-            foreach ( Type type in types )
-            {
-                BindingGenerators.Add( new RegexBindingGenerator( type.Name ) );
-            }
             Where( type => types.Any( t => t.IsAssignableFrom( type ) ) );
         }
 
