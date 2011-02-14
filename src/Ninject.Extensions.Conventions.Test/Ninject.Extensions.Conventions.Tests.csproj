@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyLoadingTests.cs" />
+    <Compile Include="AssemblyScannerTestsWhereTypeInheritsFrom.cs" />
     <Compile Include="Fakes\DefaultConvention.cs" />
     <Compile Include="Fakes\DefaultConventionView.cs" />
     <Compile Include="Fakes\DefaultView.cs" />
