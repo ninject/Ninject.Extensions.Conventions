@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Ninject.Extensions.Conventions</id>
+    <version></version>
+    <authors>Ninject Project Contributors</authors>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+	<licenseUrl>https://github.com/ninject/ninject.extensions.conventions/raw/master/LICENSE.txt</licenseUrl>
+    <description>Extension for convention based binding for Ninject</description>
+    <summary></summary>
+    <language>en-US</language>
+    <dependencies>
+      <dependency id="Ninject" version="" />
+    </dependencies> 
+  </metadata>
+</package>
