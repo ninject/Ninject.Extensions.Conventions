@@ -248,7 +248,7 @@ namespace Ninject.Extensions.Conventions
         /// </summary>
         void InThreadScope();
 
-#if !NO_WEB
+#if WEB
         /// <summary>
         /// Indicates that instances activated via the binding should be re-used within the same
         /// HTTP request.

@@ -627,7 +627,7 @@ namespace Ninject.Extensions.Conventions
             ScopeCallback = StandardScopeCallbacks.Thread;
         }
 
-#if !NO_WEB
+#if WEB
         /// <summary>
         /// Indicates that instances activated via the binding should be re-used within the same
         /// HTTP request.
