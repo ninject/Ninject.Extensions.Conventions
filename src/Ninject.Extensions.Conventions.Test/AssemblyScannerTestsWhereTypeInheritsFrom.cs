@@ -1,15 +1,12 @@
 ﻿namespace Ninject.Extensions.Conventions
 {
-#if SILVERLIGHT
-#else
+#if !SILVERLIGHT
     using System.Reflection;
     using System.Linq;
     using Fakes;
-    using Tests.MSTestAttributes;
     using Xunit;
     using Xunit.Should;
 
-    [TestClass]
     public class AssemblyScannerTestsWhereTypeInheritsFrom
     {
         private static readonly MethodInfo ProcessMethod =

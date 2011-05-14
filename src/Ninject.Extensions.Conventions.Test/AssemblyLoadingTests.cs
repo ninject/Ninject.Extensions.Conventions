@@ -2,23 +2,9 @@ namespace Ninject.Extensions.Conventions
 {
     using System.Reflection;
     using Ninject.Extensions.Conventions.Fakes;
-#if SILVERLIGHT
-#if SILVERLIGHT_MSTEST
-    using MsTest.Should;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-#else
-    using UnitDriven;
-    using UnitDriven.Should;
-    using Fact = UnitDriven.TestMethodAttribute;
-#endif
-#else
-    using Ninject.Tests.MSTestAttributes;
     using Xunit;
     using Xunit.Should;
-#endif
 
-    [TestClass]
     public class AssemblyLoadingTests
     {
         [Fact]

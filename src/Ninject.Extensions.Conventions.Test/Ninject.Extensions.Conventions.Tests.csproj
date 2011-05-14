@@ -67,9 +67,6 @@
     <Reference Include="xunit">
       <HintPath>..\..\tools\xunit.net\xunit.dll</HintPath>
     </Reference>
-    <Reference Include="xunit.should">
-      <HintPath>..\..\tools\xunit.net\xunit.should.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AssemblyLoadingTests.cs" />
@@ -82,10 +79,9 @@
     <Compile Include="Fakes\IGenericView.cs" />
     <Compile Include="Fakes\StringView.cs" />
     <Compile Include="GenericBindingGeneratorTests.cs" />
-    <Compile Include="MSTestAttributes\TestClassAttribute.cs" />
-    <Compile Include="MSTestAttributes\TestInitialize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegexBindingGeneratorTests.cs" />
+    <Compile Include="XUnitShould.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ninject.Extensions.Conventions\Ninject.Extensions.Conventions.csproj">

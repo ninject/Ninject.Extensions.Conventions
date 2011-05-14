@@ -73,12 +73,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Silverlight.Testing">
-      <HintPath>$(MSBuildExtensionsPath)\..\Microsoft SDKs\Silverlight\v4.0\Toolkit\Apr10\Testing\Microsoft.Silverlight.Testing.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight">
-      <HintPath>$(MSBuildExtensionsPath)\..\Microsoft SDKs\Silverlight\v4.0\Toolkit\Apr10\Testing\Microsoft.VisualStudio.QualityTools.UnitTesting.Silverlight.dll</HintPath>
-    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject\silverlight-4.0\Ninject.dll</HintPath>
     </Reference>
@@ -92,6 +86,12 @@
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Windows.Browser" />
+    <Reference Include="xunit-silverlight">
+      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0\xunit-silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.runner.silverlight">
+      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0\xunit.runner.silverlight.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\AssemblyLoadingTests.cs">
@@ -124,13 +124,13 @@
     <Compile Include="..\Ninject.Extensions.Conventions.Test\RegexBindingGeneratorTests.cs">
       <Link>RegexBindingGeneratorTests.cs</Link>
     </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\XUnitShould.cs">
+      <Link>XUnitShould.cs</Link>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AssertWithThrows.cs" />
-    <Compile Include="MsTestShouldExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnitDrivenShouldExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

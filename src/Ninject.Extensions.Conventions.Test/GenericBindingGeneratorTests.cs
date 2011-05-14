@@ -1,23 +1,9 @@
 namespace Ninject.Extensions.Conventions
 {
     using Ninject.Extensions.Conventions.Fakes;
-#if SILVERLIGHT
-#if SILVERLIGHT_MSTEST
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Assert = AssertWithThrows;
-    using Fact = Microsoft.VisualStudio.TestTools.UnitTesting.TestMethodAttribute;
-#else
-    using UnitDriven;
-    using Assert = AssertWithThrows;
-    using Fact = UnitDriven.TestMethodAttribute;
-#endif
-#else
-    using Ninject.Tests.MSTestAttributes;
     using Xunit;
-#endif
 
 #if !SILVERLIGHT
-    [TestClass]
     public class GenericBindingGeneratorTests
     {
         [Fact]
