@@ -1,9 +1,11 @@
 namespace Ninject.Extensions.Conventions
 {
     using System.Reflection;
+
+    using FluentAssertions;
+
     using Ninject.Extensions.Conventions.Fakes;
     using Xunit;
-    using Xunit.Should;
 
     public class AssemblyLoadingTests
     {
@@ -18,8 +20,8 @@ namespace Ninject.Extensions.Conventions
                 kernel.Scan(scanner);
                 var instance = kernel.Get<IDefaultConvention>();
 
-                instance.ShouldNotBeNull();
-                instance.ShouldBeInstanceOf<DefaultConvention>();
+                instance.Should().NotBeNull();
+                instance.Should().BeOfType<DefaultConvention>();
             }
         }
 
@@ -34,8 +36,8 @@ namespace Ninject.Extensions.Conventions
                 kernel.Scan(scanner);
                 var instance = kernel.Get<IDefaultConvention>();
 
-                instance.ShouldNotBeNull();
-                instance.ShouldBeInstanceOf<DefaultConvention>();
+                instance.Should().NotBeNull();
+                instance.Should().BeOfType<DefaultConvention>();
             }
         }
 
@@ -51,8 +53,8 @@ namespace Ninject.Extensions.Conventions
                              });
                 var instance = kernel.Get<IDefaultConvention>();
 
-                instance.ShouldNotBeNull();
-                instance.ShouldBeInstanceOf<DefaultConvention>();
+                instance.Should().NotBeNull();
+                instance.Should().BeOfType<DefaultConvention>();
             }
         }
 
@@ -70,8 +72,8 @@ namespace Ninject.Extensions.Conventions
                 
                 var instance = kernel.Get<IDefaultConvention>();
 
-                instance.ShouldNotBeNull();
-                instance.Name.ShouldBe("DefaultConventionFromPlugin");
+                instance.Should().NotBeNull();
+                instance.Name.Should().Be("DefaultConventionFromPlugin");
             }
         }
 #endif

@@ -4,8 +4,10 @@
     using System.Reflection;
     using System.Linq;
     using Fakes;
+
+    using FluentAssertions;
+
     using Xunit;
-    using Xunit.Should;
 
     public class AssemblyScannerTestsWhereTypeInheritsFrom
     {
@@ -26,10 +28,10 @@
                 scanner.WhereTypeInheritsFrom<IDefaultView>();
                 scanner.BindWithDefaultConventions();
                 ProcessMethod.Invoke(scanner, new[]{kernel});
-                kernel.GetBindings(typeof(IDefaultView)).Count().ShouldBe(1);
-                kernel.Get<IDefaultView>().ShouldBeInstanceOf<DefaultView>();
-                scanner.BindingGenerators.Count.ShouldBe(1);
-                scanner.BindingGenerators[0].ShouldBeInstanceOf<DefaultBindingGenerator>();
+                kernel.GetBindings(typeof(IDefaultView)).Count().Should().Be(1);
+                kernel.Get<IDefaultView>().Should().BeOfType<DefaultView>();
+                scanner.BindingGenerators.Count.Should().Be(1);
+                scanner.BindingGenerators[0].Should().BeOfType<DefaultBindingGenerator>();
             }
         }
 
@@ -44,10 +46,10 @@
                 scanner.WhereTypeInheritsFrom<IDefaultView>();
                 scanner.BindWith(regexBindingGenerator);
                 ProcessMethod.Invoke(scanner, new[]{kernel});
-                kernel.GetBindings(typeof(IDefaultView)).Count().ShouldBe(1);
-                kernel.Get<IDefaultView>().ShouldBeInstanceOf<DefaultView>();
-                scanner.BindingGenerators.Count.ShouldBe(1);
-                scanner.BindingGenerators[0].ShouldBeInstanceOf<RegexBindingGenerator>();
+                kernel.GetBindings(typeof(IDefaultView)).Count().Should().Be(1);
+                kernel.Get<IDefaultView>().Should().BeOfType<DefaultView>();
+                scanner.BindingGenerators.Count.Should().Be(1);
+                scanner.BindingGenerators[0].Should().BeOfType<RegexBindingGenerator>();
             }
         }
     }
