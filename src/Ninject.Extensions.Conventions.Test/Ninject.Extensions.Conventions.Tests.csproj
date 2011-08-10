@@ -56,6 +56,9 @@
     <Reference Include="FluentAssertions">
       <HintPath>..\..\tools\FluentAssertions\Net-3.5\FluentAssertions.dll</HintPath>
     </Reference>
+    <Reference Include="Moq">
+      <HintPath>..\..\tools\moq\NET35\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject\net-3.5\Ninject.dll</HintPath>
     </Reference>
@@ -70,20 +73,64 @@
     <Reference Include="xunit">
       <HintPath>..\..\tools\xunit.net\xunit.dll</HintPath>
     </Reference>
+    <Reference Include="xunit.extensions">
+      <HintPath>..\..\tools\xunit.net\xunit.extensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssemblyLoadingTests.cs" />
-    <Compile Include="AssemblyScannerTestsWhereTypeInheritsFrom.cs" />
-    <Compile Include="Fakes\DefaultConvention.cs" />
-    <Compile Include="Fakes\DefaultConventionView.cs" />
-    <Compile Include="Fakes\DefaultView.cs" />
-    <Compile Include="Fakes\IDefaultConvention.cs" />
-    <Compile Include="Fakes\IDefaultView.cs" />
-    <Compile Include="Fakes\IGenericView.cs" />
-    <Compile Include="Fakes\StringView.cs" />
-    <Compile Include="GenericBindingGeneratorTests.cs" />
+    <Compile Include="BindingBuilder\AssemblyFinderTests.cs" />
+    <Compile Include="BindingBuilder\ConventionBindingBuilderTests.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntaxBindingTests.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntaxFilteringTests.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntaxFromTests.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntaxSelectTests.cs" />
+    <Compile Include="BindingBuilder\TypeSelectorTests.cs" />
+    <Compile Include="BindingBuilder\TypeFilterTests.cs" />
+    <Compile Include="Fakes\IBar{T1,T2}.cs" />
+    <Compile Include="Fakes\IBar{T}.cs" />
+    <Compile Include="Fakes\IFoo{T}.cs" />
+    <Compile Include="Fakes\IService{T}.cs" />
+    <Compile Include="Fakes\NormalClasses\AbstractClassWithManyInterfaces.cs" />
+    <Compile Include="BindingGenerators\AllInterfacesBindingGeneratorTests.cs" />
+    <Compile Include="BindingGenerators\BaseBindingGeneratorTests.cs" />
+    <Compile Include="BindingGenerators\BindableTypeSelectorTest.cs" />
+    <Compile Include="Fakes\NormalClasses\ClassWithManyInterfaces.cs" />
+    <Compile Include="BindingGenerators\DefaultInterfacesBindingGeneratorTests.cs" />
+    <Compile Include="BindingGenerators\DefaultInterfaceBindingGeneratorTests.cs" />
+    <Compile Include="Fakes\OpenGenerics\GenericBaseClassWithManyInterfaces{T1,T2}.cs" />
+    <Compile Include="Fakes\OpenGenerics\GenericBaseClassWithManyInterfaces{T}.cs" />
+    <Compile Include="Fakes\OpenGenerics\OpenGenericClassWithManyInterfaces.cs" />
+    <Compile Include="Fakes\Interfaces\IBaseClosedGenericInterface.cs" />
+    <Compile Include="Fakes\Interfaces\IBaseNormalInterface.cs" />
+    <Compile Include="Fakes\Interfaces\IBaseOfDerivedGenericInterface.cs" />
+    <Compile Include="Fakes\Interfaces\IBaseOfDerivedInterface.cs" />
+    <Compile Include="Fakes\Interfaces\IBaseOpenGenericInterface.cs" />
+    <Compile Include="Fakes\Interfaces\IBaseOpenGenericInterface1.cs" />
+    <Compile Include="Fakes\Interfaces\IBaseOpenGenericInterface2.cs" />
+    <Compile Include="Fakes\Interfaces\IClosedGenericInterface.cs" />
+    <Compile Include="Fakes\Interfaces\IDerivedGenericInterface.cs" />
+    <Compile Include="Fakes\Interfaces\IDerivedInterface.cs" />
+    <Compile Include="Fakes\Interfaces\IOpenGenericInterface.cs" />
+    <Compile Include="Fakes\Interfaces\INormalInterface.cs" />
+    <Compile Include="BindingGenerators\KernelMock.cs" />
+    <Compile Include="BindingGenerators\SelectorBindingGeneratorTests.cs" />
+    <Compile Include="BindingGenerators\SelfBindingGeneratorTests.cs" />
+    <Compile Include="BindingGenerators\SingleInterfaceBindingGeneratorTests.cs" />
+    <Compile Include="Fakes\Bar.cs" />
+    <Compile Include="Fakes\BaseService.cs" />
+    <Compile Include="Fakes\Foo.cs" />
+    <Compile Include="Fakes\IBar.cs" />
+    <Compile Include="Fakes\ICrazyService.cs" />
+    <Compile Include="Fakes\IFoo.cs" />
+    <Compile Include="Fakes\IMultipleInterfaceCrazyService.cs" />
+    <Compile Include="Fakes\IService.cs" />
+    <Compile Include="Fakes\MultipleInterfaceCrazyService.cs" />
+    <Compile Include="IntegrationTests\AssemblyLoadingTests.cs" />
+    <Compile Include="IntegrationTests\NormalClassBindingTests.cs" />
+    <Compile Include="IntegrationTests\OpenGenericClassBindingTests.cs" />
+    <Compile Include="Fakes\NormalClasses\DefaultConvention.cs" />
+    <Compile Include="Fakes\Interfaces\IDefaultConvention.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegexBindingGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ninject.Extensions.Conventions\Ninject.Extensions.Conventions.csproj">
@@ -108,6 +155,7 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

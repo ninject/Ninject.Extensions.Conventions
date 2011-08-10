@@ -56,7 +56,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\build\debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;SILVERLIGHT_MSTEST</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;NO_ASSEMBLY_SCANNING</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
@@ -73,8 +73,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\tools\moq\Silverlight4\Castle.Core.dll</HintPath>
+    </Reference>
     <Reference Include="FluentAssertions.Silverlight">
       <HintPath>..\..\tools\FluentAssertions\Silverlight-4.0\FluentAssertions.Silverlight.dll</HintPath>
+    </Reference>
+    <Reference Include="Moq.Silverlight">
+      <HintPath>..\..\tools\moq\Silverlight4\Moq.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject\silverlight-4.0\Ninject.dll</HintPath>
@@ -92,40 +98,169 @@
     <Reference Include="xunit-silverlight">
       <HintPath>..\..\tools\xunit.sl\Silverlight-4.0\xunit-silverlight.dll</HintPath>
     </Reference>
+    <Reference Include="xunit.extensions-silverlight">
+      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0\xunit.extensions-silverlight.dll</HintPath>
+    </Reference>
     <Reference Include="xunit.runner.silverlight">
       <HintPath>..\..\tools\xunit.sl\Silverlight-4.0\xunit.runner.silverlight.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\AssemblyLoadingTests.cs">
-      <Link>AssemblyLoadingTests.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingBuilder\AssemblyFinderTests.cs">
+      <Link>BindingBuilder\AssemblyFinderTests.cs</Link>
     </Compile>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\DefaultConvention.cs">
-      <Link>Fakes\DefaultConvention.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingBuilder\ConventionBindingBuilderTests.cs">
+      <Link>BindingBuilder\ConventionBindingBuilderTests.cs</Link>
     </Compile>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\DefaultConventionView.cs">
-      <Link>Fakes\DefaultConventionView.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingBuilder\ConventionSyntaxBindingTests.cs">
+      <Link>BindingBuilder\ConventionSyntaxBindingTests.cs</Link>
     </Compile>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\DefaultView.cs">
-      <Link>Fakes\DefaultView.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingBuilder\ConventionSyntaxFilteringTests.cs">
+      <Link>BindingBuilder\ConventionSyntaxFilteringTests.cs</Link>
     </Compile>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IDefaultConvention.cs">
-      <Link>Fakes\IDefaultConvention.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingBuilder\ConventionSyntaxFromTests.cs">
+      <Link>BindingBuilder\ConventionSyntaxFromTests.cs</Link>
     </Compile>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IDefaultView.cs">
-      <Link>Fakes\IDefaultView.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingBuilder\ConventionSyntaxSelectTests.cs">
+      <Link>BindingBuilder\ConventionSyntaxSelectTests.cs</Link>
     </Compile>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IGenericView.cs">
-      <Link>Fakes\IGenericView.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingBuilder\TypeFilterTests.cs">
+      <Link>BindingBuilder\TypeFilterTests.cs</Link>
     </Compile>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\StringView.cs">
-      <Link>Fakes\StringView.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingBuilder\TypeSelectorTests.cs">
+      <Link>BindingBuilder\TypeSelectorTests.cs</Link>
     </Compile>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\GenericBindingGeneratorTests.cs">
-      <Link>GenericBindingGeneratorTests.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\AllInterfacesBindingGeneratorTests.cs">
+      <Link>BindingGenerators\AllInterfacesBindingGeneratorTests.cs</Link>
     </Compile>
-    <Compile Include="..\Ninject.Extensions.Conventions.Test\RegexBindingGeneratorTests.cs">
-      <Link>RegexBindingGeneratorTests.cs</Link>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\BaseBindingGeneratorTests.cs">
+      <Link>BindingGenerators\BaseBindingGeneratorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\BindableTypeSelectorTest.cs">
+      <Link>BindingGenerators\BindableTypeSelectorTest.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\DefaultInterfaceBindingGeneratorTests.cs">
+      <Link>BindingGenerators\DefaultInterfaceBindingGeneratorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\DefaultInterfacesBindingGeneratorTests.cs">
+      <Link>BindingGenerators\DefaultInterfacesBindingGeneratorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\KernelMock.cs">
+      <Link>BindingGenerators\KernelMock.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\SelectorBindingGeneratorTests.cs">
+      <Link>BindingGenerators\SelectorBindingGeneratorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\SelfBindingGeneratorTests.cs">
+      <Link>BindingGenerators\SelfBindingGeneratorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\SingleInterfaceBindingGeneratorTests.cs">
+      <Link>BindingGenerators\SingleInterfaceBindingGeneratorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Bar.cs">
+      <Link>Fakes\Bar.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\BaseService.cs">
+      <Link>Fakes\BaseService.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Foo.cs">
+      <Link>Fakes\Foo.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IBar.cs">
+      <Link>Fakes\IBar.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IBar{T1,T2}.cs">
+      <Link>Fakes\IBar{T1,T2}.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IBar{T}.cs">
+      <Link>Fakes\IBar{T}.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\ICrazyService.cs">
+      <Link>Fakes\ICrazyService.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IFoo.cs">
+      <Link>Fakes\IFoo.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IFoo{T}.cs">
+      <Link>Fakes\IFoo{T}.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IMultipleInterfaceCrazyService.cs">
+      <Link>Fakes\IMultipleInterfaceCrazyService.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IBaseClosedGenericInterface.cs">
+      <Link>Fakes\Interfaces\IBaseClosedGenericInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IBaseNormalInterface.cs">
+      <Link>Fakes\Interfaces\IBaseNormalInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IBaseOfDerivedGenericInterface.cs">
+      <Link>Fakes\Interfaces\IBaseOfDerivedGenericInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IBaseOfDerivedInterface.cs">
+      <Link>Fakes\Interfaces\IBaseOfDerivedInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IBaseOpenGenericInterface.cs">
+      <Link>Fakes\Interfaces\IBaseOpenGenericInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IBaseOpenGenericInterface1.cs">
+      <Link>Fakes\Interfaces\IBaseOpenGenericInterface1.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IBaseOpenGenericInterface2.cs">
+      <Link>Fakes\Interfaces\IBaseOpenGenericInterface2.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IClosedGenericInterface.cs">
+      <Link>Fakes\Interfaces\IClosedGenericInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IDefaultConvention.cs">
+      <Link>Fakes\Interfaces\IDefaultConvention.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IDerivedGenericInterface.cs">
+      <Link>Fakes\Interfaces\IDerivedGenericInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IDerivedInterface.cs">
+      <Link>Fakes\Interfaces\IDerivedInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\INormalInterface.cs">
+      <Link>Fakes\Interfaces\INormalInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IOpenGenericInterface.cs">
+      <Link>Fakes\Interfaces\IOpenGenericInterface.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IService.cs">
+      <Link>Fakes\IService.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IService{T}.cs">
+      <Link>Fakes\IService{T}.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\MultipleInterfaceCrazyService.cs">
+      <Link>Fakes\MultipleInterfaceCrazyService.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\NormalClasses\AbstractClassWithManyInterfaces.cs">
+      <Link>Fakes\NormalClasses\AbstractClassWithManyInterfaces.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\NormalClasses\ClassWithManyInterfaces.cs">
+      <Link>Fakes\NormalClasses\ClassWithManyInterfaces.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\NormalClasses\DefaultConvention.cs">
+      <Link>Fakes\NormalClasses\DefaultConvention.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\OpenGenerics\GenericBaseClassWithManyInterfaces{T1,T2}.cs">
+      <Link>Fakes\OpenGenerics\GenericBaseClassWithManyInterfaces{T1,T2}.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\OpenGenerics\GenericBaseClassWithManyInterfaces{T}.cs">
+      <Link>Fakes\OpenGenerics\GenericBaseClassWithManyInterfaces{T}.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\OpenGenerics\OpenGenericClassWithManyInterfaces.cs">
+      <Link>Fakes\OpenGenerics\OpenGenericClassWithManyInterfaces.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\AssemblyLoadingTests.cs">
+      <Link>IntegrationTests\AssemblyLoadingTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\NormalClassBindingTests.cs">
+      <Link>IntegrationTests\NormalClassBindingTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\OpenGenericClassBindingTests.cs">
+      <Link>IntegrationTests\OpenGenericClassBindingTests.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

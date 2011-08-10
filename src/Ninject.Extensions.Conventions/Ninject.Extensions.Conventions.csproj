@@ -39,7 +39,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\build\debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -76,14 +76,40 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="AssemblyScanner.cs" />
-    <Compile Include="ExtensionsForIKernel.cs" />
-    <Compile Include="DefaultBindingGenerator.cs" />
-    <Compile Include="ExtensionsForAssembly.cs" />
-    <Compile Include="GenericBindingGenerator.cs" />
-    <Compile Include="IAssemblyScanner.cs" />
-    <Compile Include="IBindingGenerator.cs" />
-    <Compile Include="RegexBindingGenerator.cs" />
+    <Compile Include="BindingBuilder\ConventionBindingBuilder.cs" />
+    <Compile Include="BindingBuilder\IAssemblyFinder.cs" />
+    <Compile Include="BindingBuilder\IConventionBindingBuilder.cs" />
+    <Compile Include="BindingBuilder\ITypeFilter.cs" />
+    <Compile Include="BindingBuilder\ITypeSelector.cs" />
+    <Compile Include="BindingBuilder\TypeSelector.cs" />
+    <Compile Include="BindingGenerators\AbstractInterfaceBindingGenerator.cs" />
+    <Compile Include="BindingGenerators\BindableTypeSelector.cs" />
+    <Compile Include="BindingBuilder\BindingGeneratorFactory.cs" />
+    <Compile Include="BindingGenerators\IBindableTypeSelector.cs" />
+    <Compile Include="BindingBuilder\IBindingGeneratorFactory.cs" />
+    <Compile Include="BindingGenerators\AllInterfacesBindingGenerator.cs" />
+    <Compile Include="BindingGenerators\BaseBindingGenerator.cs" />
+    <Compile Include="BindingGenerators\DefaultInterfaceBindingGenerator.cs" />
+    <Compile Include="BindingGenerators\DefaultInterfacesBindingGenerator.cs" />
+    <Compile Include="BindingBuilder\AssemblyFinder.cs" />
+    <Compile Include="BindingBuilder\TypeFilter.cs" />
+    <Compile Include="BindingGenerators\IBindingGenerator.cs" />
+    <Compile Include="BindingGenerators\SelectorBindingGenerator.cs" />
+    <Compile Include="BindingGenerators\SelfBindingGenerator.cs" />
+    <Compile Include="BindingGenerators\SingleInterfaceBindingGenerator.cs" />
+    <Compile Include="Extensions\ExtensionsForIKernel.cs" />
+    <Compile Include="Extensions\ExtensionsForAssembly.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntax.cs" />
+    <Compile Include="Syntax\IBindSyntax.cs" />
+    <Compile Include="Syntax\IWhereSyntax.cs" />
+    <Compile Include="Syntax\IConfigureSyntax.cs" />
+    <Compile Include="Syntax\IExcludeSyntax.cs" />
+    <Compile Include="Syntax\IFromExcludeIncludeBindSyntax.cs" />
+    <Compile Include="Syntax\IFromSyntax.cs" />
+    <Compile Include="Syntax\IFromWhereExcludeIncludeBindSyntax.cs" />
+    <Compile Include="Syntax\IExcludeIncludeBindSyntax.cs" />
+    <Compile Include="Syntax\IIncludeSyntax.cs" />
+    <Compile Include="Syntax\ISelectSyntax.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

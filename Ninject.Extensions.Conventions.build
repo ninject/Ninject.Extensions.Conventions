@@ -44,7 +44,9 @@
 				<include name="System.dll"/>
 				<include name="System.Core.dll"/>
 				<include name="xunit.dll"/>
+				<include name="xunit.extensions.dll"/>
 				<include name="FluentAssertions.dll"/>
+				<include name="moq.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
 			</references>
@@ -95,6 +97,7 @@
 				<include name="Castle.DynamicProxy-Silverlight.dll" unless="${string::contains(build.platform, 'silverlight-4.0')}"/>
 				<include name="xunit.runner.silverlight.dll"/>
 				<include name="xunit-silverlight.dll"/>
+				<include name="xunit.extensions-silverlight.dll"/>
 				<include name="FluentAssertions.Silverlight.dll"/>
 				<include name="${product.assembly}"/>
 				<include name="${path.lib}/Ninject/${build.platform}/Ninject.dll"/>
