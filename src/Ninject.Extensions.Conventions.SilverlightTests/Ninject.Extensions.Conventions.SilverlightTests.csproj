@@ -184,6 +184,9 @@
     <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IFoo{T}.cs">
       <Link>Fakes\IFoo{T}.cs</Link>
     </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IInternalInterface.cs">
+      <Link>Fakes\IInternalInterface.cs</Link>
+    </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IMultipleInterfaceCrazyService.cs">
       <Link>Fakes\IMultipleInterfaceCrazyService.cs</Link>
     </Compile>
@@ -226,6 +229,9 @@
     <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Interfaces\IOpenGenericInterface.cs">
       <Link>Fakes\Interfaces\IOpenGenericInterface.cs</Link>
     </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\InternalType.cs">
+      <Link>Fakes\InternalType.cs</Link>
+    </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\IService.cs">
       <Link>Fakes\IService.cs</Link>
     </Compile>
@@ -255,6 +261,9 @@
     </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\AssemblyLoadingTests.cs">
       <Link>IntegrationTests\AssemblyLoadingTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\NonePublicTypesTests.cs">
+      <Link>IntegrationTests\NonePublicTypesTests.cs</Link>
     </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\NormalClassBindingTests.cs">
       <Link>IntegrationTests\NormalClassBindingTests.cs</Link>

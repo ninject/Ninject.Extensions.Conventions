@@ -580,9 +580,6 @@
       </violation>
     </violations>
   </sourcecode>
-  <project key="-1911798912">
-    <configuration>TRACE;DEBUG</configuration>
-  </project>
   <sourcecode name="AssemblyFinderTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>07/21/2011 20:31:50</timestamp>
@@ -590,15 +587,6 @@
     </settings>
     <timestamp>08/11/2011 01:33:28</timestamp>
     <milliseconds>518</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="ConventionBindingBuilderTests.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>375</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="ConventionSyntaxFilteringTests.cs" parser="StyleCop.CSharp.CsParser">
@@ -619,24 +607,6 @@
     <milliseconds>359</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="ConventionSyntaxFromTests.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>534</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="TypeSelectorTests.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>306</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="TypeFilterTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>07/21/2011 20:31:50</timestamp>
@@ -653,15 +623,6 @@
     </settings>
     <timestamp>08/11/2011 01:33:28</timestamp>
     <milliseconds>482</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="ConventionSyntaxSelectTests.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>342</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="BaseBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
@@ -1033,15 +994,6 @@
     <milliseconds>107</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="NormalClassBindingTests.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
-    <milliseconds>92</milliseconds>
-    <violations />
-  </sourcecode>
   <sourcecode name="OpenGenericClassBindingTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
       <timestamp>07/21/2011 20:31:50</timestamp>
@@ -1060,4 +1012,52 @@
     <milliseconds>341</milliseconds>
     <violations />
   </sourcecode>
+  <sourcecode name="ConventionBindingBuilderTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 20:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/13/2011 00:26:10</timestamp>
+    <milliseconds>585</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ConventionSyntaxFromTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 20:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/13/2011 00:20:42</timestamp>
+    <milliseconds>527</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TypeSelectorTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 20:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/13/2011 00:32:19</timestamp>
+    <milliseconds>557</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ConventionSyntaxSelectTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 20:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/11/2011 02:05:29</timestamp>
+    <milliseconds>905</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="NormalClassBindingTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 20:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/12/2011 13:01:30</timestamp>
+    <milliseconds>990</milliseconds>
+    <violations />
+  </sourcecode>
+  <project key="-1911798912">
+    <configuration>TRACE;DEBUG</configuration>
+  </project>
 </stylecopresultscache>

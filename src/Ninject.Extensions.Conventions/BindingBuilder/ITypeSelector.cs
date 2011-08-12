@@ -28,10 +28,19 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     public interface ITypeSelector
     {
         /// <summary>
-        /// Gets all types matching the specified filter from the specified assemblies.
+        /// Gets all exported types from the specified assemblies.
         /// </summary>
         /// <param name="assemblies">The assemblies to search for types.</param>
-        /// <returns>All types matching the specified filter from the specified assemblies.</returns>
-        IEnumerable<Type> GetTypes(IEnumerable<Assembly> assemblies);
+        /// <returns>All exported types from the specified assemblies.</returns>
+        IEnumerable<Type> GetExportedTypes(IEnumerable<Assembly> assemblies);
+
+#if !NO_SKIP_VISIBILITY
+        /// <summary>
+        /// Gets all types from the specified assemblies.
+        /// </summary>
+        /// <param name="assemblies">The assemblies to search for types.</param>
+        /// <returns>All types from the specified assemblies.</returns>
+        IEnumerable<Type> GetAllTypes(IEnumerable<Assembly> assemblies);
+#endif
     }
 }

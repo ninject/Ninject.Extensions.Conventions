@@ -57,9 +57,22 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.SelectAllTypesFrom(assemblies);
 
-            this.typeSelectorMock.Verify(tf => tf.GetTypes(assemblies));
+            this.typeSelectorMock.Verify(tf => tf.GetExportedTypes(assemblies));
         }
 
+#if !NO_SKIP_VISIBILITY
+        [Fact]
+        public void IncludingNonePublicTypesPassesAssembliesToTypeFilterGetTypesToReceiveAllTypes()
+        {
+            var assemblies = new[] { Assembly.GetExecutingAssembly(), Assembly.GetCallingAssembly() };
+
+            this.testee.SelectAllTypesFrom(assemblies);
+            this.testee.IncludingNonePublicTypes();
+
+            this.typeSelectorMock.Verify(tf => tf.GetAllTypes(assemblies));
+        }
+#endif
+        
         [Fact]
         public void AllTypesReturnedByTypeFilterArePassedToTheGeneratorOnBindWith()
         {
@@ -205,12 +218,12 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
         private void SetupTypeFilterGetTypes(IEnumerable<Type> returnedTypes)
         {
-            this.typeSelectorMock.Setup(tf => tf.GetTypes(It.IsAny<IEnumerable<Assembly>>())).Returns(returnedTypes);
+            this.typeSelectorMock.Setup(tf => tf.GetExportedTypes(It.IsAny<IEnumerable<Assembly>>())).Returns(returnedTypes);
         }
 
         private void SetupTypeFilterGetTypes(IEnumerable<Assembly> expectedAssemblies, IEnumerable<Type> returnedTypes)
         {
-            this.typeSelectorMock.Setup(tf => tf.GetTypes(expectedAssemblies)).Returns(returnedTypes);
+            this.typeSelectorMock.Setup(tf => tf.GetExportedTypes(expectedAssemblies)).Returns(returnedTypes);
         }
         
         private void VerifyAllBindingsCreated(IEnumerable<Type> types, Mock<IBindingGenerator> generatorMock)

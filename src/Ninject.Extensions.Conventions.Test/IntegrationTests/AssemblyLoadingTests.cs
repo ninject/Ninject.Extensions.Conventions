@@ -26,7 +26,6 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
     using Ninject.Extensions.Conventions.Extensions;
     using Ninject.Extensions.Conventions.Fakes.Interfaces;
     using Ninject.Extensions.Conventions.Fakes.NormalClasses;
-
     using Xunit;
 
     public class AssemblyLoadingTests

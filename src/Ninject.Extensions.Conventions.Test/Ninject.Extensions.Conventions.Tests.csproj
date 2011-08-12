@@ -89,6 +89,8 @@
     <Compile Include="Fakes\IBar{T1,T2}.cs" />
     <Compile Include="Fakes\IBar{T}.cs" />
     <Compile Include="Fakes\IFoo{T}.cs" />
+    <Compile Include="Fakes\IInternalInterface.cs" />
+    <Compile Include="Fakes\InternalType.cs" />
     <Compile Include="Fakes\IService{T}.cs" />
     <Compile Include="Fakes\NormalClasses\AbstractClassWithManyInterfaces.cs" />
     <Compile Include="BindingGenerators\AllInterfacesBindingGeneratorTests.cs" />
@@ -126,6 +128,7 @@
     <Compile Include="Fakes\IService.cs" />
     <Compile Include="Fakes\MultipleInterfaceCrazyService.cs" />
     <Compile Include="IntegrationTests\AssemblyLoadingTests.cs" />
+    <Compile Include="IntegrationTests\NonePublicTypesTests.cs" />
     <Compile Include="IntegrationTests\NormalClassBindingTests.cs" />
     <Compile Include="IntegrationTests\OpenGenericClassBindingTests.cs" />
     <Compile Include="Fakes\NormalClasses\DefaultConvention.cs" />

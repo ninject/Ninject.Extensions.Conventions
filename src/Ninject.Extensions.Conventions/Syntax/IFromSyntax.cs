@@ -35,41 +35,41 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax From(params Assembly[] assemblies);
+        IIncludingNonePublicTypesSelectSyntax From(params Assembly[] assemblies);
 
         /// <summary>
         /// Scans the specified assemblies.
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax From(IEnumerable<Assembly> assemblies);
+        IIncludingNonePublicTypesSelectSyntax From(IEnumerable<Assembly> assemblies);
 
         /// <summary>
         /// Scans the calling assembly.
         /// </summary>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax FromThisAssembly();
+        IIncludingNonePublicTypesSelectSyntax FromThisAssembly();
 
         /// <summary>
         /// Scans the assembly containing the specified type.
         /// </summary>
         /// <typeparam name="T">The type that specifies the assembly.</typeparam>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax FromAssemblyContaining<T>();
+        IIncludingNonePublicTypesSelectSyntax FromAssemblyContaining<T>();
 
         /// <summary>
         /// Scans the assembly containing the specified type..
         /// </summary>
         /// <param name="types">The types that specify the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax FromAssemblyContaining(params Type[] types);
+        IIncludingNonePublicTypesSelectSyntax FromAssemblyContaining(params Type[] types);
 
         /// <summary>
         /// Scans the assembly containing the specified type..
         /// </summary>
         /// <param name="types">The types that specify the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax FromAssemblyContaining(IEnumerable<Type> types);
+        IIncludingNonePublicTypesSelectSyntax FromAssemblyContaining(IEnumerable<Type> types);
 
 #if !NO_ASSEMBLY_SCANNING
         /// <summary>
@@ -77,14 +77,14 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <param name="assemblies">The name of the assemblies to be scanned.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax From(params string[] assemblies);
+        IIncludingNonePublicTypesSelectSyntax From(params string[] assemblies);
 
         /// <summary>
         /// Scans the specified assemblies.
         /// </summary>
         /// <param name="assemblies">The name of the assemblies to be scanned.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax From(IEnumerable<string> assemblies);
+        IIncludingNonePublicTypesSelectSyntax From(IEnumerable<string> assemblies);
 
         /// <summary>
         /// Scans the specified assemblies.
@@ -92,14 +92,14 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <param name="assemblies">The name of the assemblies to be scanned.</param>
         /// <param name="filter">The filter for filtering the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax From(IEnumerable<string> assemblies, Predicate<Assembly> filter);
+        IIncludingNonePublicTypesSelectSyntax From(IEnumerable<string> assemblies, Predicate<Assembly> filter);
 
         /// <summary>
         /// Scans the assemblies in the given path.
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax FromAssembliesInPath(string path);
+        IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path);
 
         /// <summary>
         /// Scans the assemblies in the given path.
@@ -107,21 +107,21 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <param name="path">The path.</param>
         /// <param name="filter">The filter used to filter the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax FromAssembliesInPath(string path, Predicate<Assembly> filter);
+        IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, Predicate<Assembly> filter);
 
         /// <summary>
         /// Scans the assemblies matching the given pattern.
         /// </summary>
         /// <param name="patterns">The patterns to match the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax FromAssembliesMatching(params string[] patterns);
+        IIncludingNonePublicTypesSelectSyntax FromAssembliesMatching(params string[] patterns);
         
         /// <summary>
         /// Scans the assemblies matching the given pattern.
         /// </summary>
         /// <param name="patterns">The patterns to match the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax FromAssembliesMatching(IEnumerable<string> patterns);
+        IIncludingNonePublicTypesSelectSyntax FromAssembliesMatching(IEnumerable<string> patterns);
 #endif        
     }
 }

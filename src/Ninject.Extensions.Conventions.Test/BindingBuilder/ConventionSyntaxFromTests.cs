@@ -214,6 +214,16 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 #endif
 
+#if !NO_SKIP_VISIBILITY
+        [Fact]
+        public void IncludingNonePublicTypes_CallsBuilder()
+        {
+            this.testee.IncludingNonePublicTypes();
+
+            this.conventionBindingBuilderMock.Verify(b => b.IncludingNonePublicTypes());
+        }
+#endif
+
         private static IEnumerable<T> IsMatchingSequence<T>(params T[] values)
         {
 #if !SILVERLIGHT_30 && !SILVERLIGHT_20 && !SILVERLIGHT_20

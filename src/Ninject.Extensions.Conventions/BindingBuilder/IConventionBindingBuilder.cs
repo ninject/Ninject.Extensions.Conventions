@@ -65,5 +65,12 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
         void Configure(Action<IBindingWhenInNamedWithOrOnSyntax<object>> configuration);
+
+#if !NO_SKIP_VISIBILITY
+        /// <summary>
+        /// Includes none public types.
+        /// </summary>
+        void IncludingNonePublicTypes();
+#endif
     }
 }

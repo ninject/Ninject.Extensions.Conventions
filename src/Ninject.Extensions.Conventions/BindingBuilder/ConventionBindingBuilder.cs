@@ -36,6 +36,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         private readonly ITypeSelector typeSelector;
         private readonly IBindingRoot bindingRoot;
 
+        private IEnumerable<Assembly> assemblies;
         private IEnumerable<Type> allTypes = Enumerable.Empty<Type>();
         private IEnumerable<Type> currentTypes = Enumerable.Empty<Type>();
         private List<Type> types;
@@ -59,10 +60,21 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="assemblies">The assemblies from which the types are selected.</param>
         public void SelectAllTypesFrom(IEnumerable<Assembly> assemblies)
         {
+            this.assemblies = assemblies;
             this.UnionTypes();
-            this.currentTypes = this.typeSelector.GetTypes(assemblies);
+            this.currentTypes = this.typeSelector.GetExportedTypes(this.assemblies);
         }
 
+#if !NO_SKIP_VISIBILITY
+        /// <summary>
+        /// Includes none public types.
+        /// </summary>
+        public void IncludingNonePublicTypes()
+        {
+            this.currentTypes = this.typeSelector.GetAllTypes(this.assemblies);
+        }
+#endif
+        
         /// <summary>
         /// Selects the types matching the specified filter from the current selected types.
         /// </summary>

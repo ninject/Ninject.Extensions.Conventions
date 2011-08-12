@@ -36,11 +36,21 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         } 
 
         [Fact]
-        public void GetTypesReturnsAllTypesFromAllPassedAssemblies()
+        public void GetExportedTypesReturnsAllExportedTypesFromAllPassedAssemblies()
         {
-            var types = this.testee.GetTypes(new[] { Assembly.GetExecutingAssembly(), this.testee.GetType().Assembly });
+            var types = this.testee.GetExportedTypes(new[] { Assembly.GetExecutingAssembly(), this.testee.GetType().Assembly });
 
             types.Should().BeEquivalentTo(Assembly.GetExecutingAssembly().GetExportedTypes().Union(this.testee.GetType().Assembly.GetExportedTypes()));
         }
+    
+#if !NO_SKIP_VISIBILITY
+        [Fact]
+        public void GetAllTypesReturnsAllTypesFromAllPassedAssemblies()
+        {
+            var types = this.testee.GetAllTypes(new[] { Assembly.GetExecutingAssembly(), this.testee.GetType().Assembly });
+
+            types.Should().BeEquivalentTo(Assembly.GetExecutingAssembly().GetTypes().Union(this.testee.GetType().Assembly.GetTypes()));
+        }
+#endif
     }
 }

@@ -34,17 +34,6 @@ namespace Ninject.Extensions.Conventions.Extensions
     /// </summary>
     internal static class ExtensionsForAssembly
     {
-        #region Constants and Fields
-
-        /// <summary>
-        ///   Used instead of Type.EmptyTypes to support netcf
-        /// </summary>
-        private static readonly Type[] EmptyTypes = new Type[0];
-
-        #endregion
-
-        #region Public Methods
-
         /// <summary>
         /// Gets all exported types of the specified assembly.
         /// Plattform independent.
@@ -61,52 +50,5 @@ namespace Ninject.Extensions.Conventions.Extensions
             return assembly.GetExportedTypes();
 #endif
         }
-
-        /// <summary>
-        /// The get ninject modules.
-        /// </summary>
-        /// <param name="assembly">
-        /// The assembly.
-        /// </param>
-        /// <returns>
-        /// </returns>
-        public static IEnumerable<INinjectModule> GetNinjectModules(this Assembly assembly)
-        {
-            return assembly.GetExportedTypesPlatformSafe().Where(IsLoadableModule).Select(type => Activator.CreateInstance(type) as INinjectModule);
-        }
-
-        /// <summary>
-        /// The has ninject modules.
-        /// </summary>
-        /// <param name="assembly">
-        /// The assembly.
-        /// </param>
-        /// <returns>
-        /// The has ninject modules.
-        /// </returns>
-        public static bool HasNinjectModules(this Assembly assembly)
-        {
-            return assembly.GetExportedTypesPlatformSafe().Any(IsLoadableModule);
-        }
-
-        #endregion
-
-        #region Methods
-
-        /// <summary>
-        /// The is loadable module.
-        /// </summary>
-        /// <param name="type">
-        /// The type.
-        /// </param>
-        /// <returns>
-        /// The is loadable module.
-        /// </returns>
-        private static bool IsLoadableModule(Type type)
-        {
-            return typeof(INinjectModule).IsAssignableFrom(type) && !type.IsAbstract && !type.IsInterface && type.GetConstructor(EmptyTypes) != null;
-        }
-
-        #endregion
     }
 }

@@ -34,7 +34,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     /// <summary>
     /// The syntax to configure the conventions
     /// </summary>
-    public class ConventionSyntax : IFromWhereExcludeIncludeBindSyntax, IConfigureSyntax
+    public class ConventionSyntax : IFromWhereExcludeIncludeBindSyntax, IIncludingNonePublicTypesSelectSyntax, IConfigureSyntax
     {
         /// <summary>
         /// Builder for conventions
@@ -101,7 +101,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax From(IEnumerable<Assembly> assemblies)
+        public IIncludingNonePublicTypesSelectSyntax From(IEnumerable<Assembly> assemblies)
         {
             this.bindingBuilder.SelectAllTypesFrom(assemblies);
             return this;
@@ -112,7 +112,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="assemblies">The assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax From(params Assembly[] assemblies)
+        public IIncludingNonePublicTypesSelectSyntax From(params Assembly[] assemblies)
         {
             return this.From(assemblies.AsEnumerable());
         }
@@ -121,7 +121,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// Scans the calling assembly.
         /// </summary>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax FromThisAssembly()
+        public IIncludingNonePublicTypesSelectSyntax FromThisAssembly()
         {
             return this.From(Assembly.GetCallingAssembly());
         }
@@ -131,7 +131,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type that specifies the assembly.</typeparam>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax FromAssemblyContaining<T>()
+        public IIncludingNonePublicTypesSelectSyntax FromAssemblyContaining<T>()
         {
             return this.FromAssemblyContaining(typeof(T));
         }
@@ -141,7 +141,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="types">The types that specify the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax FromAssemblyContaining(params Type[] types)
+        public IIncludingNonePublicTypesSelectSyntax FromAssemblyContaining(params Type[] types)
         {
             return this.FromAssemblyContaining(types.AsEnumerable());
         }
@@ -151,7 +151,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="types">The types that specify the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax FromAssemblyContaining(IEnumerable<Type> types)
+        public IIncludingNonePublicTypesSelectSyntax FromAssemblyContaining(IEnumerable<Type> types)
         {
             return this.From(types.Select(t => t.Assembly).Distinct());
         }
@@ -162,7 +162,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="assemblies">The name of the assemblies to be scanned.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax From(params string[] assemblies)
+        public IIncludingNonePublicTypesSelectSyntax From(params string[] assemblies)
         {
             return this.From(assemblies.AsEnumerable());
         }
@@ -172,7 +172,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="assemblies">The name of the assemblies to be scanned.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax From(IEnumerable<string> assemblies)
+        public IIncludingNonePublicTypesSelectSyntax From(IEnumerable<string> assemblies)
         {
             return From(assemblies, filter => true);
         }
@@ -183,7 +183,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="assemblies">The name of the assemblies to be scanned.</param>
         /// <param name="filter">The filter for filtering the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax From(IEnumerable<string> assemblies, Predicate<Assembly> filter)
+        public IIncludingNonePublicTypesSelectSyntax From(IEnumerable<string> assemblies, Predicate<Assembly> filter)
         {
             return this.From(this.assemblyFinder.FindAssemblies(assemblies, filter));
         }
@@ -193,7 +193,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="path">The path.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax FromAssembliesInPath(string path)
+        public IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path)
         {
             return this.FromAssembliesInPath(path, filter => true);
         }
@@ -204,7 +204,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="path">The path.</param>
         /// <param name="filter">The filter used to filter the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax FromAssembliesInPath(string path, Predicate<Assembly> filter)
+        public IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, Predicate<Assembly> filter)
         {
             return this.From(this.assemblyFinder.FindAssembliesInPath(path), filter);
         }
@@ -214,7 +214,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="patterns">The patterns to match the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax FromAssembliesMatching(params string[] patterns)
+        public IIncludingNonePublicTypesSelectSyntax FromAssembliesMatching(params string[] patterns)
         {
             return this.FromAssembliesMatching(patterns.AsEnumerable());
         }
@@ -224,7 +224,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="patterns">The patterns to match the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        public ISelectSyntax FromAssembliesMatching(IEnumerable<string> patterns)
+        public IIncludingNonePublicTypesSelectSyntax FromAssembliesMatching(IEnumerable<string> patterns)
         {
             return this.From(this.assemblyFinder.FindAssembliesMatching(patterns));
         }
@@ -567,5 +567,17 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.bindingBuilder.Configure(configuration);
         }
         #endregion
+
+#if !NO_SKIP_VISIBILITY
+        /// <summary>
+        /// Specifies that none public types shall be included.
+        /// </summary>
+        /// <returns>The fluent syntax.</returns>
+        public ISelectSyntax IncludingNonePublicTypes()
+        {
+            this.bindingBuilder.IncludingNonePublicTypes();
+            return this;
+        }
+#endif
     }
 }
