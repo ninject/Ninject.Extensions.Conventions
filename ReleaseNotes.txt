@@ -1,0 +1,3 @@
+Version 2.4.0.0
+---------------
+Completely reimplemented, this extension is not backward compatiple. See the documentation for more information
