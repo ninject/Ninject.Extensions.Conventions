@@ -3,60 +3,35 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{934DCAA8-F266-4B4E-B7DF-5753694539BB}</ProjectGuid>
-    <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <ProjectGuid>{4B1077C2-8077-458F-B805-0536D6DE3B8D}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ninject.Extensions.Conventions</RootNamespace>
-    <AssemblyName>Ninject.Extensions.Conventions.SilverlightTests</AssemblyName>
-    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
+    <RootNamespace>Ninject.Extensions.Conventions.WindowsPhone7Tests</RootNamespace>
+    <AssemblyName>Ninject.Extensions.Conventions.WindowsPhone7Tests</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <TargetFrameworkProfile>WindowsPhone71</TargetFrameworkProfile>
+    <TargetFrameworkIdentifier>Silverlight</TargetFrameworkIdentifier>
     <SilverlightApplication>true</SilverlightApplication>
-    <SupportedCultures />
+    <SupportedCultures>
+    </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>Ninject.Extensions.Conventions.SilverlightTests.xap</XapFilename>
+    <XapFilename>Ninject.Extensions.Conventions.WindowsPhone7Tests.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
-    <SilverlightAppEntry>Ninject.Extensions.Conventions.App</SilverlightAppEntry>
-    <TestPageFileName>TestPage.html</TestPageFileName>
-    <CreateTestPage>true</CreateTestPage>
+    <SilverlightAppEntry>Ninject.Extensions.Conventions.WindowsPhone7Tests.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
-    <EnableOutOfBrowser>false</EnableOutOfBrowser>
-    <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
-    <UsePlatformExtensions>false</UsePlatformExtensions>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <LinkedServerProject />
-  </PropertyGroup>
-  <!--
-  //
-  // Silverlight Code Coverage Instrumentation
-  // List any libraries or assemblies that you would like to instrument during
-  // a code coverage pass. An example, for ClassLibrary1, is provided, and
-  // commented out below as a starting point:
-  //
-  -->
-  <!--
-  <ItemGroup>
-    <InstrumentSilverlightAssemblies Include="SilverlightClassLibrary1">
-      <Visible>false</Visible>
-    </InstrumentSilverlightAssemblies>
-  </ItemGroup>
-  -->
-  <!-- This property group is only here to support building this project using the 
-       MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
-       to set the TargetFrameworkVersion to v3.5 -->
-  <PropertyGroup Condition="'$(MSBuildToolsVersion)' == '3.5'">
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\build\debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;NO_ASSEMBLY_SCANNING;NO_SKIP_VISIBILITY</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;NO_MOQ;NO_ASSEMBLY_SCANNING;NO_SKIP_VISIBILITY</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
@@ -66,27 +41,23 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\build\release\</OutputPath>
-    <DefineConstants>TRACE;SILVERLIGHT</DefineConstants>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\tools\moq\Silverlight4\Castle.Core.dll</HintPath>
-    </Reference>
     <Reference Include="FluentAssertions.Silverlight">
-      <HintPath>..\..\tools\FluentAssertions\Silverlight-4.0\FluentAssertions.Silverlight.dll</HintPath>
+      <HintPath>..\..\tools\FluentAssertions\Silverlight-4.0-wp7\FluentAssertions.Silverlight.dll</HintPath>
     </Reference>
-    <Reference Include="Moq.Silverlight">
-      <HintPath>..\..\tools\moq\Silverlight4\Moq.Silverlight.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.Phone" />
+    <Reference Include="Microsoft.Phone.Interop" />
     <Reference Include="Ninject">
-      <HintPath>..\..\lib\Ninject\silverlight-4.0\Ninject.dll</HintPath>
+      <HintPath>..\..\lib\Ninject\silverlight-4.0-wp7\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Extensions.Conventions">
-      <HintPath>..\..\build\silverlight-4.0\release\Ninject.Extensions.Conventions.dll</HintPath>
+      <HintPath>..\..\build\silverlight-4.0-wp7\release\Ninject.Extensions.Conventions.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="mscorlib" />
@@ -94,15 +65,14 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Windows.Browser" />
     <Reference Include="xunit-silverlight">
-      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0\xunit-silverlight.dll</HintPath>
+      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0-wp7\xunit-silverlight.dll</HintPath>
     </Reference>
     <Reference Include="xunit.extensions-silverlight">
-      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0\xunit.extensions-silverlight.dll</HintPath>
+      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0-wp7\xunit.extensions-silverlight.dll</HintPath>
     </Reference>
     <Reference Include="xunit.runner.silverlight">
-      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0\xunit.runner.silverlight.dll</HintPath>
+      <HintPath>..\..\tools\xunit.sl\Silverlight-4.0-wp7\xunit.runner.silverlight.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -284,15 +254,26 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
+    <None Include="Properties\WMAppManifest.xml" />
   </ItemGroup>
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
-  <Import Condition="$(SilverlightVersion)=='v3.0'" Project="$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SilverlightToolkit\Tools\v3.0)Microsoft.Silverlight.Toolkit.Build.targets" />
-  <Import Condition="$(SilverlightVersion)=='v4.0'" Project="$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SilverlightToolkit\Tools\v4.0)Microsoft.Silverlight.Toolkit.Build.targets" />
-  <ProjectExtensions>
-    <VisualStudio>
-      <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">
-        <SilverlightProjectProperties />
-      </FlavorProperties>
-    </VisualStudio>
-  </ProjectExtensions>
+  <ItemGroup>
+    <Content Include="ApplicationIcon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Background.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SplashScreenImage.jpg" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions />
 </Project>

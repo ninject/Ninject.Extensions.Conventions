@@ -61,7 +61,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                     typeof(GenericBaseClassWithManyInterfaces<double>));
             }
         }
-
+        
         [Fact(Skip = "Not yet supported by Ninject Core.")]
         public void CanBeBoundToPartiallyClosedGenericInterface()
         {

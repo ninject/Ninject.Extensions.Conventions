@@ -118,8 +118,13 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// </returns>
         private bool IsEqualOpenGeneric(Type i, Type type)
         {
+#if !WINDOWS_PHONE
             return i.ContainsGenericParameters &&
                    i.GetGenericArguments().SequenceEqual(type.GetGenericArguments());
+#else
+            return i.ContainsGenericParameters &&
+                   i.GetGenericArguments().Select(t => t.Name).SequenceEqual(type.GetGenericArguments().Select(t => t.Name));
+#endif
         }
     }
 }
