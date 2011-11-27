@@ -22,12 +22,11 @@
 #if !NO_MOQ
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
-    using System;
     using System.Text.RegularExpressions;
     using Moq;
     using Ninject.Extensions.Conventions.BindingGenerators;
     using Ninject.Extensions.Conventions.Syntax;
-    using Ninject.Syntax;
+
     using Xunit;
 
     public class ConventionSyntaxBindingTests
@@ -54,7 +53,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             this.testee.BindWith<BaseBindingGenerator>();
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(It.Is<IBindingGenerator>(g => g is BaseBindingGenerator)));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(It.Is<IBindingGenerator>(g => g is BaseBindingGenerator)));
         }
 
         [Fact]
@@ -64,7 +63,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindWith(generator);
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
         [Fact]
@@ -75,7 +74,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindToAllInterfaces();
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
         [Fact]
@@ -86,7 +85,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindToBase();
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
         [Fact]
@@ -97,7 +96,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindToDefaultInterface();
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
         [Fact]
@@ -108,7 +107,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindToDefaultInterfaces();
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
         
         [Fact]
@@ -119,7 +118,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindToSelf();
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
         [Fact]
@@ -130,7 +129,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindToSingleInterface();
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
         [Fact]
@@ -142,7 +141,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindToSelection(selector);
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
         [Fact]
@@ -154,7 +153,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindToRegex(Pattern);
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
         [Fact]
@@ -167,17 +166,47 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.testee.BindToRegex(Pattern, Options);
 
-            this.conventionBindingBuilderMock.Setup(b => b.BindWith(generator));
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
         [Fact]
         public void Configure()
         {
-            Action<IBindingWhenInNamedWithOrOnSyntax<object>> configurationAction = s => s.InThreadScope();
+            ConfigurationAction configurationAction = s => s.InThreadScope();
             
             this.testee.Configure(configurationAction);
 
-            this.conventionBindingBuilderMock.Setup(b => b.Configure(configurationAction));
+            this.conventionBindingBuilderMock.Verify(b => b.Configure(configurationAction));
+        }
+
+        [Fact]
+        public void ConfigureWithService()
+        {
+            ConfigurationActionWithService configurationAction = (c, s) => c.InThreadScope();
+
+            this.testee.Configure(configurationAction);
+
+            this.conventionBindingBuilderMock.Verify(b => b.Configure(configurationAction));
+        }
+
+        [Fact]
+        public void ConfigureFor()
+        {
+            ConfigurationAction configurationAction = s => s.InThreadScope();
+
+            this.testee.ConfigureFor<int>(configurationAction);
+
+            this.conventionBindingBuilderMock.Verify(b => b.ConfigureFor<int>(configurationAction));
+        }
+
+        [Fact]
+        public void ConfigureForWithService()
+        {
+            ConfigurationActionWithService configurationAction = (c, s) => c.InThreadScope();
+
+            this.testee.ConfigureFor<string>(configurationAction);
+
+            this.conventionBindingBuilderMock.Verify(b => b.ConfigureFor<string>(configurationAction));
         }
     }
 }

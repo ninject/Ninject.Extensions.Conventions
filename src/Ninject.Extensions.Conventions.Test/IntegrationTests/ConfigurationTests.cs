@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="NonePublicTypesTests.cs" company="Ninject Project Contributors">
+// <copyright file="ConfigurationTests.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -21,31 +21,29 @@
 
 namespace Ninject.Extensions.Conventions.IntegrationTests
 {
-#if !NO_SKIP_VISIBILITY
-    using System.Reflection;
     using FluentAssertions;
 
     using Ninject.Extensions.Conventions.Fakes;
+
     using Xunit;
 
-    public class NonePublicTypesTests
+    public class ConfigurationTests
     {
         [Fact]
-        public void AssemblyCanBeSpecifiedUsingFrom()
+        public void ConfigurationReceivesService()
         {
             using (IKernel kernel = new StandardKernel())
             {
                 kernel.Bind(
-                    x => x.From(Assembly.GetExecutingAssembly())
-                          .IncludingNonePublicTypes()
-                          .SelectAllTypes()
-                          .BindToAllInterfaces());
-                var instance = kernel.Get<IInternalInterface>();
+                    x => x.FromThisAssembly()
+                          .SelectTypesInNamespaceOf<Foo>()
+                          .BindToAllInterfaces()
+                          .Configure((c, s) => c.Named(s.Name)));
 
-                instance.Should().NotBeNull();
-                instance.Should().BeOfType<InternalType>();
+                var instance = kernel.Get<IFoo>("Foo");
+
+                instance.Should().BeOfType<Foo>();
             }
-        }
+        }         
     }
-#endif
 }

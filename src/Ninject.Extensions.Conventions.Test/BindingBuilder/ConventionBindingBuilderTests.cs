@@ -211,6 +211,87 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             }
         }
 
+        [Fact]
+        public void ConfigureWithService()
+        {
+            var types = new[] { typeof(int), typeof(object) };
+            var generatorMock = new Mock<IBindingGenerator>();
+            var intBindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+            var objectBindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+
+            this.SetupTypeFilterGetTypes(types);
+            generatorMock.Setup(g => g.CreateBindings(typeof(int), this.bindingRoot)).Returns(intBindingMocks.Select(b => b.Object));
+            generatorMock.Setup(g => g.CreateBindings(typeof(object), this.bindingRoot)).Returns(objectBindingMocks.Select(b => b.Object));
+
+            this.testee.SelectAllTypesFrom(new Assembly[0]);
+            this.testee.BindWith(generatorMock.Object);
+            this.testee.Configure((c, s) => c.Named(s.Name));
+
+            foreach (var bindingMock in intBindingMocks)
+            {
+                bindingMock.Verify(b => b.Named("Int32"));
+            }
+
+            foreach (var bindingMock in objectBindingMocks)
+            {
+                bindingMock.Verify(b => b.Named("Object"));
+            }
+        }
+
+        [Fact]
+        public void ConfigureFor()
+        {
+            var types = new[] { typeof(int), typeof(object) };
+            var generatorMock = new Mock<IBindingGenerator>();
+            var intBindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+            var objectBindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+
+            this.SetupTypeFilterGetTypes(types);
+            generatorMock.Setup(g => g.CreateBindings(typeof(int), this.bindingRoot)).Returns(intBindingMocks.Select(b => b.Object));
+            generatorMock.Setup(g => g.CreateBindings(typeof(object), this.bindingRoot)).Returns(objectBindingMocks.Select(b => b.Object));
+
+            this.testee.SelectAllTypesFrom(new Assembly[0]);
+            this.testee.BindWith(generatorMock.Object);
+            this.testee.ConfigureFor<int>(c => c.InSingletonScope());
+
+            foreach (var bindingMock in intBindingMocks)
+            {
+                bindingMock.Verify(b => b.InSingletonScope());
+            }
+
+            foreach (var bindingMock in objectBindingMocks)
+            {
+                bindingMock.Verify(b => b.InSingletonScope(), Times.Never());
+            }
+        }
+
+        [Fact]
+        public void ConfigureForWithService()
+        {
+            var types = new[] { typeof(int), typeof(object) };
+            var generatorMock = new Mock<IBindingGenerator>();
+            var intBindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+            var objectBindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+
+            this.SetupTypeFilterGetTypes(types);
+            generatorMock.Setup(g => g.CreateBindings(typeof(int), this.bindingRoot)).Returns(intBindingMocks.Select(b => b.Object));
+            generatorMock.Setup(g => g.CreateBindings(typeof(object), this.bindingRoot)).Returns(objectBindingMocks.Select(b => b.Object));
+
+            this.testee.SelectAllTypesFrom(new Assembly[0]);
+            this.testee.BindWith(generatorMock.Object);
+            this.testee.ConfigureFor<int>((c, s) => c.InSingletonScope());
+
+            foreach (var bindingMock in intBindingMocks)
+            {
+                bindingMock.Verify(b => b.InSingletonScope());
+            }
+
+            foreach (var bindingMock in objectBindingMocks)
+            {
+                bindingMock.Verify(b => b.InSingletonScope(), Times.Never());
+            }
+        }
+
         private static Mock<IBindingWhenInNamedWithOrOnSyntax<object>> CreateBindingMock()
         {
             return new Mock<IBindingWhenInNamedWithOrOnSyntax<object>>();

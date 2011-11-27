@@ -23,7 +23,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
 {
     using System.Linq;
     using FluentAssertions;
-    using Ninject.Extensions.Conventions.Extensions;
+
     using Ninject.Extensions.Conventions.Fakes.Interfaces;
     using Ninject.Extensions.Conventions.Fakes.OpenGenerics;
     using Xunit;

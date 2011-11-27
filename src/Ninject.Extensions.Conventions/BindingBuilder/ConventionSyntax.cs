@@ -29,7 +29,6 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
     using Ninject.Extensions.Conventions.BindingGenerators;
     using Ninject.Extensions.Conventions.Syntax;
-    using Ninject.Syntax;
 
     /// <summary>
     /// The syntax to configure the conventions
@@ -559,12 +558,49 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         /// <summary>
+        /// Configures the bindings for the specified service with the specified configuration.
+        /// </summary>
+        /// <typeparam name="TService">The type of service that shall be configured.</typeparam>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The fluent syntax</returns>
+        public IConfigureForSyntax ConfigureFor<TService>(ConfigurationAction configuration)
+        {
+            this.bindingBuilder.ConfigureFor<TService>(configuration);
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the bindings for the specified service with the specified configuration.
+        /// </summary>
+        /// <typeparam name="TService">The type of service that shall be configured.</typeparam>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The fluent syntax</returns>
+        public IConfigureForSyntax ConfigureFor<TService>(ConfigurationActionWithService configuration)
+        {
+            this.bindingBuilder.ConfigureFor<TService>(configuration);
+            return this;
+        }
+
+        /// <summary>
         /// Configures the bindings with the specified configuration.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
-        public void Configure(Action<IBindingWhenInNamedWithOrOnSyntax<object>> configuration)
+        /// <returns>The fluent syntax</returns>
+        public IConfigureForSyntax Configure(ConfigurationAction configuration)
         {
             this.bindingBuilder.Configure(configuration);
+            return this;
+        }
+
+        /// <summary>
+        /// Configures the bindings with the specified configuration.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The fluent syntax</returns>
+        public IConfigureForSyntax Configure(ConfigurationActionWithService configuration)
+        {
+            this.bindingBuilder.Configure(configuration);
+            return this;
         }
         #endregion
 

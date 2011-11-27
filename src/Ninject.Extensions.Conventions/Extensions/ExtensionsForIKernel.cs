@@ -19,7 +19,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Conventions.Extensions
+namespace Ninject.Extensions.Conventions
 {
     using System;
 

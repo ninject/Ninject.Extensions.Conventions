@@ -23,7 +23,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     using System.Reflection;
 
     using Ninject.Extensions.Conventions.BindingGenerators;
-    using Ninject.Syntax;
+    using Ninject.Extensions.Conventions.Syntax;
 
     /// <summary>
     /// Builder for conventions configurations.
@@ -64,7 +64,13 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// Configures the bindings using the specified configuration.
         /// </summary>
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
-        void Configure(Action<IBindingWhenInNamedWithOrOnSyntax<object>> configuration);
+        void Configure(ConfigurationAction configuration);
+
+        /// <summary>
+        /// Configures the bindings using the specified configuration.
+        /// </summary>
+        /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        void Configure(ConfigurationActionWithService configuration);
 
 #if !NO_SKIP_VISIBILITY
         /// <summary>
@@ -72,5 +78,19 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         void IncludingNonePublicTypes();
 #endif
+
+        /// <summary>
+        /// Configures the binding of the specified type using the specified configuration.
+        /// </summary>
+        /// <typeparam name="T">The type to be configured.</typeparam>
+        /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        void ConfigureFor<T>(ConfigurationAction configuration);
+
+        /// <summary>
+        /// Configures the binding of the specified type using the specified configuration.
+        /// </summary>
+        /// <typeparam name="T">The type to be configured.</typeparam>
+        /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        void ConfigureFor<T>(ConfigurationActionWithService configuration);
     }
 }

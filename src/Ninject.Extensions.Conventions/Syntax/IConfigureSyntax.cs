@@ -21,19 +21,23 @@
 
 namespace Ninject.Extensions.Conventions.Syntax
 {
-    using System;
-
-    using Ninject.Syntax;
-
     /// <summary>
     /// Syntax to configure the binding.
     /// </summary>
-    public interface IConfigureSyntax
+    public interface IConfigureSyntax : IConfigureForSyntax
     {
         /// <summary>
         /// Configures the bindings with the specified configuration.
         /// </summary>
         /// <param name="configuration">The configuration.</param>
-        void Configure(Action<IBindingWhenInNamedWithOrOnSyntax<object>> configuration);
+        /// <returns>The fluent syntax.</returns>
+        IConfigureForSyntax Configure(ConfigurationAction configuration);
+
+        /// <summary>
+        /// Configures the bindings with the specified configuration.
+        /// </summary>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns>The fluent syntax.</returns>
+        IConfigureForSyntax Configure(ConfigurationActionWithService configuration);
     }
 }

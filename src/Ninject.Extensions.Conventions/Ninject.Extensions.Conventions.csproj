@@ -101,6 +101,7 @@
     <Compile Include="Extensions\ExtensionsForAssembly.cs" />
     <Compile Include="BindingBuilder\ConventionSyntax.cs" />
     <Compile Include="Syntax\IBindSyntax.cs" />
+    <Compile Include="Syntax\IConfigureForSyntax.cs" />
     <Compile Include="Syntax\IIncludingNonePublicTypesSelectSyntax.cs" />
     <Compile Include="Syntax\IIncludingNonePublicTypesSyntax.cs" />
     <Compile Include="Syntax\IWhereSyntax.cs" />

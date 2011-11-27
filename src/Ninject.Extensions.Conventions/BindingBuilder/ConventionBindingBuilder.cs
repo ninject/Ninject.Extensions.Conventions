@@ -26,6 +26,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     using System.Linq;
     using System.Reflection;
     using Ninject.Extensions.Conventions.BindingGenerators;
+    using Ninject.Extensions.Conventions.Syntax;
     using Ninject.Syntax;
 
     /// <summary>
@@ -35,13 +36,13 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     {
         private readonly ITypeSelector typeSelector;
         private readonly IBindingRoot bindingRoot;
+        private readonly IDictionary<Type, IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>>> bindingSyntax =
+            new Dictionary<Type, IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>>>();
 
         private IEnumerable<Assembly> assemblies;
         private IEnumerable<Type> allTypes = Enumerable.Empty<Type>();
         private IEnumerable<Type> currentTypes = Enumerable.Empty<Type>();
         private List<Type> types;
-        private IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> bindingSyntax = 
-            Enumerable.Empty<IBindingWhenInNamedWithOrOnSyntax<object>>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConventionBindingBuilder"/> class.
@@ -125,21 +126,65 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             
             foreach (var type in this.types)
             {
-                this.bindingSyntax = this.bindingSyntax.Union(generator.CreateBindings(type, this.bindingRoot));
+                this.bindingSyntax[type] = generator.CreateBindings(type, this.bindingRoot).ToList();
             }
-
-            this.bindingSyntax = this.bindingSyntax.ToList();
         }
 
         /// <summary>
         /// Configures the bindings using the specified configuration.
         /// </summary>
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
-        public void Configure(Action<IBindingWhenInNamedWithOrOnSyntax<object>> configuration)
+        public void Configure(ConfigurationAction configuration)
         {
-            foreach (var syntax in this.bindingSyntax)
+            foreach (var bindingSyntaxEntry in this.bindingSyntax)
+            {
+                foreach (var syntax in bindingSyntaxEntry.Value)
+                {
+                    configuration(syntax);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Configures the bindings using the specified configuration.
+        /// </summary>
+        /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        public void Configure(ConfigurationActionWithService configuration)
+        {
+            foreach (var bindingSyntaxEntry in this.bindingSyntax)
+            {
+                foreach (var syntax in bindingSyntaxEntry.Value)
+                {
+                    configuration(syntax, bindingSyntaxEntry.Key);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Configures the binding of the specified type using the specified configuration.
+        /// </summary>
+        /// <typeparam name="T">The type to be configured.</typeparam>
+        /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        public void ConfigureFor<T>(ConfigurationAction configuration)
+        {
+            var type = typeof(T);
+            foreach (var syntax in this.bindingSyntax[type])
             {
                 configuration(syntax);
+            }
+        }
+        
+        /// <summary>
+        /// Configures the binding of the specified type using the specified configuration.
+        /// </summary>
+        /// <typeparam name="T">The type to be configured.</typeparam>
+        /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        public void ConfigureFor<T>(ConfigurationActionWithService configuration)
+        {
+            var type = typeof(T);
+            foreach (var syntax in this.bindingSyntax[type])
+            {
+                configuration(syntax, type);
             }
         }
 
