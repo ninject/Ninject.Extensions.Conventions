@@ -32,6 +32,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
     using Ninject.Extensions.Conventions.Fakes;
     using Ninject.Extensions.Conventions.Fakes.Interfaces;
     using Ninject.Extensions.Conventions.Fakes.NormalClasses;
+    using Ninject.Syntax;
 
     using Xunit;
 
@@ -40,12 +41,16 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         private readonly KernelMock kernelMock;
         private readonly Mock<IBindableTypeSelector> bindableInterfaceSelectorMock;
         private readonly BindingGeneratorFactory bindingGeneratorFactory;
+        private readonly Mock<IBindingCreator> multiBindingCreatorMock;
 
         public SelectorBindingGeneratorTests()
         {
             this.kernelMock = new KernelMock();
             this.bindableInterfaceSelectorMock = new Mock<IBindableTypeSelector>();
-            this.bindingGeneratorFactory = new BindingGeneratorFactory(this.bindableInterfaceSelectorMock.Object);
+            this.multiBindingCreatorMock = new Mock<IBindingCreator>();
+            this.bindingGeneratorFactory = new TestBindingGeneratorFactory(
+                this.bindableInterfaceSelectorMock.Object, 
+                this.multiBindingCreatorMock.Object);
         }
 
         [Fact]
@@ -78,9 +83,9 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
 
             var testee = this.bindingGeneratorFactory.CreateSelectorBindingGenerator(
                 (implementationType, serviceTypes) => expectedServices);
-            testee.CreateBindings(type, this.kernelMock.Object).ToList();
+            testee.CreateBindings(type, this.kernelMock.Object);
 
-            this.kernelMock.VerifyAllBindingsCreated(expectedServices, type);
+            this.multiBindingCreatorMock.Verify(mbc => mbc.CreateBindings(this.kernelMock.Object, expectedServices, type));
         }
 
         [Fact]
@@ -113,12 +118,15 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         {
             var type = typeof(MultipleInterfaceCrazyService);
             var interfaces = new[] { typeof(IFoo), typeof(IBar<>) };
+            var result = new[] { new Mock<IBindingWhenInNamedWithOrOnSyntax<object>>().Object };
+
             this.bindableInterfaceSelectorMock.Setup(s => s.GetBindableInterfaces(type)).Returns(interfaces);
+            this.multiBindingCreatorMock.Setup(mbc => mbc.CreateBindings(this.kernelMock.Object, interfaces, type)).Returns(result);
 
             var testee = this.bindingGeneratorFactory.CreateSelectorBindingGenerator((timpl, tif) => interfaces);
             var syntax = testee.CreateBindings(type, this.kernelMock.Object).ToList();
 
-            syntax.Should().BeEquivalentTo(this.kernelMock.ReturnedSyntax);
+            syntax.Should().BeEquivalentTo(result);
         }
 
         [Fact]
@@ -138,7 +146,10 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             var testee = this.bindingGeneratorFactory.CreateRegexBindingGenerator("IBase.*");
             testee.CreateBindings(type, this.kernelMock.Object).ToList();
 
-            this.kernelMock.VerifyAllBindingsCreated(interfaces.Skip(2), type);
+            this.multiBindingCreatorMock.Verify(mbc => mbc.CreateBindings(
+                this.kernelMock.Object, 
+                It.Is<IEnumerable<Type>>(t => t.SequenceEqual(interfaces.Skip(2))), 
+                type));
         }
     }
 }

@@ -23,6 +23,8 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
 {
     using System;
 
+    using Ninject.Extensions.Conventions.BindingBuilder;
+
     /// <summary>
     /// Binds all interfaces 
     /// </summary>
@@ -32,8 +34,9 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// Initializes a new instance of the <see cref="DefaultInterfacesBindingGenerator"/> class.
         /// </summary>
         /// <param name="bindableTypeSelector">The bindable type selector.</param>
-        public DefaultInterfacesBindingGenerator(IBindableTypeSelector bindableTypeSelector)
-            : base(bindableTypeSelector, ImplementationTypeContainsinterfaceName)
+        /// <param name="bindingCreator">Creator for multiple bindins for one type.</param>
+        public DefaultInterfacesBindingGenerator(IBindableTypeSelector bindableTypeSelector, IBindingCreator bindingCreator)
+            : base(bindableTypeSelector, bindingCreator, ImplementationTypeContainsinterfaceName)
         {
         }
 

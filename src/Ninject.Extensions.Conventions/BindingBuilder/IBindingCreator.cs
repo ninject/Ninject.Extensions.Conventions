@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="AllInterfacesBindingGenerator.cs" company="Ninject Project Contributors">
+// <copyright file="IBindingCreator.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -19,23 +19,28 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Conventions.BindingGenerators
+namespace Ninject.Extensions.Conventions.BindingBuilder
 {
-    using Ninject.Extensions.Conventions.BindingBuilder;
+    using System;
+    using System.Collections.Generic;
+
+    using Ninject.Syntax;
 
     /// <summary>
-    /// Creates bindings for all interfaces of a type.
+    /// Creates bindings.
     /// </summary>
-    public class AllInterfacesBindingGenerator : AbstractInterfaceBindingGenerator
+    public interface IBindingCreator
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AllInterfacesBindingGenerator"/> class.
+        /// Creates the bindings for the specified services.
         /// </summary>
-        /// <param name="bindableTypeSelector">The bindable type selector.</param>
-        /// <param name="bindingCreator">Creator for multiple bindins for one type.</param>
-        public AllInterfacesBindingGenerator(IBindableTypeSelector bindableTypeSelector, IBindingCreator bindingCreator)
-            : base(bindableTypeSelector, bindingCreator, (ts, ti) => true)
-        {
-        }
+        /// <param name="bindingRoot">The binding root.</param>
+        /// <param name="serviceTypes">The service types.</param>
+        /// <param name="implementationType">The implementation type.</param>
+        /// <returns>The syntax of the created bindings.</returns>
+        IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> CreateBindings(
+            IBindingRoot bindingRoot,
+            IEnumerable<Type> serviceTypes,
+            Type implementationType);
     }
 }

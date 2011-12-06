@@ -25,6 +25,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
     using System.Collections.Generic;
     using System.Linq;
 
+    using Ninject.Extensions.Conventions.BindingBuilder;
     using Ninject.Extensions.Conventions.Syntax;
     using Ninject.Syntax;
 
@@ -33,6 +34,8 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
     /// </summary>
     public class SelectorBindingGenerator : IBindingGenerator
     {
+        private readonly IBindingCreator bindingCreator;
+
         /// <summary>
         /// Evaluates the base type and interfaces of a type.
         /// </summary>
@@ -41,11 +44,16 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBindingGenerator"/> class.
         /// </summary>
+        /// <param name="bindingCreator">The binding creator.</param>
         /// <param name="selector">The selection delegate.</param>
         /// <param name="bindableTypeSelector">The bindable type selector.</param>
-        public SelectorBindingGenerator(ServiceSelector selector, IBindableTypeSelector bindableTypeSelector)
+        public SelectorBindingGenerator(
+            IBindingCreator bindingCreator, 
+            ServiceSelector selector, 
+            IBindableTypeSelector bindableTypeSelector)
         {
             this.Selector = selector;
+            this.bindingCreator = bindingCreator;
             this.bindableTypeSelector = bindableTypeSelector;
         }
 
@@ -72,7 +80,9 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
 
             var interfaces = this.bindableTypeSelector.GetBindableInterfaces(type);
             var baseTypes = this.bindableTypeSelector.GetBindableBaseTypes(type);
-            return this.Selector.Invoke(type, interfaces.Union(baseTypes)).Select(i => bindingRoot.Bind(i).To(type));
+            var selectedTypes = this.Selector.Invoke(type, interfaces.Union(baseTypes));
+
+            return this.bindingCreator.CreateBindings(bindingRoot, selectedTypes, type);
         }
     }
 }

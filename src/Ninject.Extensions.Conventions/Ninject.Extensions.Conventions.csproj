@@ -79,8 +79,11 @@
     <Compile Include="BindingBuilder\ConventionBindingBuilder.cs" />
     <Compile Include="BindingBuilder\IAssemblyFinder.cs" />
     <Compile Include="BindingBuilder\IConventionBindingBuilder.cs" />
+    <Compile Include="BindingBuilder\IBindingCreator.cs" />
     <Compile Include="BindingBuilder\ITypeFilter.cs" />
     <Compile Include="BindingBuilder\ITypeSelector.cs" />
+    <Compile Include="BindingBuilder\MultipleConfigurationBindingCreator.cs" />
+    <Compile Include="BindingBuilder\SingleConfigurationBindingCreator.cs" />
     <Compile Include="BindingBuilder\TypeSelector.cs" />
     <Compile Include="BindingGenerators\AbstractInterfaceBindingGenerator.cs" />
     <Compile Include="BindingGenerators\BindableTypeSelector.cs" />

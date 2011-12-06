@@ -22,12 +22,16 @@
 #if !SILVERLIGHT_30 && !SILVERLIGHT_20 && !NO_MOQ
 namespace Ninject.Extensions.Conventions.BindingGenerators
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using FluentAssertions;
     using Moq;
 
     using Ninject.Extensions.Conventions.BindingBuilder;
     using Ninject.Extensions.Conventions.Fakes;
+    using Ninject.Syntax;
+
     using Xunit;
 
     public class DefaultInterfaceBindingGeneratorTests
@@ -35,12 +39,16 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         private readonly IBindingGenerator testee;
         private readonly KernelMock kernelMock;
         private readonly Mock<IBindableTypeSelector> bindableInterfaceSelectorMock;
+        private readonly Mock<IBindingCreator> multiBindingCreatorMock;
 
         public DefaultInterfaceBindingGeneratorTests()
         {
             this.kernelMock = new KernelMock();
             this.bindableInterfaceSelectorMock = new Mock<IBindableTypeSelector>();
-            var bindingGeneratorFactory = new BindingGeneratorFactory(this.bindableInterfaceSelectorMock.Object);
+            this.multiBindingCreatorMock = new Mock<IBindingCreator>();
+            var bindingGeneratorFactory = new TestBindingGeneratorFactory(
+                this.bindableInterfaceSelectorMock.Object, 
+                this.multiBindingCreatorMock.Object);
             this.testee = bindingGeneratorFactory.CreateDefaultInterfaceBindingGenerator();
         }
 
@@ -49,12 +57,15 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         {
             var type = typeof(MultipleInterfaceCrazyService);
             var interfaces = new[] { typeof(IFoo), typeof(IMultipleInterfaceCrazyService), typeof(IBar) };
+            var expectedInterfaces = new[] { typeof(IMultipleInterfaceCrazyService) };
             this.bindableInterfaceSelectorMock.Setup(s => s.GetBindableInterfaces(type)).Returns(interfaces);
 
-            this.testee.CreateBindings(type, this.kernelMock.Object).ToList();
+            this.testee.CreateBindings(type, this.kernelMock.Object);
 
-            this.kernelMock.VerifyBindingCreated<IMultipleInterfaceCrazyService, MultipleInterfaceCrazyService>();
-            this.kernelMock.Bindings.Count.Should().Be(1);
+            this.multiBindingCreatorMock.Verify(mbc => mbc.CreateBindings(
+                this.kernelMock.Object,
+                It.Is<IEnumerable<Type>>(t => t.SequenceEqual(expectedInterfaces)), 
+                type));
         }
         
         [Fact]
@@ -66,7 +77,10 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
 
             this.testee.CreateBindings(type, this.kernelMock.Object).ToList();
 
-            this.kernelMock.VerifyAllBindingsCreated(interfaces.Where(i => i.Name.StartsWith("IBar")), type);
+            this.multiBindingCreatorMock.Verify(mbc => mbc.CreateBindings(
+                this.kernelMock.Object,
+                It.Is<IEnumerable<Type>>(t => t.SequenceEqual(interfaces.Where(i => i.Name.StartsWith("IBar")))),
+                type));
         }
 
         [Fact]
@@ -74,11 +88,18 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         {
             var type = typeof(MultipleInterfaceCrazyService);
             var interfaces = new[] { typeof(IFoo), typeof(IMultipleInterfaceCrazyService), typeof(IBar) };
+            var expectedInterfaces = new[] { typeof(IMultipleInterfaceCrazyService) };
+            var result = new[] { new Mock<IBindingWhenInNamedWithOrOnSyntax<object>>().Object };
+
             this.bindableInterfaceSelectorMock.Setup(s => s.GetBindableInterfaces(type)).Returns(interfaces);
+            this.multiBindingCreatorMock.Setup(mbc => mbc.CreateBindings(
+                this.kernelMock.Object,
+                It.Is<IEnumerable<Type>>(t => t.SequenceEqual(expectedInterfaces)),
+                type)).Returns(result);
 
             var syntax = this.testee.CreateBindings(type, this.kernelMock.Object).ToList();
 
-            syntax.Should().BeEquivalentTo(this.kernelMock.ReturnedSyntax);
+            syntax.Should().BeEquivalentTo(result);
         }
     }
 }

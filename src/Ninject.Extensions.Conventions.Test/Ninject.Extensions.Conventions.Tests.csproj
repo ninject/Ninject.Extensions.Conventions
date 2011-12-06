@@ -86,6 +86,7 @@
     <Compile Include="BindingBuilder\ConventionSyntaxSelectTests.cs" />
     <Compile Include="BindingBuilder\TypeSelectorTests.cs" />
     <Compile Include="BindingBuilder\TypeFilterTests.cs" />
+    <Compile Include="BindingGenerators\TestBindingGeneratorFactory.cs" />
     <Compile Include="Fakes\IBar{T1,T2}.cs" />
     <Compile Include="Fakes\IBar{T}.cs" />
     <Compile Include="Fakes\IFoo{T}.cs" />
@@ -129,6 +130,7 @@
     <Compile Include="Fakes\MultipleInterfaceCrazyService.cs" />
     <Compile Include="IntegrationTests\AssemblyLoadingTests.cs" />
     <Compile Include="IntegrationTests\ConfigurationTests.cs" />
+    <Compile Include="IntegrationTests\InterfaceSegregationTests.cs" />
     <Compile Include="IntegrationTests\NonePublicTypesTests.cs" />
     <Compile Include="IntegrationTests\NormalClassBindingTests.cs" />
     <Compile Include="IntegrationTests\OpenGenericClassBindingTests.cs" />

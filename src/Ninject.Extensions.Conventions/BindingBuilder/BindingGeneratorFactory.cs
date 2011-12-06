@@ -67,6 +67,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             var regex = new Regex(pattern, options);
             return new SelectorBindingGenerator(
+                this.CreateMultiBindingCreator(), 
                 (_, serviceType) => serviceType.Where(t => regex.IsMatch(t.Name)),
                 this.bindableTypeSelector);
         }
@@ -77,7 +78,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         public IBindingGenerator CreateAllInterfacesBindingGenerator()
         {
-            return new AllInterfacesBindingGenerator(this.bindableTypeSelector);
+            return new AllInterfacesBindingGenerator(this.bindableTypeSelector, this.CreateMultiBindingCreator());
         }
 
         /// <summary>
@@ -95,7 +96,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         public IBindingGenerator CreateDefaultInterfaceBindingGenerator()
         {
-            return new DefaultInterfaceBindingGenerator(this.bindableTypeSelector);
+            return new DefaultInterfaceBindingGenerator(this.bindableTypeSelector, this.CreateMultiBindingCreator());
         }
 
         /// <summary>
@@ -104,7 +105,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         public IBindingGenerator CreateDefaultInterfacesBindingGenerator()
         {
-            return new DefaultInterfacesBindingGenerator(this.bindableTypeSelector);
+            return new DefaultInterfacesBindingGenerator(this.bindableTypeSelector, this.CreateMultiBindingCreator());
         }
 
         /// <summary>
@@ -132,7 +133,16 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         public IBindingGenerator CreateSelectorBindingGenerator(ServiceSelector selector)
         {
-            return new SelectorBindingGenerator(selector, this.bindableTypeSelector);
+            return new SelectorBindingGenerator(this.CreateMultiBindingCreator(), selector, this.bindableTypeSelector);
+        }
+
+        /// <summary>
+        /// Creates the multi binding creator.
+        /// </summary>
+        /// <returns>The newly created IMultiBindingCreator</returns>
+        protected virtual IBindingCreator CreateMultiBindingCreator()
+        {
+            return new SingleConfigurationBindingCreator();
         }
     }
 }

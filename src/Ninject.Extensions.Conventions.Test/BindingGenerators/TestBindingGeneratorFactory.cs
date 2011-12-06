@@ -1,5 +1,5 @@
-﻿//-------------------------------------------------------------------------------
-// <copyright file="AllInterfacesBindingGenerator.cs" company="Ninject Project Contributors">
+//-------------------------------------------------------------------------------
+// <copyright file="TestBindingGeneratorFactory.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -23,19 +23,19 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
 {
     using Ninject.Extensions.Conventions.BindingBuilder;
 
-    /// <summary>
-    /// Creates bindings for all interfaces of a type.
-    /// </summary>
-    public class AllInterfacesBindingGenerator : AbstractInterfaceBindingGenerator
+    public class TestBindingGeneratorFactory : BindingGeneratorFactory
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="AllInterfacesBindingGenerator"/> class.
-        /// </summary>
-        /// <param name="bindableTypeSelector">The bindable type selector.</param>
-        /// <param name="bindingCreator">Creator for multiple bindins for one type.</param>
-        public AllInterfacesBindingGenerator(IBindableTypeSelector bindableTypeSelector, IBindingCreator bindingCreator)
-            : base(bindableTypeSelector, bindingCreator, (ts, ti) => true)
+        private readonly IBindingCreator bindingCreator;
+
+        public TestBindingGeneratorFactory(IBindableTypeSelector bindableTypeSelector, IBindingCreator bindingCreator)
+            : base(bindableTypeSelector)
         {
+            this.bindingCreator = bindingCreator;
+        }
+
+        protected override IBindingCreator CreateMultiBindingCreator()
+        {
+            return this.bindingCreator;
         }
     }
 }

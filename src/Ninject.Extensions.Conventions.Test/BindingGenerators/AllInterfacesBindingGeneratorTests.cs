@@ -22,26 +22,31 @@
 #if !SILVERLIGHT_30 && !SILVERLIGHT_20 && !NO_MOQ
 namespace Ninject.Extensions.Conventions.BindingGenerators
 {
+    using System.Collections.Generic;
     using System.Linq;
     using FluentAssertions;
     using Moq;
 
     using Ninject.Extensions.Conventions.BindingBuilder;
     using Ninject.Extensions.Conventions.Fakes;
+    using Ninject.Planning.Bindings;
+    using Ninject.Syntax;
+
     using Xunit;
 
     public class AllInterfacesBindingGeneratorTests
     {
         private readonly IBindingGenerator testee;
-        private readonly KernelMock kernelMock;
+        private readonly IKernel kernel;
         private readonly Mock<IBindableTypeSelector> bindableInterfaceSelectorMock;
+        private readonly Mock<IBindingCreator> multiBindingCreatorMock;
 
         public AllInterfacesBindingGeneratorTests()
         {
-            this.kernelMock = new KernelMock();
+            this.kernel = new Mock<IKernel>().Object;
             this.bindableInterfaceSelectorMock = new Mock<IBindableTypeSelector>();
-            var bindingGeneratorFactory = new BindingGeneratorFactory(this.bindableInterfaceSelectorMock.Object);
-            this.testee = bindingGeneratorFactory.CreateAllInterfacesBindingGenerator();
+            this.multiBindingCreatorMock = new Mock<IBindingCreator>();
+            this.testee = new AllInterfacesBindingGenerator(this.bindableInterfaceSelectorMock.Object, this.multiBindingCreatorMock.Object);
         }
 
         [Fact]
@@ -51,21 +56,24 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             var interfaces = new[] { typeof(IFoo), typeof(IBar<>) };
             this.bindableInterfaceSelectorMock.Setup(s => s.GetBindableInterfaces(type)).Returns(interfaces);
 
-            this.testee.CreateBindings(type, this.kernelMock.Object).ToList();
+            this.testee.CreateBindings(type, this.kernel);
 
-            this.kernelMock.VerifyAllBindingsCreated(interfaces, type);
+            this.multiBindingCreatorMock.Verify(mbc => mbc.CreateBindings(this.kernel, interfaces, type));
         }
         
         [Fact]
-        public void SyntaxFormAllBindingsAreReturned()
+        public void BindingSyntaxReturnedByMultiBindingCreatorIsReturned()
         {
             var type = typeof(MultipleInterfaceCrazyService);
             var interfaces = new[] { typeof(IFoo), typeof(IBar<>) };
+            var result = new[] { new Mock<IBindingWhenInNamedWithOrOnSyntax<object>>().Object };
+
             this.bindableInterfaceSelectorMock.Setup(s => s.GetBindableInterfaces(type)).Returns(interfaces);
+            this.multiBindingCreatorMock.Setup(mbc => mbc.CreateBindings(this.kernel, interfaces, type)).Returns(result);
 
-            var syntax = this.testee.CreateBindings(type, this.kernelMock.Object).ToList();
+            var syntax = this.testee.CreateBindings(type, this.kernel).ToList();
 
-            syntax.Should().BeEquivalentTo(this.kernelMock.ReturnedSyntax);
+            syntax.Should().BeEquivalentTo(result);
         }
     }
 }

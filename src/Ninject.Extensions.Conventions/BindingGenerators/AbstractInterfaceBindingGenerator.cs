@@ -25,6 +25,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
     using System.Collections.Generic;
     using System.Linq;
 
+    using Ninject.Extensions.Conventions.BindingBuilder;
     using Ninject.Syntax;
 
     /// <summary>
@@ -36,7 +37,12 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// Gets the types that are binddabe to a given type.
         /// </summary>
         private readonly IBindableTypeSelector bindableTypeSelector;
-        
+
+        /// <summary>
+        /// Creator for multiple bindins for one type.
+        /// </summary>
+        private readonly IBindingCreator bindingCreator;
+
         /// <summary>
         /// The filter used to decide if a binding for the interface type is created.
         /// </summary>
@@ -46,10 +52,15 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// Initializes a new instance of the <see cref="AbstractInterfaceBindingGenerator"/> class.
         /// </summary>
         /// <param name="bindableTypeSelector">The bindable type selector.</param>
+        /// <param name="bindingCreator">Creator for multiple bindins for one type.</param>
         /// <param name="filter">The filter used to decide if a binding for the interface type is created.</param>
-        protected AbstractInterfaceBindingGenerator(IBindableTypeSelector bindableTypeSelector, Func<Type, Type, bool> filter)
+        protected AbstractInterfaceBindingGenerator(
+            IBindableTypeSelector bindableTypeSelector, 
+            IBindingCreator bindingCreator,
+            Func<Type, Type, bool> filter)
         {
             this.bindableTypeSelector = bindableTypeSelector;
+            this.bindingCreator = bindingCreator;
             this.filter = filter;
         }
 
@@ -63,10 +74,10 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// </returns>
         public IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> CreateBindings(Type type, IBindingRoot bindingRoot)
         {
-            return this.bindableTypeSelector
+            var interfaces = this.bindableTypeSelector
                 .GetBindableInterfaces(type)
-                .Where(interfaceType => this.filter(type, interfaceType))
-                .Select(i => bindingRoot.Bind(i).To(type));
+                .Where(interfaceType => this.filter(type, interfaceType));
+            return this.bindingCreator.CreateBindings(bindingRoot, interfaces, type);
         }
 
         /// <summary>
