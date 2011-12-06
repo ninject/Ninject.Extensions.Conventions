@@ -34,7 +34,9 @@
 		<mkdir dir="${current.path.test}"/>
 		<call target="CopyDefaultTestInfrastructureAssemblies"/>
 
-		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${build.defines}"
+		<property name="defines" value="${build.defines},MONO_2_6" if="${teamcity}"/>
+		<property name="defines" value="${build.defines}" unless="${teamcity}"/>
+		<csc noconfig="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${defines}"
 		 output="${current.path.test}/${product.assembly.test}">
 			<sources basedir="${path.src}">
 				<include name="${product.name}.Test/**/*.cs"/>
