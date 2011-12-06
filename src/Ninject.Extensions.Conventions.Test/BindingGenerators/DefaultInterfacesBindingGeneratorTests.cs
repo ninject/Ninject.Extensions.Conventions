@@ -80,13 +80,14 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         {
             var type = typeof(Bar<int>);
             var interfaces = new[] { typeof(IFoo), typeof(IBar), typeof(IBar<int>), typeof(IBar<>) };
+            var expectedInterfaces = interfaces.Where(i => i.Name.StartsWith("IBar"));
             this.bindableInterfaceSelectorMock.Setup(s => s.GetBindableInterfaces(type)).Returns(interfaces);
 
             this.testee.CreateBindings(type, this.kernelMock.Object).ToList();
 
             this.multiBindingCreatorMock.Verify(mbc => mbc.CreateBindings(
                 this.kernelMock.Object,
-                It.Is<IEnumerable<Type>>(t => t.SequenceEqual(interfaces.Where(i => i.Name.StartsWith("IBar")))),
+                It.Is<IEnumerable<Type>>(t => t.SequenceEqual(expectedInterfaces)),
                 type));
         }
 
