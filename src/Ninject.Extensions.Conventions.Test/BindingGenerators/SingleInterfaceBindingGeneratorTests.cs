@@ -19,7 +19,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-#if !SILVERLIGHT_30 && !SILVERLIGHT_20 && !NO_MOQ
+#if !SILVERLIGHT_30 && !SILVERLIGHT_20 && !NO_MOQ && !NO_GENERIC_MOQ
 namespace Ninject.Extensions.Conventions.BindingGenerators
 {
     using System;

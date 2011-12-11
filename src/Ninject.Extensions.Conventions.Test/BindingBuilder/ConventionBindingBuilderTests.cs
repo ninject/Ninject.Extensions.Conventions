@@ -189,6 +189,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.VerifyAllBindingsCreated(types1.Union(types2), generatorMock);
         }
 
+#if !NO_GENERIC_MOQ
         [Fact]
         public void Configure()
         {
@@ -296,6 +297,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             return new Mock<IBindingWhenInNamedWithOrOnSyntax<object>>();
         }
+#endif
 
         private void SetupTypeFilterGetTypes(IEnumerable<Type> returnedTypes)
         {

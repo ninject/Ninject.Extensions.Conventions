@@ -61,6 +61,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             this.multiBindingCreatorMock.Verify(mbc => mbc.CreateBindings(this.kernel, interfaces, type));
         }
         
+#if !NO_GENERIC_MOQ
         [Fact]
         public void BindingSyntaxReturnedByMultiBindingCreatorIsReturned()
         {
@@ -75,6 +76,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
 
             syntax.Should().BeEquivalentTo(result);
         }
+#endif
     }
 }
 #endif

@@ -19,7 +19,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-#if !NO_MOQ
+#if !NO_MOQ && !NO_GENERIC_MOQ
 namespace Ninject.Extensions.Conventions.BindingGenerators
 {
     using System;
