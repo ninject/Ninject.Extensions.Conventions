@@ -45,20 +45,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             IEnumerable<Type> serviceTypes, 
             Type implementationType)
         {
-            var interfaceEnumerator = serviceTypes.GetEnumerator();
-
-            if (!interfaceEnumerator.MoveNext())
-            {
-                return Enumerable.Empty<IBindingWhenInNamedWithOrOnSyntax<object>>();
-            }
-
-            var result = bindingRoot.Bind(interfaceEnumerator.Current).To(implementationType);
-            while (interfaceEnumerator.MoveNext())
-            {
-                bindingRoot.AddBinding(new Binding(interfaceEnumerator.Current, result.Binding.BindingConfiguration));
-            }
-
-            return new[] { result };
+            return !serviceTypes.Any() 
+                ? Enumerable.Empty<IBindingWhenInNamedWithOrOnSyntax<object>>() 
+                : new[] { bindingRoot.Bind(serviceTypes.ToArray()).To(implementationType) };
         }
     }
 }

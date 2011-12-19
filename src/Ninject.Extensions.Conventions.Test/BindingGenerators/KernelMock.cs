@@ -37,7 +37,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         public KernelMock()
         {
             this.Mock = new Mock<IKernel>();
-            this.Mock.Setup(m => m.Bind(It.IsAny<Type>())).Returns<Type>(this.CreateBindToMock);
+            this.Mock.Setup(m => m.Bind(It.IsAny<Type[]>())).Returns<Type[]>(this.CreateBindToMock);
             this.Bindings = new List<Binding>();
             this.ReturnedSyntax = new List<IBindingWhenInNamedWithOrOnSyntax<object>>();
         }
@@ -76,8 +76,9 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             }
         }
         
-        private IBindingToSyntax<object> CreateBindToMock(Type interfaceType)
+        private IBindingToSyntax<object> CreateBindToMock(Type[] interfaceTypes)
         {
+            var interfaceType = interfaceTypes.Single();
             var bindToMock = new Mock<IBindingToSyntax<object>>();
             bindToMock.Setup(m => m.To(It.IsAny<Type>())).Returns<Type>(implementationType => this.CreateConfigSyntax(interfaceType, implementationType));
             bindToMock.Setup(m => m.ToSelf()).Returns(() => this.CreateConfigSyntax(interfaceType, interfaceType));
