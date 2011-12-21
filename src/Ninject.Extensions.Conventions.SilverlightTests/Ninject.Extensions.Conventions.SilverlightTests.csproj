@@ -3,9 +3,9 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{934DCAA8-F266-4B4E-B7DF-5753694539BB}</ProjectGuid>
+    <ProjectGuid>{28952DBF-037A-40DB-B04C-DAE58B7F330D}</ProjectGuid>
     <ProjectTypeGuids>{A1591282-1198-4647-A2B1-27E5FF5F6F3B};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -15,36 +15,23 @@
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
     <SilverlightApplication>true</SilverlightApplication>
-    <SupportedCultures />
+    <SupportedCultures>
+    </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
     <XapFilename>Ninject.Extensions.Conventions.SilverlightTests.xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>Ninject.Extensions.Conventions.App</SilverlightAppEntry>
-    <TestPageFileName>TestPage.html</TestPageFileName>
+    <TestPageFileName>Ninject.Extensions.Conventions.SilverlightTestsTestPage.html</TestPageFileName>
     <CreateTestPage>true</CreateTestPage>
     <ValidateXaml>true</ValidateXaml>
     <EnableOutOfBrowser>false</EnableOutOfBrowser>
     <OutOfBrowserSettingsFile>Properties\OutOfBrowserSettings.xml</OutOfBrowserSettingsFile>
     <UsePlatformExtensions>false</UsePlatformExtensions>
     <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
-    <LinkedServerProject />
+    <LinkedServerProject>
+    </LinkedServerProject>
   </PropertyGroup>
-  <!--
-  //
-  // Silverlight Code Coverage Instrumentation
-  // List any libraries or assemblies that you would like to instrument during
-  // a code coverage pass. An example, for ClassLibrary1, is provided, and
-  // commented out below as a starting point:
-  //
-  -->
-  <!--
-  <ItemGroup>
-    <InstrumentSilverlightAssemblies Include="SilverlightClassLibrary1">
-      <Visible>false</Visible>
-    </InstrumentSilverlightAssemblies>
-  </ItemGroup>
-  -->
   <!-- This property group is only here to support building this project using the 
        MSBuild 3.5 toolset. In order to work correctly with this older toolset, it needs 
        to set the TargetFrameworkVersion to v3.5 -->
@@ -56,7 +43,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\build\debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;NO_ASSEMBLY_SCANNING;NO_SKIP_VISIBILITY</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT NO_ASSEMBLY_SCANNING NO_SKIP_VISIBILITY</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
     <ErrorReport>prompt</ErrorReport>
@@ -74,7 +61,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core">
-      <HintPath>..\..\tools\moq\Silverlight4\Castle.Core.dll</HintPath>
+      <HintPath>..\..\lib\Ninject.Extensions.Factory\silverlight-4.0\DynamicProxy\lib\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="FluentAssertions.Silverlight">
       <HintPath>..\..\tools\FluentAssertions\Silverlight-4.0\FluentAssertions.Silverlight.dll</HintPath>
@@ -82,14 +69,17 @@
     <Reference Include="Moq.Silverlight">
       <HintPath>..\..\tools\moq\Silverlight4\Moq.Silverlight.dll</HintPath>
     </Reference>
+    <Reference Include="mscorlib" />
     <Reference Include="Ninject">
       <HintPath>..\..\lib\Ninject\silverlight-4.0\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Extensions.Conventions">
       <HintPath>..\..\build\silverlight-4.0\release\Ninject.Extensions.Conventions.dll</HintPath>
     </Reference>
+    <Reference Include="Ninject.Extensions.Factory">
+      <HintPath>..\..\lib\Ninject.Extensions.Factory\silverlight-4.0\Ninject.Extensions.Factory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
-    <Reference Include="mscorlib" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
@@ -156,6 +146,9 @@
     </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\SingleInterfaceBindingGeneratorTests.cs">
       <Link>BindingGenerators\SingleInterfaceBindingGeneratorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\TestBindingGeneratorFactory.cs">
+      <Link>BindingGenerators\TestBindingGeneratorFactory.cs</Link>
     </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Bar.cs">
       <Link>Fakes\Bar.cs</Link>
@@ -262,6 +255,15 @@
     <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\AssemblyLoadingTests.cs">
       <Link>IntegrationTests\AssemblyLoadingTests.cs</Link>
     </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\ConfigurationTests.cs">
+      <Link>IntegrationTests\ConfigurationTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\FactoryTests.cs">
+      <Link>IntegrationTests\FactoryTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\InterfaceSegregationTests.cs">
+      <Link>IntegrationTests\InterfaceSegregationTests.cs</Link>
+    </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\NonePublicTypesTests.cs">
       <Link>IntegrationTests\NonePublicTypesTests.cs</Link>
     </Compile>
@@ -270,6 +272,9 @@
     </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\OpenGenericClassBindingTests.cs">
       <Link>IntegrationTests\OpenGenericClassBindingTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\SpecialConfigurations.cs">
+      <Link>IntegrationTests\SpecialConfigurations.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
@@ -285,9 +290,15 @@
   <ItemGroup>
     <None Include="Properties\AppManifest.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
-  <Import Condition="$(SilverlightVersion)=='v3.0'" Project="$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SilverlightToolkit\Tools\v3.0)Microsoft.Silverlight.Toolkit.Build.targets" />
-  <Import Condition="$(SilverlightVersion)=='v4.0'" Project="$(Registry:HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\SilverlightToolkit\Tools\v4.0)Microsoft.Silverlight.Toolkit.Build.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
   <ProjectExtensions>
     <VisualStudio>
       <FlavorProperties GUID="{A1591282-1198-4647-A2B1-27E5FF5F6F3B}">

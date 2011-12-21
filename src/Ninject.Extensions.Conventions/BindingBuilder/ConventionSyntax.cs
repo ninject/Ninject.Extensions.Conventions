@@ -29,6 +29,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
     using Ninject.Extensions.Conventions.BindingGenerators;
     using Ninject.Extensions.Conventions.Syntax;
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+    using Ninject.Extensions.Factory;
+#endif
 
     /// <summary>
     /// The syntax to configure the conventions
@@ -556,6 +559,27 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             return this.BindWith(this.bindingGeneratorFactory.CreateRegexBindingGenerator(pattern, options));
         }
+
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+        /// <summary>
+        /// Binds interfaces to factory implementations using the factory extension.
+        /// </summary>
+        /// <returns>The fluent syntax</returns>
+        public IConfigureSyntax BindToFactory()
+        {
+            return this.BindWith(this.bindingGeneratorFactory.FactoryBindingGenerator(null));
+        }
+
+        /// <summary>
+        /// Binds interfaces to factory implementations using the factory extension.
+        /// </summary>
+        /// <param name="instanceProvider">The instance provider.</param>
+        /// <returns>The fluent syntax</returns>
+        public IConfigureSyntax BindToFactory(Func<IInstanceProvider> instanceProvider)
+        {
+            return this.BindWith(this.bindingGeneratorFactory.FactoryBindingGenerator(instanceProvider));
+        }
+#endif
 
         /// <summary>
         /// Configures the bindings for the specified service with the specified configuration.

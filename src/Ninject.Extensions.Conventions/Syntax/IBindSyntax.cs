@@ -26,6 +26,9 @@ namespace Ninject.Extensions.Conventions.Syntax
     using System.Text.RegularExpressions;
 
     using Ninject.Extensions.Conventions.BindingGenerators;
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+    using Ninject.Extensions.Factory;
+#endif
 
     /// <summary>
     /// Delegate to select the types for which a binding is created to the given type.
@@ -114,5 +117,20 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <param name="options">The regex options.</param>
         /// <returns>The fluent syntax</returns>
         IConfigureSyntax BindToRegex(string pattern, RegexOptions options);
+
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+        /// <summary>
+        /// Binds interfaces to factory implementations using the factory extension.
+        /// </summary>
+        /// <returns>The fluent syntax</returns>
+        IConfigureSyntax BindToFactory();
+
+        /// <summary>
+        /// Binds interfaces to factory implementations using the factory extension.
+        /// </summary>
+        /// <param name="instanceProvider">The instance provider.</param>
+        /// <returns>The fluent syntax</returns>
+        IConfigureSyntax BindToFactory(Func<IInstanceProvider> instanceProvider);
+#endif
     }
 }

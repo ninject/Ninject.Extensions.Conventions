@@ -55,7 +55,7 @@ namespace Ninject.Extensions.Conventions
             }
 
             this.contentLoaded = true;
-            LoadComponent(this, new Uri("/Ninject.SilverlightTests;component/App.xaml", UriKind.Relative));
+            LoadComponent(this, new Uri("/Ninject.Extensions.Conventions;component/App.xaml", UriKind.Relative));
         }
 
         /// <summary>

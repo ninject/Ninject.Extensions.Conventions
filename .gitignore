@@ -9,6 +9,8 @@ dist
 *.cache
 lib/Ninject/*.zip
 lib/Ninject/*/**
+lib/Ninject.Extensions.Factory/*.zip
+lib/Ninject.Extensions.Factory/*/**
 /src/Ninject.Extensions.Conventions/StyleCop.Cache
 /src/Ninject.Extensions.Conventions.Test/StyleCop.Cache
 /src/Ninject.Extensions.Conventions.sln.docstates

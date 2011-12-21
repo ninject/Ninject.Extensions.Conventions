@@ -3,6 +3,8 @@
     <AssemblyPart x:Name="Ninject.Extensions.Conventions.SilverlightTests" Source="Ninject.Extensions.Conventions.SilverlightTests.dll" />
     <AssemblyPart x:Name="Ninject" Source="Ninject.dll" />
     <AssemblyPart x:Name="Ninject.Extensions.Conventions" Source="Ninject.Extensions.Conventions.dll" />
+    <AssemblyPart x:Name="Castle.Core" Source="Castle.Core.dll" />
+    <AssemblyPart x:Name="Ninject.Extensions.Factory" Source="Ninject.Extensions.Factory.dll" />
     <AssemblyPart x:Name="UnitDrivenLight" Source="UnitDrivenLight.dll" />
   </Deployment.Parts>
 </Deployment>

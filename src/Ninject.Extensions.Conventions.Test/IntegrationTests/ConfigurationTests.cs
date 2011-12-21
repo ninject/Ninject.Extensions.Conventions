@@ -44,6 +44,6 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
 
                 instance.Should().BeOfType<Foo>();
             }
-        }         
+        }
     }
 }

@@ -21,11 +21,15 @@
 
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
+    using System;
     using System.Text.RegularExpressions;
 
     using Ninject.Components;
     using Ninject.Extensions.Conventions.BindingGenerators;
     using Ninject.Extensions.Conventions.Syntax;
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+    using Ninject.Extensions.Factory;
+#endif
 
     /// <summary>
     /// Factory for binding generators.
@@ -89,5 +93,14 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="selector">The selector.</param>
         /// <returns>The newly created generator.</returns>
         IBindingGenerator CreateSelectorBindingGenerator(ServiceSelector selector);
+
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+        /// <summary>
+        /// Creates a new FactoryBindingGenerator instance.
+        /// </summary>
+        /// <param name="instanceProvider">The instance provider passed to the new instance.</param>
+        /// <returns>The newly created FactoryBindingGenerator.</returns>
+        IBindingGenerator FactoryBindingGenerator(Func<IInstanceProvider> instanceProvider);
+#endif
     }
 }

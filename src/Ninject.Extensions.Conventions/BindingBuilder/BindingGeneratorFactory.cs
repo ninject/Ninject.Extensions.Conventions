@@ -21,12 +21,16 @@
 
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
+    using System;
     using System.Linq;
     using System.Text.RegularExpressions;
 
     using Ninject.Components;
     using Ninject.Extensions.Conventions.BindingGenerators;
     using Ninject.Extensions.Conventions.Syntax;
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+    using Ninject.Extensions.Factory;
+#endif
 
     /// <summary>
     /// Factory for binding generators.
@@ -135,6 +139,18 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             return new SelectorBindingGenerator(this.CreateMultiBindingCreator(), selector, this.bindableTypeSelector);
         }
+
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+        /// <summary>
+        /// Creates a new FactoryBindingGenerator instance.
+        /// </summary>
+        /// <param name="instanceProvider">The instance provider passed to the new instance.</param>
+        /// <returns>The newly created FactoryBindingGenerator.</returns>
+        public IBindingGenerator FactoryBindingGenerator(Func<IInstanceProvider> instanceProvider)
+        {
+            return new FactoryBindingGenerator(instanceProvider);
+        }
+#endif
 
         /// <summary>
         /// Creates the multi binding creator.
