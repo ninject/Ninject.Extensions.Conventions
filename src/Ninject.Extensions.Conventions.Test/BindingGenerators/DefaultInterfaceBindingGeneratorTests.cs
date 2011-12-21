@@ -68,7 +68,6 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
                 type));
         }
         
-#if !MONO_2_6
         [Fact]
         public void GenericInterfacesWithTheSameNameAreBound()
         {
@@ -84,7 +83,6 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
                 It.Is<IEnumerable<Type>>(t => t.SequenceEqual(expectedInterfaes)),
                 type));
         }
-#endif
 
         [Fact]
         public void SyntaxFormAllBindingsAreReturned()
