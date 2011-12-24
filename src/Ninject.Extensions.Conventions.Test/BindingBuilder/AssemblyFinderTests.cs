@@ -82,7 +82,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var expectedAssembly2 = this.testee.GetType().Assembly;
 
             var assemblies = this.testee.FindAssembliesMatching(new[] { "Ninject.Extensions.Conventions*.dll" })
-                .Where(n => !n.Contains("Silverlight"));
+                .Where(n => !(n.Contains("Silverlight") || n.Contains("WindowsPhone")));
 
             assemblies.Select<string, string>(GetFileName).Should()
                 .BeEquivalentTo(new[] { expectedAssembly1, expectedAssembly2 }.Select(a => GetFileName(a.Location)));

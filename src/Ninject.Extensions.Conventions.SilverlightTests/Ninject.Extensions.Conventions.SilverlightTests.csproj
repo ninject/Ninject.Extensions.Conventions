@@ -42,7 +42,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\build\debug\</OutputPath>
+    <OutputPath>..\..\build\debug\SL\</OutputPath>
     <DefineConstants>TRACE;DEBUG;SILVERLIGHT NO_ASSEMBLY_SCANNING NO_SKIP_VISIBILITY</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>

@@ -30,7 +30,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\build\debug\</OutputPath>
+    <OutputPath>..\..\build\debug\WP7\</OutputPath>
     <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;NO_MOQ;NO_ASSEMBLY_SCANNING;NO_SKIP_VISIBILITY</DefineConstants>
     <NoStdLib>true</NoStdLib>
     <NoConfig>true</NoConfig>
@@ -126,6 +126,9 @@
     </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\SingleInterfaceBindingGeneratorTests.cs">
       <Link>BindingGenerators\SingleInterfaceBindingGeneratorTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\BindingGenerators\TestBindingGeneratorFactory.cs">
+      <Link>BindingGenerators\TestBindingGeneratorFactory.cs</Link>
     </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\Fakes\Bar.cs">
       <Link>Fakes\Bar.cs</Link>
@@ -232,6 +235,15 @@
     <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\AssemblyLoadingTests.cs">
       <Link>IntegrationTests\AssemblyLoadingTests.cs</Link>
     </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\ConfigurationTests.cs">
+      <Link>IntegrationTests\ConfigurationTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\FactoryTests.cs">
+      <Link>IntegrationTests\FactoryTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\InterfaceSegregationTests.cs">
+      <Link>IntegrationTests\InterfaceSegregationTests.cs</Link>
+    </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\NonePublicTypesTests.cs">
       <Link>IntegrationTests\NonePublicTypesTests.cs</Link>
     </Compile>
@@ -240,6 +252,9 @@
     </Compile>
     <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\OpenGenericClassBindingTests.cs">
       <Link>IntegrationTests\OpenGenericClassBindingTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Ninject.Extensions.Conventions.Test\IntegrationTests\SpecialConfigurations.cs">
+      <Link>IntegrationTests\SpecialConfigurations.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
