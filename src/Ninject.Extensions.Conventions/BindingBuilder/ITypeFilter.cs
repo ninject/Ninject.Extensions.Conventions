@@ -23,6 +23,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
 
     /// <summary>
     /// Decides if some criteria apply to a type.
@@ -48,5 +49,26 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         ///     <c>true</c> if the given type is inherited from any of the specified types; otherwise, <c>false</c>.
         /// </returns>
         bool IsTypeInheritedFromAny(Type type, IEnumerable<Type> types);
+
+        /// <summary>
+        /// Determines whether the specified type has the specified attribute.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="attributeType">The type of the attribute.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified type has the attribute; otherwise, <c>false</c>.
+        /// </returns>
+        bool HasAttribute(Type type, Type attributeType);
+
+        /// <summary>
+        /// Determines whether the specified type has an attribute matching the predicate.
+        /// </summary>
+        /// <typeparam name="TAttribute">The type of the attribute.</typeparam>
+        /// <param name="type">The type.</param>
+        /// <param name="predicate">A function to test if an attribute matches.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified type has an attribute that matches the predicate; otherwise, <c>false</c>.
+        /// </returns>
+        bool HasAttribute<TAttribute>(Type type, Func<TAttribute, bool> predicate);
     }
 }

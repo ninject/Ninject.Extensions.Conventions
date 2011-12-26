@@ -1,5 +1,5 @@
-﻿//-------------------------------------------------------------------------------
-// <copyright file="Foo.cs" company="Ninject Project Contributors">
+//-------------------------------------------------------------------------------
+// <copyright file="TestAttribute.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -21,8 +21,15 @@
 
 namespace Ninject.Extensions.Conventions.Fakes
 {
-    [TestAttribute(1)]
-    public class Foo : IFoo, IFoo<int>
+    using System;
+
+    public class TestAttribute : Attribute
     {
+        public int TestValue { get; set; }
+
+        public TestAttribute(int testValue)
+        {
+            this.TestValue = testValue;
+        }
     }
 }

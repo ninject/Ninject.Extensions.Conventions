@@ -63,5 +63,32 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             return types.Any(t => t != type && t.IsAssignableFrom(type));
         }
+
+        /// <summary>
+        /// Determines whether the specified type has the specified attribute.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <param name="attributeType">The type of the attribute.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified type has the attribute; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasAttribute(Type type, Type attributeType)
+        {
+            return type.GetCustomAttributes(attributeType, true).Any();
+        }
+
+        /// <summary>
+        /// Determines whether the specified type has an attribute matching the predicate.
+        /// </summary>
+        /// <typeparam name="TAttribute">The type of the attribute.</typeparam>
+        /// <param name="type">The type.</param>
+        /// <param name="predicate">A function to test if an attribute matches.</param>
+        /// <returns>
+        ///     <c>true</c> if the specified type has an attribute that matches the predicate; otherwise, <c>false</c>.
+        /// </returns>
+        public bool HasAttribute<TAttribute>(Type type, Func<TAttribute, bool> predicate)
+        {
+            return type.GetCustomAttributes(typeof(TAttribute), true).OfType<TAttribute>().Any(predicate);
+        }
     }
 }

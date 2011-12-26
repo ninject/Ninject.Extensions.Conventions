@@ -21,8 +21,11 @@
 
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
+    using System;
+
     using FluentAssertions;
 
+    using Ninject.Extensions.Conventions.Fakes;
     using Ninject.Extensions.Conventions.Fakes.NormalClasses;
 
     using Xunit;
@@ -122,6 +125,46 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var type = typeof(DefaultConvention);
 
             var result = this.testee.IsTypeInheritedFromAny(type, new[] { typeof(int) });
+
+            result.Should().BeFalse();
+        }
+
+        [Fact]
+        public void HasAttributeWhenTypeHasTheSpecifiedAttributeReturnsTrue()
+        {
+            var type = typeof(Foo);
+
+            var result = this.testee.HasAttribute(type, typeof(TestAttribute));
+
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void HasAttributeWhenTypeHasNotTheSpecifiedAttributeReturnsFalse()
+        {
+            var type = typeof(MultipleInterfaceCrazyService);
+
+            var result = this.testee.HasAttribute(type, typeof(TestAttribute));
+
+            result.Should().BeFalse();
+        }
+        
+        [Fact]
+        public void HasAttributeWhenTypeHasMatchingAttributeReturnsTrue()
+        {
+            var type = typeof(Foo);
+
+            var result = this.testee.HasAttribute<TestAttribute>(type, a => a.TestValue == 1);
+
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void HasAttributeWhenTypeHasNoMatchingAttributeReturnsFalse()
+        {
+            var type = typeof(Foo);
+
+            var result = this.testee.HasAttribute<TestAttribute>(type, a => a.TestValue != 1);
 
             result.Should().BeFalse();
         }

@@ -373,6 +373,69 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             return this.SelectTypesInheritedFrom(typeof(T));
         }
+
+        /// <summary>
+        /// Selects the types with thw specified attribute.
+        /// </summary>
+        /// <typeparam name="T">The type of the attribute</typeparam>
+        /// <returns>The fluent syntax</returns>
+        public IFromWhereExcludeIncludeBindSyntax SelectTypesWithAttribute<T>() where T : Attribute
+        {
+            return this.SelectTypesWithAttribute(typeof(T));
+        }
+
+        /// <summary>
+        /// Selects the types that matches the specified attribute predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the attribute</typeparam>
+        /// <param name="predicate">A function to test if an attribute predicate.</param>
+        /// <returns>The fluent syntax</returns>
+        public IFromWhereExcludeIncludeBindSyntax SelectTypesWithAttribute<T>(Func<T, bool> predicate) where T : Attribute
+        {
+            return this.Select(t => this.typeFilter.HasAttribute(t, predicate));
+        }
+
+        /// <summary>
+        /// Selects the types with thw specified attribute.
+        /// </summary>
+        /// <param name="attributeType">The type of the attribute.</param>
+        /// <returns>The fluent syntax</returns>
+        public IFromWhereExcludeIncludeBindSyntax SelectTypesWithAttribute(Type attributeType)
+        {
+            return this.Select(t => this.typeFilter.HasAttribute(t, attributeType));
+        }        
+        
+        /// <summary>
+        /// Selects the types without the specified attribute.
+        /// </summary>
+        /// <typeparam name="T">The type of the attribute</typeparam>
+        /// <returns>The fluent syntax</returns>
+        public IFromWhereExcludeIncludeBindSyntax SelectTypesWithoutAttribute<T>() where T : Attribute
+        {
+            return this.SelectTypesWithoutAttribute(typeof(T));
+        }
+
+        /// <summary>
+        /// Selects the types that do not match the specified attribute predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the attribute</typeparam>
+        /// <param name="predicate">A function to test if an attribute matches.</param>
+        /// <returns>The fluent syntax</returns>
+        public IFromWhereExcludeIncludeBindSyntax SelectTypesWithoutAttribute<T>(Func<T, bool> predicate) where T : Attribute
+        {
+            return this.Select(t => !this.typeFilter.HasAttribute(t, predicate));
+        }
+
+        /// <summary>
+        /// Selects the types with thw specified attribute.
+        /// </summary>
+        /// <param name="attributeType">The type of the attribute.</param>
+        /// <returns>The fluent syntax</returns>
+        public IFromWhereExcludeIncludeBindSyntax SelectTypesWithoutAttribute(Type attributeType)
+        {
+            return this.Select(t => !this.typeFilter.HasAttribute(t, attributeType));
+        }
+
         #endregion
 
         #region Type Filtering

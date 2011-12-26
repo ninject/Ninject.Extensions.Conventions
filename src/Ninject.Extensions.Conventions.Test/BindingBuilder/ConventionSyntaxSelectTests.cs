@@ -27,6 +27,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     using System.Linq;
     using FluentAssertions;
     using Moq;
+
+    using Ninject.Extensions.Conventions.Fakes;
     using Ninject.Extensions.Conventions.Fakes.NormalClasses;
     using Xunit;
     using Xunit.Extensions;
@@ -289,6 +291,100 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             result.Should().BeTrue();
             this.typeFilterMock.VerifyAll();
         }
+
+        [Fact]
+        public void SelectTypesWithAttribute_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        {
+            var type = typeof(int);
+
+            this.SetupStoreFilter();
+            this.SetupHasAttribute(type, typeof(TestAttribute));
+
+            this.testee.SelectTypesWithAttribute<TestAttribute>();
+            var result = this.filter(type);
+
+            result.Should().BeTrue();
+            this.typeFilterMock.VerifyAll();
+        }
+
+        [Fact]
+        public void SelectTypesWithoutAttribute_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        {
+            var type = typeof(int);
+
+            this.SetupStoreFilter();
+            this.SetupHasAttribute(type, typeof(TestAttribute));
+
+            this.testee.SelectTypesWithoutAttribute<TestAttribute>();
+            var result = this.filter(type);
+
+            result.Should().BeFalse();
+            this.typeFilterMock.VerifyAll();
+        }
+        
+        [Fact]
+        public void SelectTypesWithAttribute_NoneGeneric_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        {
+            var type = typeof(int);
+            var attributeType = typeof(TestAttribute);
+
+            this.SetupStoreFilter();
+            this.SetupHasAttribute(type, attributeType);
+
+            this.testee.SelectTypesWithAttribute(attributeType);
+            var result = this.filter(type);
+
+            result.Should().BeTrue();
+            this.typeFilterMock.VerifyAll();
+        }
+
+        [Fact]
+        public void SelectTypesWithoutAttribute_NoneGeneric_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        {
+            var type = typeof(int);
+            var attributeType = typeof(TestAttribute);
+
+            this.SetupStoreFilter();
+            this.SetupHasAttribute(type, attributeType);
+
+            this.testee.SelectTypesWithoutAttribute(attributeType);
+            var result = this.filter(type);
+
+            result.Should().BeFalse();
+            this.typeFilterMock.VerifyAll();
+        }
+        
+        [Fact]
+        public void SelectTypesWithAttribute_WithMatcher_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        {
+            var type = typeof(int);
+            Func<TestAttribute, bool> matcher = a => a.TestValue == 1;
+
+            this.SetupStoreFilter();
+            this.SetupHasAttribute(type, matcher);
+
+            this.testee.SelectTypesWithAttribute(matcher);
+            var result = this.filter(type);
+
+            result.Should().BeTrue();
+            this.typeFilterMock.VerifyAll();
+        }
+        
+        [Fact]
+        public void SelectTypesWithoutAttribute_WithMatcher_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        {
+            var type = typeof(int);
+            Func<TestAttribute, bool> matcher = a => a.TestValue == 1;
+
+            this.SetupStoreFilter();
+            this.SetupHasAttribute(type, matcher);
+
+            this.testee.SelectTypesWithoutAttribute(matcher);
+            var result = this.filter(type);
+
+            result.Should().BeFalse();
+            this.typeFilterMock.VerifyAll();
+        }
         
         private void SetupIsTypeInheritedFromAny(Type type, params Type[] givenTypes)
         {
@@ -298,6 +394,22 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
                 .Verifiable();
         }
 
+        private void SetupHasAttribute(Type type, Type attributeType)
+        {
+            this.typeFilterMock
+                .Setup(f => f.HasAttribute(type, attributeType))
+                .Returns(true)
+                .Verifiable();
+        }
+
+        private void SetupHasAttribute(Type type, Func<TestAttribute, bool> matcher)
+        {
+            this.typeFilterMock
+                .Setup(f => f.HasAttribute(type, matcher))
+                .Returns(true)
+                .Verifiable();
+        }
+        
         private void SetupIsInNameSpace(Type type, params string[] matchingNamespaces)
         {
             this.typeFilterMock

@@ -125,5 +125,53 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <typeparam name="T">The ancestor type.</typeparam>
         /// <returns>The fluent syntax</returns>
         IFromWhereExcludeIncludeBindSyntax SelectTypesInheritedFrom<T>();
+
+        /// <summary>
+        /// Selects the types with the specified attribute.
+        /// </summary>
+        /// <typeparam name="T">The type of the attribute</typeparam>
+        /// <returns>The fluent syntax</returns>
+        IFromWhereExcludeIncludeBindSyntax SelectTypesWithAttribute<T>()
+            where T : Attribute;
+
+        /// <summary>
+        /// Selects the types that matches the specified attribute predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the attribute</typeparam>
+        /// <param name="predicate">A function to test if an attribute matches.</param>
+        /// <returns>The fluent syntax</returns>
+        IFromWhereExcludeIncludeBindSyntax SelectTypesWithAttribute<T>(Func<T, bool> predicate)
+            where T : Attribute;
+
+        /// <summary>
+        /// Selects the types with the specified attribute.
+        /// </summary>
+        /// <param name="attributeType">The type of the attribute.</param>
+        /// <returns>The fluent syntax</returns>
+        IFromWhereExcludeIncludeBindSyntax SelectTypesWithAttribute(Type attributeType);
+
+        /// <summary>
+        /// Selects the types without the specified attribute.
+        /// </summary>
+        /// <typeparam name="T">The type of the attribute</typeparam>
+        /// <returns>The fluent syntax</returns>
+        IFromWhereExcludeIncludeBindSyntax SelectTypesWithoutAttribute<T>()
+            where T : Attribute;
+
+        /// <summary>
+        /// Selects the types that do not match the specified attribute predicate.
+        /// </summary>
+        /// <typeparam name="T">The type of the attribute</typeparam>
+        /// <param name="predicate">A function to test if an attribute matches.</param>
+        /// <returns>The fluent syntax</returns>
+        IFromWhereExcludeIncludeBindSyntax SelectTypesWithoutAttribute<T>(Func<T, bool> predicate)
+            where T : Attribute;
+
+        /// <summary>
+        /// Selects the types without the specified attribute.
+        /// </summary>
+        /// <param name="attributeType">The type of the attribute.</param>
+        /// <returns>The fluent syntax</returns>
+        IFromWhereExcludeIncludeBindSyntax SelectTypesWithoutAttribute(Type attributeType);
     }
 }
