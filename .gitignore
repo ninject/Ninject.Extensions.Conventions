@@ -7,6 +7,7 @@ dist
 *resharper*
 *.user
 *.cache
+*.dotCover
 lib/Ninject/*.zip
 lib/Ninject/*/**
 lib/Ninject.Extensions.Factory/*.zip

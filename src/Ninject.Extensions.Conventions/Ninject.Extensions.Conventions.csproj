@@ -110,6 +110,7 @@
     <Compile Include="Extensions\ExtensionsForIKernel.cs" />
     <Compile Include="Extensions\ExtensionsForAssembly.cs" />
     <Compile Include="BindingBuilder\ConventionSyntax.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Syntax\IBindSyntax.cs" />
     <Compile Include="Syntax\IConfigureForSyntax.cs" />
     <Compile Include="Syntax\IIncludingNonePublicTypesSelectSyntax.cs" />
