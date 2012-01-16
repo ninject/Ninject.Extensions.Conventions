@@ -114,8 +114,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Syntax\IBindSyntax.cs" />
     <Compile Include="Syntax\IConfigureForSyntax.cs" />
+    <Compile Include="Syntax\IFromFilterWhereExcludeIncludeBindSyntax.cs" />
     <Compile Include="Syntax\IIncludingNonePublicTypesSelectSyntax.cs" />
     <Compile Include="Syntax\IIncludingNonePublicTypesSyntax.cs" />
+    <Compile Include="Syntax\ISelectSyntax.cs" />
     <Compile Include="Syntax\IWhereSyntax.cs" />
     <Compile Include="Syntax\IConfigureSyntax.cs" />
     <Compile Include="Syntax\IExcludeSyntax.cs" />
@@ -124,7 +126,7 @@
     <Compile Include="Syntax\IFromWhereExcludeIncludeBindSyntax.cs" />
     <Compile Include="Syntax\IExcludeIncludeBindSyntax.cs" />
     <Compile Include="Syntax\IIncludeSyntax.cs" />
-    <Compile Include="Syntax\ISelectSyntax.cs" />
+    <Compile Include="Syntax\IFilterSyntax.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

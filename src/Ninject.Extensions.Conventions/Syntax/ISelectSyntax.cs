@@ -1,6 +1,6 @@
-//-------------------------------------------------------------------------------
+﻿//-------------------------------------------------------------------------------
 // <copyright file="ISelectSyntax.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
+//   Copyright (c) 2009-2012 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -22,156 +22,47 @@
 namespace Ninject.Extensions.Conventions.Syntax
 {
     using System;
-    using System.Collections.Generic;
 
     /// <summary>
-    /// Syntax for the selection of the types.
+    /// Syntax to select the types
     /// </summary>
     public interface ISelectSyntax
     {
         /// <summary>
-        /// Selects all types matching the given filter.
+        /// Selects the types using the specified filter.
         /// </summary>
-        /// <param name="filter">The filter</param>
+        /// <param name="filter">The filter.</param>
         /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax Select(Func<Type, bool> filter);
+        IFromExcludeIncludeBindSyntax Select(Func<Type, bool> filter);
 
         /// <summary>
-        /// Selects all types
+        /// Selects all types.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectAllTypes();
+        IFromFilterWhereExcludeIncludeBindSyntax SelectAllTypes();
 
         /// <summary>
-        /// Selects the types in the specified namespaces.
+        /// Selects all none abstract classes.
         /// </summary>
-        /// <param name="namespaces">The namespaces from which the types are selected.</param>
         /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesInNamespaces(IEnumerable<string> namespaces);
+        IFromFilterWhereExcludeIncludeBindSyntax SelectAllClasses();
 
         /// <summary>
-        /// Selects the types in the specified namespaces.
+        /// Selects all calsses including abstract ones.
         /// </summary>
-        /// <param name="namespaces">The namespaces from which the types are selected.</param>
         /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesInNamespaces(params string[] namespaces);
+        IFromFilterWhereExcludeIncludeBindSyntax SelectAllIncludingAbstractClasses();
 
         /// <summary>
-        /// Selects the types in the same namespace as the given type.
+        /// Selects all abstract classes.
         /// </summary>
-        /// <typeparam name="T">The type defining the namespace.</typeparam>
         /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesInNamespaceOf<T>();
+        IFromFilterWhereExcludeIncludeBindSyntax SelectAllAbstractClasses();
 
         /// <summary>
-        /// Selects the types in the same namespaces as the given types.
+        /// Selects all interfaces.
         /// </summary>
-        /// <param name="types">The types defining the namespaces.</param>
         /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesInNamespaceOf(params Type[] types);
-
-        /// <summary>
-        /// Selects all types not in the given namespaces.
-        /// </summary>
-        /// <param name="namespaces">The namespaces from which the types are not selected.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesNotInNamespaces(IEnumerable<string> namespaces);
-
-        /// <summary>
-        /// Selects all types not in the given namespaces.
-        /// </summary>
-        /// <param name="namespaces">The namespaces from which the types are not selected.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesNotInNamespaces(params string[] namespaces);
-
-        /// <summary>
-        /// Selects all types not in same namespaces as the given type.
-        /// </summary>
-        /// <typeparam name="T">The type defining the namespace.</typeparam>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesNotInNamespaceOf<T>();
-
-        /// <summary>
-        /// Selects all types not in same namespaces as the given types.
-        /// </summary>
-        /// <param name="types">The types defining the namespace.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesNotInNamespaceOf(params Type[] types);
-
-        /// <summary>
-        /// Selects the types inherited from any of the given types.
-        /// </summary>
-        /// <param name="types">The ancestor types.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesInheritedFromAny(IEnumerable<Type> types);
-
-        /// <summary>
-        /// Selects the types inherited from any of the given types.
-        /// </summary>
-        /// <param name="types">The ancestor types.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesInheritedFromAny(params Type[] types);
-
-        /// <summary>
-        /// Selects the types inherited from the given types.
-        /// </summary>
-        /// <param name="type">The ancestor type.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesInheritedFrom(Type type);
-
-        /// <summary>
-        /// Selects the types inherited from the given types.
-        /// </summary>
-        /// <typeparam name="T">The ancestor type.</typeparam>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesInheritedFrom<T>();
-
-        /// <summary>
-        /// Selects the types with the specified attribute.
-        /// </summary>
-        /// <typeparam name="T">The type of the attribute</typeparam>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesWithAttribute<T>()
-            where T : Attribute;
-
-        /// <summary>
-        /// Selects the types that matches the specified attribute predicate.
-        /// </summary>
-        /// <typeparam name="T">The type of the attribute</typeparam>
-        /// <param name="predicate">A function to test if an attribute matches.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesWithAttribute<T>(Func<T, bool> predicate)
-            where T : Attribute;
-
-        /// <summary>
-        /// Selects the types with the specified attribute.
-        /// </summary>
-        /// <param name="attributeType">The type of the attribute.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesWithAttribute(Type attributeType);
-
-        /// <summary>
-        /// Selects the types without the specified attribute.
-        /// </summary>
-        /// <typeparam name="T">The type of the attribute</typeparam>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesWithoutAttribute<T>()
-            where T : Attribute;
-
-        /// <summary>
-        /// Selects the types that do not match the specified attribute predicate.
-        /// </summary>
-        /// <typeparam name="T">The type of the attribute</typeparam>
-        /// <param name="predicate">A function to test if an attribute matches.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesWithoutAttribute<T>(Func<T, bool> predicate)
-            where T : Attribute;
-
-        /// <summary>
-        /// Selects the types without the specified attribute.
-        /// </summary>
-        /// <param name="attributeType">The type of the attribute.</param>
-        /// <returns>The fluent syntax</returns>
-        IFromWhereExcludeIncludeBindSyntax SelectTypesWithoutAttribute(Type attributeType);
+        IFromFilterWhereExcludeIncludeBindSyntax SelectAllInterfaces();
     }
 }

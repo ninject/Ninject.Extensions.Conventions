@@ -35,7 +35,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .SelectTypesInNamespaceOf<Foo>()
+                          .SelectAllClasses().InNamespaceOf<Foo>()
                           .BindToAllInterfaces()
                           .Configure(c => c.Named("Default"))
                           .ConfigureFor<Foo>(c => c.Named("Foo")));
@@ -53,7 +53,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .SelectTypesInNamespaceOf<Foo>()
+                          .SelectAllClasses().InNamespaceOf<Foo>()
                           .BindToAllInterfaces()
                           .Configure((c, s) => c.Named("Default").WithMetadata("type", s.Name))
                           .ConfigureFor<Foo>(c => c.Named("Foo")));
@@ -71,7 +71,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .SelectTypesInNamespaceOf<Foo>()
+                          .SelectAllClasses().InNamespaceOf<Foo>()
                           .BindToAllInterfaces()
                           .Configure(c => c.Named("Default"))
                           .ConfigureFor<Foo>(c => c.Named("Foo")));

@@ -24,7 +24,7 @@ namespace Ninject.Extensions.Conventions.Syntax
     /// <summary>
     /// From, exclude, include, bind syntax
     /// </summary>
-    public interface IFromExcludeIncludeBindSyntax : IExcludeIncludeBindSyntax, IFromSyntax, ISelectSyntax
+    public interface IFromExcludeIncludeBindSyntax : IExcludeIncludeBindSyntax, IFromSyntax
     {
     }
 }

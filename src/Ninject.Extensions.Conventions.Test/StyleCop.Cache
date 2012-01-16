@@ -582,506 +582,560 @@
   </sourcecode>
   <sourcecode name="AssemblyFinderTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>518</milliseconds>
+    <timestamp>12/24/2011 04:17:06</timestamp>
+    <milliseconds>352</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="ConventionSyntaxBindingTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>359</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="ConventionBindingBuilderTests.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/13/2011 01:08:32</timestamp>
-    <milliseconds>648</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="TypeFilterTests.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>325</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="ConventionSyntaxFromTests.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/13/2011 01:08:44</timestamp>
-    <milliseconds>324</milliseconds>
+    <timestamp>11/27/2011 17:30:40</timestamp>
+    <milliseconds>58</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="ConventionSyntaxFilteringTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
+    <timestamp>08/11/2011 00:33:28</timestamp>
     <milliseconds>551</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="ConventionSyntaxSelectTests.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="ConventionBindingBuilderTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 02:05:29</timestamp>
-    <milliseconds>905</milliseconds>
+    <timestamp>12/11/2011 05:49:34</timestamp>
+    <milliseconds>948</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ConventionSyntaxFromTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/13/2011 00:08:44</timestamp>
+    <milliseconds>324</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="TypeSelectorTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/13/2011 01:08:54</timestamp>
+    <timestamp>08/13/2011 00:08:54</timestamp>
     <milliseconds>385</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="AllInterfacesBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="TypeFilterTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>482</milliseconds>
+    <timestamp>12/26/2011 17:52:28</timestamp>
+    <milliseconds>603</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="BaseBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>464</milliseconds>
+    <timestamp>12/11/2011 05:57:57</timestamp>
+    <milliseconds>819</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="DefaultInterfaceBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="AllInterfacesBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>438</milliseconds>
+    <timestamp>12/19/2011 20:31:15</timestamp>
+    <milliseconds>473</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="BindableTypeSelectorTest.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
+    <timestamp>08/11/2011 00:33:28</timestamp>
     <milliseconds>451</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="DefaultInterfacesBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>424</milliseconds>
+    <timestamp>12/21/2011 03:03:45</timestamp>
+    <milliseconds>41</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="KernelMock.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="DefaultInterfaceBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:34:36</timestamp>
-    <milliseconds>69</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="SelectorBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>406</milliseconds>
+    <timestamp>12/21/2011 03:03:45</timestamp>
+    <milliseconds>28</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="SelfBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>502</milliseconds>
+    <timestamp>12/11/2011 05:58:48</timestamp>
+    <milliseconds>151</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="Bar.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="KernelMock.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
-    <milliseconds>329</milliseconds>
+    <timestamp>12/19/2011 02:04:19</timestamp>
+    <milliseconds>255</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SelectorBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>12/11/2011 05:58:48</timestamp>
+    <milliseconds>191</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="SingleInterfaceBindingGeneratorTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/11/2011 01:33:28</timestamp>
-    <milliseconds>391</milliseconds>
+    <timestamp>12/11/2011 05:58:48</timestamp>
+    <milliseconds>180</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="TestBindingGeneratorFactory.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>12/05/2011 14:18:34</timestamp>
+    <milliseconds>835</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="Bar.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/10/2011 08:55:37</timestamp>
+    <milliseconds>329</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="BaseService.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>342</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="IBar{T}.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
-    <milliseconds>362</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="Foo.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
-    <milliseconds>349</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="IBar{T1,T2}.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
-    <milliseconds>367</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IBar.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>357</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="IFoo.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="Foo.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
-    <milliseconds>289</milliseconds>
+    <timestamp>12/26/2011 17:51:01</timestamp>
+    <milliseconds>719</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IBar{T}.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/10/2011 08:55:37</timestamp>
+    <milliseconds>362</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IBar{T1,T2}.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/10/2011 08:55:37</timestamp>
+    <milliseconds>367</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="ICrazyService.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>375</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="IFoo{T}.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="IFoo.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
-    <milliseconds>382</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="IBaseClosedGenericInterface.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
-    <milliseconds>256</milliseconds>
+    <timestamp>08/10/2011 08:55:37</timestamp>
+    <milliseconds>289</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IInternalInterface.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/13/2011 00:43:18</timestamp>
+    <timestamp>08/12/2011 23:43:18</timestamp>
     <milliseconds>37</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IFoo{T}.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/10/2011 08:55:37</timestamp>
+    <milliseconds>382</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IMultipleInterfaceCrazyService.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>391</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IBaseClosedGenericInterface.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/10/2011 08:48:21</timestamp>
+    <milliseconds>256</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IBaseNormalInterface.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>109</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IBaseOfDerivedGenericInterface.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>117</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IBaseOfDerivedInterface.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>135</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IBaseOpenGenericInterface.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>168</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IBaseOpenGenericInterface1.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>262</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="IBaseOpenGenericInterface2.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
-    <milliseconds>268</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IClosedGenericInterface.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>274</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IBaseOpenGenericInterface2.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/10/2011 08:48:21</timestamp>
+    <milliseconds>268</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IDefaultConvention.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>280</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IDerivedGenericInterface.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>286</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IDerivedInterface.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>292</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="IService.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
-    <milliseconds>398</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="IOpenGenericInterface.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
-    <milliseconds>304</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="INormalInterface.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:48:21</timestamp>
+    <timestamp>08/10/2011 08:48:21</timestamp>
     <milliseconds>298</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="InternalType.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/13/2011 00:43:18</timestamp>
+    <timestamp>08/12/2011 23:43:18</timestamp>
     <milliseconds>28</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IOpenGenericInterface.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/10/2011 08:48:21</timestamp>
+    <milliseconds>304</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="IService.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/10/2011 08:55:37</timestamp>
+    <milliseconds>398</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="IService{T}.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>405</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="MultipleInterfaceCrazyService.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>413</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="AbstractClassWithManyInterfaces.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>275</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="ClassWithManyInterfaces.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>300</milliseconds>
-    <violations />
-  </sourcecode>
-  <sourcecode name="GenericBaseClassWithManyInterfaces{T}.cs" parser="StyleCop.CSharp.CsParser">
-    <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
-      <milliseconds>0</milliseconds>
-    </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
-    <milliseconds>312</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="DefaultConvention.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>306</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="GenericBaseClassWithManyInterfaces{T}.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>08/10/2011 08:55:37</timestamp>
+    <milliseconds>312</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="GenericBaseClassWithManyInterfaces{T1,T2}.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:55:37</timestamp>
+    <timestamp>08/10/2011 08:55:37</timestamp>
     <milliseconds>318</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="OpenGenericClassWithManyInterfaces.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/14/2011 02:42:13</timestamp>
+    <timestamp>08/14/2011 01:42:13</timestamp>
     <milliseconds>963</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="NonePublicTypesTests.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="TestAttribute.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/13/2011 01:10:44</timestamp>
-    <milliseconds>730</milliseconds>
+    <timestamp>12/26/2011 17:51:01</timestamp>
+    <milliseconds>706</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="FactoryTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>12/21/2011 00:00:21</timestamp>
+    <milliseconds>133</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ConfigurationTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>01/14/2012 22:44:29</timestamp>
+    <milliseconds>953</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="AssemblyLoadingTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/13/2011 00:44:51</timestamp>
-    <milliseconds>865</milliseconds>
+    <timestamp>11/27/2011 17:30:40</timestamp>
+    <milliseconds>72</milliseconds>
     <violations />
   </sourcecode>
-  <sourcecode name="OpenGenericClassBindingTests.cs" parser="StyleCop.CSharp.CsParser">
+  <sourcecode name="NonePublicTypesTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/14/2011 04:00:29</timestamp>
-    <milliseconds>792</milliseconds>
+    <timestamp>11/27/2011 17:30:40</timestamp>
+    <milliseconds>100</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="InterfaceSegregationTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>01/13/2012 00:56:17</timestamp>
+    <milliseconds>227</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="NormalClassBindingTests.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/13/2011 00:44:51</timestamp>
-    <milliseconds>854</milliseconds>
+    <timestamp>01/13/2012 01:02:20</timestamp>
+    <milliseconds>955</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="OpenGenericClassBindingTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>01/13/2012 00:57:28</timestamp>
+    <milliseconds>976</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="SpecialConfigurations.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>01/13/2012 01:02:58</timestamp>
+    <milliseconds>795</milliseconds>
     <violations />
   </sourcecode>
   <sourcecode name="AssemblyInfo.cs" parser="StyleCop.CSharp.CsParser">
     <settings>
-      <timestamp>07/21/2011 20:31:50</timestamp>
+      <timestamp>07/21/2011 19:31:50</timestamp>
       <milliseconds>0</milliseconds>
     </settings>
-    <timestamp>08/10/2011 09:57:07</timestamp>
+    <timestamp>08/10/2011 08:57:07</timestamp>
     <milliseconds>341</milliseconds>
+    <violations />
+  </sourcecode>
+  <sourcecode name="ConventionSyntaxSelectTests.cs" parser="StyleCop.CSharp.CsParser">
+    <settings>
+      <timestamp>07/21/2011 19:31:50</timestamp>
+      <milliseconds>0</milliseconds>
+    </settings>
+    <timestamp>01/15/2012 23:24:19</timestamp>
+    <milliseconds>417</milliseconds>
     <violations />
   </sourcecode>
   <project key="-1911798912">

@@ -38,7 +38,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .SelectTypesInNamespaceOf<ClassWithManyInterfaces>()
+                          .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
                           .BindToAllInterfaces());
                 var instance = kernel.Get<INormalInterface>();
 
@@ -53,7 +53,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .SelectTypesInNamespaceOf<ClassWithManyInterfaces>()
+                          .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
                           .BindToAllInterfaces());
                 var instance = kernel.Get<IClosedGenericInterface<int>>();
 
@@ -68,7 +68,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .SelectTypesInNamespaceOf<ClassWithManyInterfaces>()
+                          .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
                           .BindToSelection((ts, ti) => ti.Where(i => !i.IsInterface)));
                 var instances = kernel.GetAll<object>();
 
@@ -83,7 +83,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .SelectTypesInNamespaceOf<ClassWithManyInterfaces>()
+                          .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
                           .BindToSelection((ts, ti) => ti.Where(i => !i.IsInterface)));
                 var instance = kernel.Get<GenericBaseClassWithManyInterfaces<int, int>>();
 

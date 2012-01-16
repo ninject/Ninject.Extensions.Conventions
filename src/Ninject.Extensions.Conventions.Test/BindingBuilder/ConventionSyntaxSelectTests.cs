@@ -74,12 +74,70 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.filter.Should().NotBeNull();
             this.filter(typeof(List<int>)).Should().BeTrue();
             this.filter(typeof(DefaultConvention)).Should().BeTrue();
+            this.filter(typeof(IFoo)).Should().BeTrue();
+            this.filter(typeof(AbstractClassWithManyInterfaces)).Should().BeTrue();
         }
 
+        [Fact]
+        public void SelectAllClasses_CallsBuilder_WithAFilterReturningTrueForAllNoneAbstractClasses()
+        {
+            this.SetupStoreFilter();
+
+            this.testee.SelectAllClasses();
+
+            this.filter.Should().NotBeNull();
+            this.filter(typeof(List<int>)).Should().BeTrue();
+            this.filter(typeof(DefaultConvention)).Should().BeTrue();
+            this.filter(typeof(IFoo)).Should().BeFalse();
+            this.filter(typeof(AbstractClassWithManyInterfaces)).Should().BeFalse();
+        }
+        
+        [Fact]
+        public void SelectAbstractClasses_CallsBuilder_WithAFilterReturningTrueForAllNoneAbstractClasses()
+        {
+            this.SetupStoreFilter();
+
+            this.testee.SelectAllAbstractClasses();
+
+            this.filter.Should().NotBeNull();
+            this.filter(typeof(List<int>)).Should().BeFalse();
+            this.filter(typeof(DefaultConvention)).Should().BeFalse();
+            this.filter(typeof(IFoo)).Should().BeFalse();
+            this.filter(typeof(AbstractClassWithManyInterfaces)).Should().BeTrue();
+        }
+        
+        [Fact]
+        public void SelectAllIncludingAbstractClasses_CallsBuilder_WithAFilterReturningTrueForAllNoneAbstractClasses()
+        {
+            this.SetupStoreFilter();
+
+            this.testee.SelectAllIncludingAbstractClasses();
+
+            this.filter.Should().NotBeNull();
+            this.filter(typeof(List<int>)).Should().BeTrue();
+            this.filter(typeof(DefaultConvention)).Should().BeTrue();
+            this.filter(typeof(IFoo)).Should().BeFalse();
+            this.filter(typeof(AbstractClassWithManyInterfaces)).Should().BeTrue();
+        }  
+      
+        [Fact]
+        public void SelectAllInterfaces_CallsBuilder_WithAFilterReturningTrueForAllNoneAbstractClasses()
+        {
+            this.SetupStoreFilter();
+
+            this.testee.SelectAllInterfaces();
+
+            this.filter.Should().NotBeNull();
+            this.filter(typeof(List<int>)).Should().BeFalse();
+            this.filter(typeof(DefaultConvention)).Should().BeFalse();
+            this.filter(typeof(IFoo)).Should().BeTrue();
+            this.filter(typeof(AbstractClassWithManyInterfaces)).Should().BeFalse();
+        }
+        
         [Theory]
         [InlineData(new[] { "SomeNamespace", "MatchingNamespace" }, new[] { "MatchingNamespace" }, true)]
         [InlineData(new[] { "SomeNamespace", "OtherNamespace" }, new string[0], false)]
-        public void SelectTypesInNamespacesWithParams_CallsBuilder_WithAFilterSelectingTypesThatHaveAnyMatchingNamespace(
+        public void InNamespacesWithParams_CallsBuilder_WithAFilterSelectingTypesThatHaveAnyMatchingNamespace(
             string[] namespaces, 
             string[] matchingNameSpaces, 
             bool expectedResult)
@@ -89,7 +147,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsInNameSpace(type, matchingNameSpaces);
 
-            this.testee.SelectTypesInNamespaces(namespaces);
+            this.testee.InNamespaces(namespaces);
             var result = this.filter(type);
 
             result.Should().Be(expectedResult);
@@ -98,7 +156,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Theory]
         [InlineData(new[] { "SomeNamespace", "MatchingNamespace" }, new[] { "MatchingNamespace" }, true)]
         [InlineData(new[] { "SomeNamespace", "OtherNamespace" }, new string[0], false)]
-        public void SelectTypesInNamespaces_CallsBuilder_WithAFilterSelectingTypesThatHaveAnyMatchingNamespace(
+        public void InNamespaces_CallsBuilder_WithAFilterSelectingTypesThatHaveAnyMatchingNamespace(
             string[] namespaces,
             string[] matchingNameSpaces,
             bool expectedResult)
@@ -108,7 +166,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsInNameSpace(type, matchingNameSpaces);
 
-            this.testee.SelectTypesInNamespaces(namespaces.AsEnumerable());
+            this.testee.InNamespaces(namespaces.AsEnumerable());
             var result = this.filter(type);
 
             result.Should().Be(expectedResult);
@@ -117,7 +175,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Theory]
         [InlineData(new[] { typeof(DefaultConvention), typeof(IList<>) }, new[] { "System.Collections.Generic" }, true)]
         [InlineData(new[] { typeof(DefaultConvention), typeof(IList<>) }, new string[0], false)]
-        public void SelectTypesInNamespaceOf_CallsBuilder_WithAFilterSelectingTypesThatHaveAnyMatchingNamespace(
+        public void InNamespaceOf_CallsBuilder_WithAFilterSelectingTypesThatHaveAnyMatchingNamespace(
             Type[] namespaceTypes,
             string[] matchingNameSpaces,
             bool expectedResult)
@@ -127,7 +185,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsInNameSpace(type, matchingNameSpaces);
 
-            this.testee.SelectTypesInNamespaceOf(namespaceTypes);
+            this.testee.InNamespaceOf(namespaceTypes);
             var result = this.filter(type);
 
             result.Should().Be(expectedResult);
@@ -136,7 +194,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Theory]
         [InlineData(new[] { "System" }, true)]
         [InlineData(new string[0], false)]
-        public void SelectTypesInNamespaceOfGeneric_CallsBuilder_WithAFilterSelectingTypesThatHaveAnyMatchingNamespace(
+        public void InNamespaceOfGeneric_CallsBuilder_WithAFilterSelectingTypesThatHaveAnyMatchingNamespace(
             string[] matchingNameSpaces,
             bool expectedResult)
         {
@@ -145,7 +203,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsInNameSpace(type, matchingNameSpaces);
 
-            this.testee.SelectTypesInNamespaceOf<int>();
+            this.testee.InNamespaceOf<int>();
             var result = this.filter(type);
 
             result.Should().Be(expectedResult);
@@ -155,7 +213,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [InlineData(new[] { "SomeNamespace", "MatchingNamespace" }, new[] { "SomeNamespace", "MatchingNamespace" }, false)]
         [InlineData(new[] { "SomeNamespace", "MatchingNamespace" }, new[] { "MatchingNamespace" }, false)]
         [InlineData(new[] { "SomeNamespace", "OtherNamespace" }, new string[0], true)]
-        public void SelectTypesNotInNamespacesWithParams_CallsBuilder_WithAFilterSelectingTypesThatHaveNoMatchingNamespace(
+        public void NotInNamespacesWithParams_CallsBuilder_WithAFilterSelectingTypesThatHaveNoMatchingNamespace(
             string[] namespaces,
             string[] matchingNameSpaces,
             bool expectedResult)
@@ -165,7 +223,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsInNameSpace(type, matchingNameSpaces);
 
-            this.testee.SelectTypesNotInNamespaces(namespaces);
+            this.testee.NotInNamespaces(namespaces);
             var result = this.filter(type);
 
             result.Should().Be(expectedResult);
@@ -175,7 +233,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [InlineData(new[] { "SomeNamespace", "MatchingNamespace" }, new[] { "SomeNamespace", "MatchingNamespace" }, false)]
         [InlineData(new[] { "SomeNamespace", "MatchingNamespace" }, new[] { "MatchingNamespace" }, false)]
         [InlineData(new[] { "SomeNamespace", "OtherNamespace" }, new string[0], true)]
-        public void SelectTypesNotInNamespaces_CallsBuilder_WithAFilterSelectingTypesThatHaveNoMatchingNamespace(
+        public void NotInNamespaces_CallsBuilder_WithAFilterSelectingTypesThatHaveNoMatchingNamespace(
             string[] namespaces,
             string[] matchingNameSpaces,
             bool expectedResult)
@@ -185,7 +243,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsInNameSpace(type, matchingNameSpaces);
 
-            this.testee.SelectTypesNotInNamespaces(namespaces.AsEnumerable());
+            this.testee.NotInNamespaces(namespaces.AsEnumerable());
             var result = this.filter(type);
 
             result.Should().Be(expectedResult);
@@ -195,7 +253,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [InlineData(new[] { typeof(object), typeof(IList<>) }, new[] { "System", "System.Collections.Generic" }, false)]
         [InlineData(new[] { typeof(object), typeof(IList<>) }, new[] { "System.Collections.Generic" }, false)]
         [InlineData(new[] { typeof(object), typeof(IList<>) }, new string[0], true)]
-        public void SelectTypesNotInNamespaceOf_CallsBuilder_WithAFilterSelectingTypesThatHaveNoMatchingNamespace(
+        public void NotInNamespaceOf_CallsBuilder_WithAFilterSelectingTypesThatHaveNoMatchingNamespace(
             Type[] namespaceTypes,
             string[] matchingNameSpaces,
             bool expectedResult)
@@ -205,7 +263,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsInNameSpace(type, matchingNameSpaces);
 
-            this.testee.SelectTypesNotInNamespaceOf(namespaceTypes);
+            this.testee.NotInNamespaceOf(namespaceTypes);
             var result = this.filter(type);
 
             result.Should().Be(expectedResult);
@@ -214,7 +272,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Theory]
         [InlineData(new[] { "System" }, false)]
         [InlineData(new string[0], true)]
-        public void SelectTypesNotInNamespaceOfGeneric_CallsBuilder_WithAFilterSelectingTypesThatHaveNoMatchingNamespace(
+        public void NotInNamespaceOfGeneric_CallsBuilder_WithAFilterSelectingTypesThatHaveNoMatchingNamespace(
             string[] matchingNameSpaces,
             bool expectedResult)
         {
@@ -223,14 +281,14 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsInNameSpace(type, matchingNameSpaces);
 
-            this.testee.SelectTypesNotInNamespaceOf<int>();
+            this.testee.NotInNamespaceOf<int>();
             var result = this.filter(type);
 
             result.Should().Be(expectedResult);
         }
 
         [Fact]
-        public void SelectTypesInheritedFromAnyWithParams_CallsBuilder_WithAFilterAskingTypeFilterIfItIsInherited()
+        public void InheritedFromAnyWithParams_CallsBuilder_WithAFilterAskingTypeFilterIfItIsInherited()
         {
             var givenTypes = new[] { typeof(object), typeof(double) };
             var type = typeof(int);
@@ -238,7 +296,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsTypeInheritedFromAny(type, givenTypes);
 
-            this.testee.SelectTypesInheritedFromAny(givenTypes);
+            this.testee.InheritedFromAny(givenTypes);
             var result = this.filter(type);
 
             result.Should().BeTrue();
@@ -246,7 +304,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         [Fact]
-        public void SelectTypesInheritedFromAny_CallsBuilder_WithAFilterAskingTypeFilterIfItIsInherited()
+        public void InheritedFromAny_CallsBuilder_WithAFilterAskingTypeFilterIfItIsInherited()
         {
             var givenTypes = new[] { typeof(object), typeof(double) };
             var type = typeof(int);
@@ -254,7 +312,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsTypeInheritedFromAny(type, givenTypes);
 
-            this.testee.SelectTypesInheritedFromAny(givenTypes.AsEnumerable());
+            this.testee.InheritedFromAny(givenTypes.AsEnumerable());
             var result = this.filter(type);
 
             result.Should().BeTrue();
@@ -262,7 +320,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         [Fact]
-        public void SelectTypesInheritedFrom_CallsBuilder_WithAFilterAskingTypeFilterIfItIsInherited()
+        public void InheritedFrom_CallsBuilder_WithAFilterAskingTypeFilterIfItIsInherited()
         {
             var givenType = typeof(object);
             var type = typeof(int);
@@ -270,7 +328,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupIsTypeInheritedFromAny(type, givenType);
 
-            this.testee.SelectTypesInheritedFrom(givenType);
+            this.testee.InheritedFrom(givenType);
             var result = this.filter(type);
 
             result.Should().BeTrue();
@@ -278,14 +336,14 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         [Fact]
-        public void SelectTypesInheritedFromGeneric_CallsBuilder_WithAFilterAskingTypeFilterIfItIsInherited()
+        public void InheritedFromGeneric_CallsBuilder_WithAFilterAskingTypeFilterIfItIsInherited()
         {
             var type = typeof(int);
 
             this.SetupStoreFilter();
             this.SetupIsTypeInheritedFromAny(type, typeof(object));
 
-            this.testee.SelectTypesInheritedFrom<object>();
+            this.testee.InheritedFrom<object>();
             var result = this.filter(type);
 
             result.Should().BeTrue();
@@ -293,14 +351,14 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         [Fact]
-        public void SelectTypesWithAttribute_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        public void WithAttribute_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
         {
             var type = typeof(int);
 
             this.SetupStoreFilter();
             this.SetupHasAttribute(type, typeof(TestAttribute));
 
-            this.testee.SelectTypesWithAttribute<TestAttribute>();
+            this.testee.WithAttribute<TestAttribute>();
             var result = this.filter(type);
 
             result.Should().BeTrue();
@@ -308,14 +366,14 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         [Fact]
-        public void SelectTypesWithoutAttribute_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        public void WithoutAttribute_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
         {
             var type = typeof(int);
 
             this.SetupStoreFilter();
             this.SetupHasAttribute(type, typeof(TestAttribute));
 
-            this.testee.SelectTypesWithoutAttribute<TestAttribute>();
+            this.testee.WithoutAttribute<TestAttribute>();
             var result = this.filter(type);
 
             result.Should().BeFalse();
@@ -323,7 +381,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
         
         [Fact]
-        public void SelectTypesWithAttribute_NoneGeneric_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        public void WithAttribute_NoneGeneric_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
         {
             var type = typeof(int);
             var attributeType = typeof(TestAttribute);
@@ -331,7 +389,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupHasAttribute(type, attributeType);
 
-            this.testee.SelectTypesWithAttribute(attributeType);
+            this.testee.WithAttribute(attributeType);
             var result = this.filter(type);
 
             result.Should().BeTrue();
@@ -339,7 +397,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         [Fact]
-        public void SelectTypesWithoutAttribute_NoneGeneric_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        public void WithoutAttribute_NoneGeneric_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
         {
             var type = typeof(int);
             var attributeType = typeof(TestAttribute);
@@ -347,7 +405,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupHasAttribute(type, attributeType);
 
-            this.testee.SelectTypesWithoutAttribute(attributeType);
+            this.testee.WithoutAttribute(attributeType);
             var result = this.filter(type);
 
             result.Should().BeFalse();
@@ -355,7 +413,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
         
         [Fact]
-        public void SelectTypesWithAttribute_WithMatcher_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        public void WithAttribute_WithMatcher_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
         {
             var type = typeof(int);
             Func<TestAttribute, bool> matcher = a => a.TestValue == 1;
@@ -363,7 +421,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupHasAttribute(type, matcher);
 
-            this.testee.SelectTypesWithAttribute(matcher);
+            this.testee.WithAttribute(matcher);
             var result = this.filter(type);
 
             result.Should().BeTrue();
@@ -371,7 +429,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
         
         [Fact]
-        public void SelectTypesWithoutAttribute_WithMatcher_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
+        public void WithoutAttribute_WithMatcher_CallsBuilder_WithAFilterAskingIfTypeHasAttribute()
         {
             var type = typeof(int);
             Func<TestAttribute, bool> matcher = a => a.TestValue == 1;
@@ -379,7 +437,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupStoreFilter();
             this.SetupHasAttribute(type, matcher);
 
-            this.testee.SelectTypesWithoutAttribute(matcher);
+            this.testee.WithoutAttribute(matcher);
             var result = this.filter(type);
 
             result.Should().BeFalse();

@@ -36,7 +36,8 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .Select(t => t == typeof(Foo))
+                          .SelectAllClasses()
+                          .Where(t => t == typeof(Foo))
                           .BindToAllInterfaces()
                           .Configure(c => c.InSingletonScope()));
 

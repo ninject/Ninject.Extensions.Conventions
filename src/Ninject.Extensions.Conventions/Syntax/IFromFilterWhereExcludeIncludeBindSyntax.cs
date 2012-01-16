@@ -1,6 +1,6 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="ConfigurationTests.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
+// <copyright file="IFromFilterWhereExcludeIncludeBindSyntax.cs" company="Ninject Project Contributors">
+//   Copyright (c) 2009-2012 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -19,31 +19,12 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Conventions.IntegrationTests
+namespace Ninject.Extensions.Conventions.Syntax
 {
-    using FluentAssertions;
-
-    using Ninject.Extensions.Conventions.Fakes;
-
-    using Xunit;
-
-    public class ConfigurationTests
+    /// <summary>
+    /// Syntax to filter types, exculde or include types or bind the currently selected types.
+    /// </summary>
+    public interface IFromFilterWhereExcludeIncludeBindSyntax : IFromWhereExcludeIncludeBindSyntax, IFilterSyntax
     {
-        [Fact]
-        public void ConfigurationReceivesService()
-        {
-            using (IKernel kernel = new StandardKernel())
-            {
-                kernel.Bind(
-                    x => x.FromThisAssembly()
-                          .SelectAllClasses().InNamespaceOf<Foo>()
-                          .BindToAllInterfaces()
-                          .Configure((c, s) => c.Named(s.Name)));
-
-                var instance = kernel.Get<IFoo>("Foo");
-
-                instance.Should().BeOfType<Foo>();
-            }
-        }
     }
 }

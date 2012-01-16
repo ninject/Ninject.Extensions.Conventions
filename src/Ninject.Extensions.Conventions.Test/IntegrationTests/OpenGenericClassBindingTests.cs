@@ -37,7 +37,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .SelectTypesInNamespaceOf(typeof(OpenGenericClassWithManyInterfaces<>))
+                          .SelectAllClasses().InNamespaceOf(typeof(OpenGenericClassWithManyInterfaces<>))
                           .BindToAllInterfaces());
                 var instance = kernel.Get<IOpenGenericInterface<double>>();
 
@@ -52,7 +52,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.FromThisAssembly()
-                          .SelectTypesInNamespaceOf(typeof(OpenGenericClassWithManyInterfaces<>))
+                          .SelectAllClasses().InNamespaceOf(typeof(OpenGenericClassWithManyInterfaces<>))
                           .BindToAllInterfaces());
                 var instances = kernel.GetAll<IBaseOpenGenericInterface1<double>>();
 
