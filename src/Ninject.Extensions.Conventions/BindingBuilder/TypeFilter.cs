@@ -61,7 +61,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </returns>
         public bool IsTypeInheritedFromAny(Type type, IEnumerable<Type> types)
         {
-            return types.Any(t => t != type && t.IsAssignableFrom(type));
+            return types.Any(t => t != type && IsTypeInheritedFrom(type, t));
         }
 
         /// <summary>
@@ -89,6 +89,34 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         public bool HasAttribute<TAttribute>(Type type, Func<TAttribute, bool> predicate)
         {
             return type.GetCustomAttributes(typeof(TAttribute), true).OfType<TAttribute>().Any(predicate);
+        }
+
+        private static bool IsTypeInheritedFrom(Type type, Type baseType)
+        {
+            return baseType.IsGenericTypeDefinition
+                   ? IsTypeInheritedFromGenericTypeDefinition(type, baseType)
+                   : baseType.IsAssignableFrom(type);
+        }
+
+        private static bool IsTypeInheritedFromGenericTypeDefinition(Type type, Type genericTypeDefinition)
+        {
+            return IsAssignableToGenericTypeDefinition(type.BaseType, genericTypeDefinition) ||
+                   type.GetInterfaces().Any(t => IsAssignableToGenericTypeDefinition(t, genericTypeDefinition));
+        }
+
+        private static bool IsAssignableToGenericTypeDefinition(Type type, Type genericTypeDefinition)
+        {
+            while (type != null)
+            {
+                if (type.IsGenericType && type.GetGenericTypeDefinition() == genericTypeDefinition)
+                {
+                    return true;
+                }
+
+                type = type.BaseType;
+            }
+
+            return false;
         }
     }
 }

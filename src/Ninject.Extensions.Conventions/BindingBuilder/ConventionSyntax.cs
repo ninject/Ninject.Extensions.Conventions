@@ -295,9 +295,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="namespaces">The namespaces from which the types are selected.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax InNamespaces(IEnumerable<string> namespaces)
+        public IFromFilterWhereExcludeIncludeBindSyntax InNamespaces(IEnumerable<string> namespaces)
         {
-            return this.Filter(t => namespaces.Any(ns => this.typeFilter.IsTypeInNamespace(t, ns)));
+            return this.SelectTypes(t => namespaces.Any(ns => this.typeFilter.IsTypeInNamespace(t, ns)));
         }
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="namespaces">The namespaces from which the types are selected.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax InNamespaces(params string[] namespaces)
+        public IFromFilterWhereExcludeIncludeBindSyntax InNamespaces(params string[] namespaces)
         {
             return this.InNamespaces(namespaces.AsEnumerable());
         }
@@ -315,7 +315,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="types">The types defining the namespaces.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax InNamespaceOf(params Type[] types)
+        public IFromFilterWhereExcludeIncludeBindSyntax InNamespaceOf(params Type[] types)
         {
             return this.InNamespaces(types.Select(t => t.Namespace));
         }
@@ -325,7 +325,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type defining the namespace.</typeparam>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax InNamespaceOf<T>()
+        public IFromFilterWhereExcludeIncludeBindSyntax InNamespaceOf<T>()
         {
             return this.InNamespaceOf(typeof(T));
         }
@@ -335,9 +335,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="namespaces">The namespaces from which the types are not selected.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax NotInNamespaces(IEnumerable<string> namespaces)
+        public IFromFilterWhereExcludeIncludeBindSyntax NotInNamespaces(IEnumerable<string> namespaces)
         {
-            return this.Filter(t => namespaces.All(ns => !this.typeFilter.IsTypeInNamespace(t, ns)));
+            return this.SelectTypes(t => namespaces.All(ns => !this.typeFilter.IsTypeInNamespace(t, ns)));
         }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="namespaces">The namespaces from which the types are not selected.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax NotInNamespaces(params string[] namespaces)
+        public IFromFilterWhereExcludeIncludeBindSyntax NotInNamespaces(params string[] namespaces)
         {
             return this.NotInNamespaces(namespaces.AsEnumerable());
         }
@@ -355,7 +355,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="types">The types defining the namespace.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax NotInNamespaceOf(params Type[] types)
+        public IFromFilterWhereExcludeIncludeBindSyntax NotInNamespaceOf(params Type[] types)
         {
             return this.NotInNamespaces(types.Select(t => t.Namespace));
         }
@@ -365,7 +365,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type defining the namespace.</typeparam>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax NotInNamespaceOf<T>()
+        public IFromFilterWhereExcludeIncludeBindSyntax NotInNamespaceOf<T>()
         {
             return this.NotInNamespaceOf(typeof(T));
         }
@@ -375,7 +375,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="types">The ancestor types.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax InheritedFromAny(params Type[] types)
+        public IFromFilterWhereExcludeIncludeBindSyntax InheritedFromAny(params Type[] types)
         {
             return this.InheritedFromAny(types.AsEnumerable());
         }
@@ -385,9 +385,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="types">The ancestor types.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax InheritedFromAny(IEnumerable<Type> types)
+        public IFromFilterWhereExcludeIncludeBindSyntax InheritedFromAny(IEnumerable<Type> types)
         {
-            return this.Filter(t => this.typeFilter.IsTypeInheritedFromAny(t, types));
+            return this.SelectTypes(t => this.typeFilter.IsTypeInheritedFromAny(t, types));
         }
 
         /// <summary>
@@ -395,7 +395,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="type">The ancestor type.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax InheritedFrom(Type type)
+        public IFromFilterWhereExcludeIncludeBindSyntax InheritedFrom(Type type)
         {
             return this.InheritedFromAny(type);
         }
@@ -405,7 +405,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The ancestor type.</typeparam>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax InheritedFrom<T>()
+        public IFromFilterWhereExcludeIncludeBindSyntax InheritedFrom<T>()
         {
             return this.InheritedFrom(typeof(T));
         }
@@ -415,7 +415,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax WithAttribute<T>() where T : Attribute
+        public IFromFilterWhereExcludeIncludeBindSyntax WithAttribute<T>() where T : Attribute
         {
             return this.WithAttribute(typeof(T));
         }
@@ -426,9 +426,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <param name="predicate">A function to test if an attribute predicate.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax WithAttribute<T>(Func<T, bool> predicate) where T : Attribute
+        public IFromFilterWhereExcludeIncludeBindSyntax WithAttribute<T>(Func<T, bool> predicate) where T : Attribute
         {
-            return this.Filter(t => this.typeFilter.HasAttribute(t, predicate));
+            return this.SelectTypes(t => this.typeFilter.HasAttribute(t, predicate));
         }
 
         /// <summary>
@@ -436,9 +436,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="attributeType">The type of the attribute.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax WithAttribute(Type attributeType)
+        public IFromFilterWhereExcludeIncludeBindSyntax WithAttribute(Type attributeType)
         {
-            return this.Filter(t => this.typeFilter.HasAttribute(t, attributeType));
+            return this.SelectTypes(t => this.typeFilter.HasAttribute(t, attributeType));
         }        
         
         /// <summary>
@@ -446,7 +446,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax WithoutAttribute<T>() where T : Attribute
+        public IFromFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>() where T : Attribute
         {
             return this.WithoutAttribute(typeof(T));
         }
@@ -457,9 +457,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <param name="predicate">A function to test if an attribute matches.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax WithoutAttribute<T>(Func<T, bool> predicate) where T : Attribute
+        public IFromFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>(Func<T, bool> predicate) where T : Attribute
         {
-            return this.Filter(t => !this.typeFilter.HasAttribute(t, predicate));
+            return this.SelectTypes(t => !this.typeFilter.HasAttribute(t, predicate));
         }
 
         /// <summary>
@@ -467,9 +467,27 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="attributeType">The type of the attribute.</param>
         /// <returns>The fluent syntax</returns>
-        public IFromWhereExcludeIncludeBindSyntax WithoutAttribute(Type attributeType)
+        public IFromFilterWhereExcludeIncludeBindSyntax WithoutAttribute(Type attributeType)
         {
-            return this.Filter(t => !this.typeFilter.HasAttribute(t, attributeType));
+            return this.SelectTypes(t => !this.typeFilter.HasAttribute(t, attributeType));
+        }
+
+        /// <summary>
+        /// Selects the types that are generic.
+        /// </summary>
+        /// <returns>The fluent syntax</returns>
+        public IFromFilterWhereExcludeIncludeBindSyntax WhichAreGeneric()
+        {
+            return this.SelectTypes(t => t.IsGenericType);
+        }
+
+        /// <summary>
+        /// Selects the types that are not generic.
+        /// </summary>
+        /// <returns>The fluent syntax</returns>
+        public IFromFilterWhereExcludeIncludeBindSyntax WhichAreNotGeneric()
+        {
+            return this.SelectTypes(t => !t.IsGenericType);
         }
 
         #endregion
@@ -738,12 +756,6 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             return this;
         }
 #endif
-
-        private IFromWhereExcludeIncludeBindSyntax Filter(Func<Type, bool> filter)
-        {
-            this.bindingBuilder.Where(filter);
-            return this;
-        }
 
         private IFromFilterWhereExcludeIncludeBindSyntax SelectTypes(Func<Type, bool> filter)
         {

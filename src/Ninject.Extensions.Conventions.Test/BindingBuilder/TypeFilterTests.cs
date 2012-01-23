@@ -21,8 +21,6 @@
 
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
-    using System;
-
     using FluentAssertions;
 
     using Ninject.Extensions.Conventions.Fakes;
@@ -129,6 +127,26 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             result.Should().BeFalse();
         }
 
+        [Fact]
+        public void IsTypeInheritedFromAnyWhenGenericTypeDefinitionIsPassedFromWhichTypeDerivesReturnsTrue()
+        {
+            var type = typeof(MultipleInterfaceCrazyService);
+
+            var result = this.testee.IsTypeInheritedFromAny(type, new[] { typeof(BaseService<>) });
+
+            result.Should().BeTrue();
+        }
+
+        [Fact]
+        public void IsTypeInheritedFromAnyWhenGenericInterfaceTypeDefinitionIsPassedFromWhichTypeDerivesReturnsTrue()
+        {
+            var type = typeof(MultipleInterfaceCrazyService);
+
+            var result = this.testee.IsTypeInheritedFromAny(type, new[] { typeof(IBar<>) });
+
+            result.Should().BeTrue();
+        }
+        
         [Fact]
         public void HasAttributeWhenTypeHasTheSpecifiedAttributeReturnsTrue()
         {
