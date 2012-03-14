@@ -142,6 +142,7 @@
     <Compile Include="IntegrationTests\ConfigurationTests.cs" />
     <Compile Include="IntegrationTests\FactoryTests.cs" />
     <Compile Include="IntegrationTests\InterfaceSegregationTests.cs" />
+    <Compile Include="IntegrationTests\ModuleLoadingTest.cs" />
     <Compile Include="IntegrationTests\NonePublicTypesTests.cs" />
     <Compile Include="IntegrationTests\NormalClassBindingTests.cs" />
     <Compile Include="IntegrationTests\OpenGenericClassBindingTests.cs" />

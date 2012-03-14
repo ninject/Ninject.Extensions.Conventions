@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="IFromWhereExcludeIncludeBindSyntax.cs" company="Ninject Project Contributors">
+// <copyright file="IJoinWhereExcludeIncludeBindSyntax.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -24,7 +24,7 @@ namespace Ninject.Extensions.Conventions.Syntax
     /// <summary>
     /// From, Where, Exclude, Include, Bind syntax
     /// </summary>
-    public interface IFromWhereExcludeIncludeBindSyntax : IFromExcludeIncludeBindSyntax, IWhereSyntax
+    public interface IJoinWhereExcludeIncludeBindSyntax : IJoinExcludeIncludeBindSyntax, IWhereSyntax
     {
     }
 }

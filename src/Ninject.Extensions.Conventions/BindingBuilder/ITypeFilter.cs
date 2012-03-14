@@ -23,7 +23,6 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
 
     /// <summary>
     /// Decides if some criteria apply to a type.
@@ -34,11 +33,13 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// Determines whether the type is in the given namespace.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <param name="nameSpace">The name space.</param>
+        /// <param name="namespace">The name space.</param>
         /// <returns>
         /// <c>true</c> if the type is in the given namespace; otherwise, <c>false</c>.
         /// </returns>
-        bool IsTypeInNamespace(Type type, string nameSpace);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "namespace",
+            Justification = "No better alternative known.")]
+        bool IsTypeInNamespace(Type type, string @namespace);
 
         /// <summary>
         /// Determines whether the type is inherited from any of the specified types.

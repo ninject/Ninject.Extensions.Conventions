@@ -48,6 +48,8 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <typeparam name="T">The type of the binding generator</typeparam>
         /// <returns>The fluent syntax</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
         IConfigureSyntax BindWith<T>() where T : IBindingGenerator, new();
 
         /// <summary>

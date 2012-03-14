@@ -38,6 +38,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="serviceTypes">The service types.</param>
         /// <param name="implementationType">The implementation type.</param>
         /// <returns>The syntax of the created bindings.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Nesting is required because the binding syntax is generic and an enuerable of them is used here.")]
         IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> CreateBindings(
             IBindingRoot bindingRoot,
             IEnumerable<Type> serviceTypes,

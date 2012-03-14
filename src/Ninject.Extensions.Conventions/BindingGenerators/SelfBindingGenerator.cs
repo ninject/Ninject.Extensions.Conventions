@@ -42,6 +42,16 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// </returns>
         public IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> CreateBindings(Type type, IBindingRoot bindingRoot)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            if (bindingRoot == null)
+            {
+                throw new ArgumentNullException("bindingRoot");
+            } 
+            
             if (type.IsInterface || type.IsAbstract)
             {
                 return Enumerable.Empty<IBindingWhenInNamedWithOrOnSyntax<object>>();

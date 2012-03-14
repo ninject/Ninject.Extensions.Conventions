@@ -45,14 +45,14 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <summary>
         /// Includes the specified types.
         /// </summary>
-        /// <param name="types">The types to be included.</param>
-        void Including(IEnumerable<Type> types);
+        /// <param name="includedTypes">The types to be included.</param>
+        void Including(IEnumerable<Type> includedTypes);
 
         /// <summary>
         /// Excludes the specified types.
         /// </summary>
-        /// <param name="types">The types to be excluded.</param>
-        void Excluding(IEnumerable<Type> types);
+        /// <param name="excludedTypes">The types to be excluded.</param>
+        void Excluding(IEnumerable<Type> excludedTypes);
 
         /// <summary>
         /// Creates the bindings using the specified generator.
@@ -84,6 +84,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type to be configured.</typeparam>
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
         void ConfigureFor<T>(ConfigurationAction configuration);
 
         /// <summary>
@@ -91,6 +93,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type to be configured.</typeparam>
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
         void ConfigureFor<T>(ConfigurationActionWithService configuration);
     }
 }

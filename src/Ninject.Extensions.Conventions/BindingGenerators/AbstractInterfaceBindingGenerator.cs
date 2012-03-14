@@ -87,13 +87,18 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// <returns>The name of the given type without the generic type post fix in case of a generic type.</returns>
         protected static string GetNameWithoutGenericPart(Type type)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            } 
+            
             var name = type.Name;
             if (!type.IsGenericType)
             {
                 return name;
             }
 
-            var genericMarkerPosition = name.IndexOf("`");
+            var genericMarkerPosition = name.IndexOf("`", StringComparison.Ordinal);
             return name.Substring(0, genericMarkerPosition);
         }
     }

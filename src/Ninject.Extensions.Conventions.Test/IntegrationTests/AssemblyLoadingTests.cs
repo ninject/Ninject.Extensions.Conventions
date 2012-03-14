@@ -21,6 +21,7 @@
 
 namespace Ninject.Extensions.Conventions.IntegrationTests
 {
+    using System.Linq;
     using System.Reflection;
     using FluentAssertions;
 
@@ -92,6 +93,22 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
 
                 instance.Should().NotBeNull();
                 instance.Name.Should().Be("DefaultConventionFromPlugin");
+            }
+        }
+
+        [Fact]
+        public void MultipleAssembliesCanBeUsed()
+        {
+            using (IKernel kernel = new StandardKernel())
+            {
+                kernel.Bind(
+                    x => x.From("TestPlugin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
+                          .SelectAllTypes()
+                          .Join.FromThisAssembly().SelectAllClasses()
+                          .BindToDefaultInterface());
+                var instances = kernel.GetAll<IDefaultConvention>();
+
+                instances.Count().Should().Be(2);
             }
         }
 #endif

@@ -1,6 +1,6 @@
-//-------------------------------------------------------------------------------
-// <copyright file="IWhereSyntax.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
+﻿//-------------------------------------------------------------------------------
+// <copyright file="IJoinSyntax.cs" company="Ninject Project Contributors">
+//   Copyright (c) 2009-2012 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -18,21 +18,17 @@
 //   limitations under the License.
 // </copyright>
 //-------------------------------------------------------------------------------
-
 namespace Ninject.Extensions.Conventions.Syntax
 {
-    using System;
-
     /// <summary>
-    /// Fluent syntax to filter the selected types
+    /// Syntax to allow multiple From.Select statements
     /// </summary>
-    public interface IWhereSyntax
+    public interface IJoinSyntax
     {
         /// <summary>
-        /// Filters the selected types.
+        /// Gets the from syntax to select additional types from different assemblies
         /// </summary>
-        /// <param name="filter">The filter used to filter the selected types.</param>
-        /// <returns>The fluent syntax</returns>
-        IJoinExcludeIncludeBindSyntax Where(Func<Type, bool> filter);
+        /// <value>The fluent syntax.</value>
+        IFromSyntax Join { get; }
     }
 }

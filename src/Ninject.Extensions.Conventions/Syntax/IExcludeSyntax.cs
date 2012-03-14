@@ -34,6 +34,8 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <typeparam name="T">The type to be excluded</typeparam>
         /// <returns>The fluent syntax</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
         IExcludeIncludeBindSyntax Excluding<T>();
 
         /// <summary>

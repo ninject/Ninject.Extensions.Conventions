@@ -45,6 +45,11 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             IEnumerable<Type> serviceTypes, 
             Type implementationType)
         {
+            if (bindingRoot == null)
+            {
+                throw new ArgumentNullException("bindingRoot");
+            } 
+            
             return !serviceTypes.Any() 
                 ? Enumerable.Empty<IBindingWhenInNamedWithOrOnSyntax<object>>() 
                 : new[] { bindingRoot.Bind(serviceTypes.ToArray()).To(implementationType) };

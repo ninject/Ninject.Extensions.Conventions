@@ -34,21 +34,31 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// Determines whether the type is in the given namespace.
         /// </summary>
         /// <param name="type">The type.</param>
-        /// <param name="nameSpace">The name space.</param>
+        /// <param name="namespace">The name space.</param>
         /// <returns>
         ///     <c>true</c> if the type is in the given namespace; otherwise, <c>false</c>.
         /// </returns>
-        public bool IsTypeInNamespace(Type type, string nameSpace)
+        public bool IsTypeInNamespace(Type type, string @namespace)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
+            if (@namespace == null)
+            {
+                throw new ArgumentNullException("namespace");
+            } 
+            
             var typeNamespace = type.Namespace ?? string.Empty;
-            if (nameSpace.Length > typeNamespace.Length)
+            if (@namespace.Length > typeNamespace.Length)
             {
                 return false;
             }
 
-            var typeNamespaceSubstring = typeNamespace.Substring(0, nameSpace.Length);
-            return typeNamespaceSubstring == nameSpace && 
-                  (typeNamespace.Length == nameSpace.Length || typeNamespace[nameSpace.Length] == '.');
+            var typeNamespaceSubstring = typeNamespace.Substring(0, @namespace.Length);
+            return typeNamespaceSubstring == @namespace && 
+                  (typeNamespace.Length == @namespace.Length || typeNamespace[@namespace.Length] == '.');
         }
 
         /// <summary>
@@ -74,6 +84,11 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </returns>
         public bool HasAttribute(Type type, Type attributeType)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            } 
+            
             return type.GetCustomAttributes(attributeType, true).Any();
         }
 
@@ -88,6 +103,11 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </returns>
         public bool HasAttribute<TAttribute>(Type type, Func<TAttribute, bool> predicate)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            } 
+            
             return type.GetCustomAttributes(typeof(TAttribute), true).OfType<TAttribute>().Any(predicate);
         }
 

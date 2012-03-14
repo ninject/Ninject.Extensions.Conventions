@@ -40,13 +40,18 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// </returns>
         public IEnumerable<Type> GetBindableInterfaces(Type type)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            } 
+            
             if (type.IsInterface || type.IsAbstract)
             {
                 return Enumerable.Empty<Type>();
             } 
             
             return type.IsGenericTypeDefinition
-                ? type.GetInterfaces().Where(i => this.IsEqualOpenGeneric(i, type))
+                ? type.GetInterfaces().Where(i => IsEqualOpenGeneric(i, type))
                                       .Select(i => i.GetGenericTypeDefinition()) 
                 : type.GetInterfaces();
         }
@@ -61,13 +66,18 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// </returns>
         public IEnumerable<Type> GetBindableBaseTypes(Type type)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            } 
+            
             if (type.IsInterface || type.IsAbstract)
             {
                 return Enumerable.Empty<Type>();
             }
 
             return type.IsGenericType 
-                ? this.GetMatchingGenericBaseClasses(type) 
+                ? GetMatchingGenericBaseClasses(type) 
                 : GetAllBaseClasses(type);
         }
 
@@ -88,25 +98,6 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
 
             return result;
         }
-        
-        /// <summary>
-        /// Gets the base classes that have the same generic arguments as the given type.
-        /// </summary>
-        /// <param name="type">The type for which the base calsses are returned.</param>
-        /// <returns>The base classes that have the same generic arguments as the given type.</returns>
-        private IEnumerable<Type> GetMatchingGenericBaseClasses(Type type)
-        {
-            IList<Type> result = new List<Type>();
-            var baseType = type.BaseType;
-            
-            while (baseType != null && this.IsEqualOpenGeneric(type, baseType))
-            {
-                result.Add(baseType.GetGenericTypeDefinition());
-                baseType = baseType.BaseType;
-            }
-
-            return result;
-        }
 
         /// <summary>
         /// Determines whether the given interface is a generic with the same generic parameters.
@@ -116,7 +107,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// <returns>
         ///     <c>true</c> if [is equal open generic] [the specified i]; otherwise, <c>false</c>.
         /// </returns>
-        private bool IsEqualOpenGeneric(Type i, Type type)
+        private static bool IsEqualOpenGeneric(Type i, Type type)
         {
 #if !WINDOWS_PHONE
             return i.ContainsGenericParameters &&
@@ -125,6 +116,25 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             return i.ContainsGenericParameters &&
                    i.GetGenericArguments().Select(t => t.Name).SequenceEqual(type.GetGenericArguments().Select(t => t.Name));
 #endif
+        }
+        
+        /// <summary>
+        /// Gets the base classes that have the same generic arguments as the given type.
+        /// </summary>
+        /// <param name="type">The type for which the base calsses are returned.</param>
+        /// <returns>The base classes that have the same generic arguments as the given type.</returns>
+        private static IEnumerable<Type> GetMatchingGenericBaseClasses(Type type)
+        {
+            IList<Type> result = new List<Type>();
+            var baseType = type.BaseType;
+            
+            while (baseType != null && IsEqualOpenGeneric(type, baseType))
+            {
+                result.Add(baseType.GetGenericTypeDefinition());
+                baseType = baseType.BaseType;
+            }
+
+            return result;
         }
     }
 }

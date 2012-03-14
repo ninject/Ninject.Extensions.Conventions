@@ -56,6 +56,11 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// </returns>
         public IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> CreateBindings(Type type, IBindingRoot bindingRoot)
         {
+            if (bindingRoot == null)
+            {
+                throw new ArgumentNullException("bindingRoot");
+            } 
+            
             var singleInterface = this.bindableTypeSelector.GetBindableInterfaces(type).Single();
             return new[] { bindingRoot.Bind(singleInterface).To(type) };
         }

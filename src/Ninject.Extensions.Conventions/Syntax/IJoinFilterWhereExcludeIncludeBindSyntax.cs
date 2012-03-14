@@ -1,6 +1,6 @@
-//-------------------------------------------------------------------------------
-// <copyright file="IFromExcludeIncludeBindSyntax.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
+﻿//-------------------------------------------------------------------------------
+// <copyright file="IJoinFilterWhereExcludeIncludeBindSyntax.cs" company="Ninject Project Contributors">
+//   Copyright (c) 2009-2012 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -22,9 +22,9 @@
 namespace Ninject.Extensions.Conventions.Syntax
 {
     /// <summary>
-    /// From, exclude, include, bind syntax
+    /// Syntax to filter types, exculde or include types or bind the currently selected types.
     /// </summary>
-    public interface IFromExcludeIncludeBindSyntax : IExcludeIncludeBindSyntax, IFromSyntax
+    public interface IJoinFilterWhereExcludeIncludeBindSyntax : IJoinWhereExcludeIncludeBindSyntax, IFilterSyntax
     {
     }
 }

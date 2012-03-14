@@ -37,6 +37,8 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// <param name="type">The type for which the bindings are created.</param>
         /// <param name="bindingRoot">The binding root that is used to create the bindings.</param>
         /// <returns>The syntaxes for the created bindings to configure more options.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Nesting is required because the binding syntax is generic and an enuerable of them is used here.")]
         IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> CreateBindings(Type type, IBindingRoot bindingRoot);
     }
 }

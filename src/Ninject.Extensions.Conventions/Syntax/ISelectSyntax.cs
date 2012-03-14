@@ -33,36 +33,38 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <param name="filter">The filter.</param>
         /// <returns>The fluent syntax</returns>
-        IFromExcludeIncludeBindSyntax Select(Func<Type, bool> filter);
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1716:IdentifiersShouldNotMatchKeywords", MessageId = "Select",
+            Justification = "No better alternative known.")]
+        IJoinExcludeIncludeBindSyntax Select(Func<Type, bool> filter);
 
         /// <summary>
         /// Selects all types.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax SelectAllTypes();
+        IJoinFilterWhereExcludeIncludeBindSyntax SelectAllTypes();
 
         /// <summary>
         /// Selects all none abstract classes.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax SelectAllClasses();
+        IJoinFilterWhereExcludeIncludeBindSyntax SelectAllClasses();
 
         /// <summary>
         /// Selects all calsses including abstract ones.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax SelectAllIncludingAbstractClasses();
+        IJoinFilterWhereExcludeIncludeBindSyntax SelectAllIncludingAbstractClasses();
 
         /// <summary>
         /// Selects all abstract classes.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax SelectAllAbstractClasses();
+        IJoinFilterWhereExcludeIncludeBindSyntax SelectAllAbstractClasses();
 
         /// <summary>
         /// Selects all interfaces.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax SelectAllInterfaces();
+        IJoinFilterWhereExcludeIncludeBindSyntax SelectAllInterfaces();
     }
 }

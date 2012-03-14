@@ -23,6 +23,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
 {
     using FluentAssertions;
     using Ninject.Extensions.Conventions.Fakes;
+    using Ninject.Modules;
 
     using Xunit;
 

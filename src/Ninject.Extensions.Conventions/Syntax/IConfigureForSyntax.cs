@@ -46,6 +46,8 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="configuration">The configuration.</param>
         /// <returns>The fluent syntax.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
         IConfigureForSyntax ConfigureFor<TService>(ConfigurationAction configuration);
     
         /// <summary>
@@ -54,6 +56,8 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <typeparam name="TService">The type of the service.</typeparam>
         /// <param name="configuration">The configuration.</param>
         /// <returns>The fluent syntax.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
         IConfigureForSyntax ConfigureFor<TService>(ConfigurationActionWithService configuration);
     }
 }

@@ -26,7 +26,9 @@ namespace Ninject.Extensions.Conventions
     using Ninject.Extensions.Conventions.BindingBuilder;
     using Ninject.Extensions.Conventions.BindingGenerators;
     using Ninject.Extensions.Conventions.Syntax;
+    using Ninject.Infrastructure;
     using Ninject.Modules;
+    using Ninject.Syntax;
 
     /// <summary>
     /// Provides extensions for the IKernel interface
@@ -38,15 +40,28 @@ namespace Ninject.Extensions.Conventions
         /// </summary>
         /// <param name="kernel">The kernel for which the bindings are created.</param>
         /// <param name="configure">The binding convention configuration.</param>
-        public static void Bind(this IKernel kernel, Action<IFromSyntax> configure)
+        public static void Bind(this IBindingRoot kernel, Action<IFromSyntax> configure)
         {
+            if (configure == null)
+            {
+                throw new ArgumentNullException("configure");
+            } 
+
 #if !NO_ASSEMBLY_SCANNING
-            var builder = new ConventionSyntax(
-                new ConventionBindingBuilder(kernel, new TypeSelector()), 
-                new AssemblyFinder(new AssemblyNameRetriever()), 
-                new TypeFilter(), 
-                new BindingGeneratorFactory(new BindableTypeSelector()));
-            configure(builder);
+            var assemblyNameRetriever = new AssemblyNameRetriever();
+            try
+            {
+                var builder = new ConventionSyntax(
+                    new ConventionBindingBuilder(kernel, new TypeSelector()),
+                    new AssemblyFinder(assemblyNameRetriever),
+                    new TypeFilter(),
+                    new BindingGeneratorFactory(new BindableTypeSelector()));
+                configure(builder);
+            }
+            finally
+            {
+                assemblyNameRetriever.Dispose();                
+            }
 #else
             var builder = new ConventionSyntax(
                 new ConventionBindingBuilder(kernel, new TypeSelector()), 

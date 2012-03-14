@@ -39,7 +39,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         private readonly IDictionary<Type, IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>>> bindingSyntax =
             new Dictionary<Type, IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>>>();
 
-        private IEnumerable<Assembly> assemblies;
+        private IEnumerable<Assembly> selectedAssemblies;
         private IEnumerable<Type> allTypes = Enumerable.Empty<Type>();
         private IEnumerable<Type> currentTypes = Enumerable.Empty<Type>();
         private List<Type> types;
@@ -61,9 +61,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="assemblies">The assemblies from which the types are selected.</param>
         public void SelectAllTypesFrom(IEnumerable<Assembly> assemblies)
         {
-            this.assemblies = assemblies;
+            this.selectedAssemblies = assemblies;
             this.UnionTypes();
-            this.currentTypes = this.typeSelector.GetExportedTypes(this.assemblies);
+            this.currentTypes = this.typeSelector.GetExportedTypes(this.selectedAssemblies);
         }
 
 #if !NO_SKIP_VISIBILITY
@@ -72,7 +72,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         public void IncludingNonePublicTypes()
         {
-            this.currentTypes = this.typeSelector.GetAllTypes(this.assemblies);
+            this.currentTypes = this.typeSelector.GetAllTypes(this.selectedAssemblies);
         }
 #endif
         
@@ -88,12 +88,17 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <summary>
         /// Includes the specified types.
         /// </summary>
-        /// <param name="types">The types to be included.</param>
-        public void Including(IEnumerable<Type> types)
+        /// <param name="includedTypes">The types to be included.</param>
+        public void Including(IEnumerable<Type> includedTypes)
         {
+            if (includedTypes == null)
+            {
+                throw new ArgumentNullException("includedTypes");
+            } 
+            
             this.CreateTypeList();
 
-            foreach (var type in types)
+            foreach (var type in includedTypes)
             {
                 if (!this.types.Contains(type))
                 {
@@ -105,12 +110,17 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <summary>
         /// Excludes the specified types.
         /// </summary>
-        /// <param name="types">The types to be excluded.</param>
-        public void Excluding(IEnumerable<Type> types)
+        /// <param name="excludedTypes">The types to be excluded.</param>
+        public void Excluding(IEnumerable<Type> excludedTypes)
         {
+            if (excludedTypes == null)
+            {
+                throw new ArgumentNullException("excludedTypes");
+            } 
+            
             this.CreateTypeList();
 
-            foreach (var type in types)
+            foreach (var type in excludedTypes)
             {
                 this.types.Remove(type);
             }
@@ -122,6 +132,11 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="generator">The generator to use to create the bindings.</param>
         public void BindWith(IBindingGenerator generator)
         {
+            if (generator == null)
+            {
+                throw new ArgumentNullException("generator");
+            } 
+            
             this.CreateTypeList();
             
             foreach (var type in this.types)
@@ -136,6 +151,11 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
         public void Configure(ConfigurationAction configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            } 
+            
             foreach (var bindingSyntaxEntry in this.bindingSyntax)
             {
                 foreach (var syntax in bindingSyntaxEntry.Value)
@@ -151,6 +171,11 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
         public void Configure(ConfigurationActionWithService configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            } 
+            
             foreach (var bindingSyntaxEntry in this.bindingSyntax)
             {
                 foreach (var syntax in bindingSyntaxEntry.Value)
@@ -165,8 +190,15 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type to be configured.</typeparam>
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
         public void ConfigureFor<T>(ConfigurationAction configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            } 
+            
             var type = typeof(T);
             foreach (var syntax in this.bindingSyntax[type])
             {
@@ -179,8 +211,15 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type to be configured.</typeparam>
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
         public void ConfigureFor<T>(ConfigurationActionWithService configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            } 
+            
             var type = typeof(T);
             foreach (var syntax in this.bindingSyntax[type])
             {

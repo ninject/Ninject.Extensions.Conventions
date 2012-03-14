@@ -34,91 +34,99 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <param name="namespaces">The namespaces from which the types are selected.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax InNamespaces(IEnumerable<string> namespaces);
+        IJoinFilterWhereExcludeIncludeBindSyntax InNamespaces(IEnumerable<string> namespaces);
 
         /// <summary>
         /// Selects the types in the specified namespaces.
         /// </summary>
         /// <param name="namespaces">The namespaces from which the types are selected.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax InNamespaces(params string[] namespaces);
+        IJoinFilterWhereExcludeIncludeBindSyntax InNamespaces(params string[] namespaces);
 
         /// <summary>
         /// Selects the types in the same namespace as the given type.
         /// </summary>
         /// <typeparam name="T">The type defining the namespace.</typeparam>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax InNamespaceOf<T>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
+        IJoinFilterWhereExcludeIncludeBindSyntax InNamespaceOf<T>();
 
         /// <summary>
         /// Selects the types in the same namespaces as the given types.
         /// </summary>
         /// <param name="types">The types defining the namespaces.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax InNamespaceOf(params Type[] types);
+        IJoinFilterWhereExcludeIncludeBindSyntax InNamespaceOf(params Type[] types);
 
         /// <summary>
         /// Selects all types not in the given namespaces.
         /// </summary>
         /// <param name="namespaces">The namespaces from which the types are not selected.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax NotInNamespaces(IEnumerable<string> namespaces);
+        IJoinFilterWhereExcludeIncludeBindSyntax NotInNamespaces(IEnumerable<string> namespaces);
 
         /// <summary>
         /// Selects all types not in the given namespaces.
         /// </summary>
         /// <param name="namespaces">The namespaces from which the types are not selected.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax NotInNamespaces(params string[] namespaces);
+        IJoinFilterWhereExcludeIncludeBindSyntax NotInNamespaces(params string[] namespaces);
 
         /// <summary>
         /// Selects all types not in same namespaces as the given type.
         /// </summary>
         /// <typeparam name="T">The type defining the namespace.</typeparam>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax NotInNamespaceOf<T>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
+        IJoinFilterWhereExcludeIncludeBindSyntax NotInNamespaceOf<T>();
 
         /// <summary>
         /// Selects all types not in same namespaces as the given types.
         /// </summary>
         /// <param name="types">The types defining the namespace.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax NotInNamespaceOf(params Type[] types);
+        IJoinFilterWhereExcludeIncludeBindSyntax NotInNamespaceOf(params Type[] types);
 
         /// <summary>
         /// Selects the types inherited from any of the given types.
         /// </summary>
         /// <param name="types">The ancestor types.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax InheritedFromAny(IEnumerable<Type> types);
+        IJoinFilterWhereExcludeIncludeBindSyntax InheritedFromAny(IEnumerable<Type> types);
 
         /// <summary>
         /// Selects the types inherited from any of the given types.
         /// </summary>
         /// <param name="types">The ancestor types.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax InheritedFromAny(params Type[] types);
+        IJoinFilterWhereExcludeIncludeBindSyntax InheritedFromAny(params Type[] types);
 
         /// <summary>
         /// Selects the types inherited from the given types.
         /// </summary>
         /// <param name="type">The ancestor type.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax InheritedFrom(Type type);
+        IJoinFilterWhereExcludeIncludeBindSyntax InheritedFrom(Type type);
 
         /// <summary>
         /// Selects the types inherited from the given types.
         /// </summary>
         /// <typeparam name="T">The ancestor type.</typeparam>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax InheritedFrom<T>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
+        IJoinFilterWhereExcludeIncludeBindSyntax InheritedFrom<T>();
 
         /// <summary>
         /// Selects the types with the specified attribute.
         /// </summary>
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax WithAttribute<T>()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
+        IJoinFilterWhereExcludeIncludeBindSyntax WithAttribute<T>()
             where T : Attribute;
 
         /// <summary>
@@ -127,7 +135,7 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <param name="predicate">A function to test if an attribute matches.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax WithAttribute<T>(Func<T, bool> predicate)
+        IJoinFilterWhereExcludeIncludeBindSyntax WithAttribute<T>(Func<T, bool> predicate)
             where T : Attribute;
 
         /// <summary>
@@ -135,14 +143,16 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <param name="attributeType">The type of the attribute.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax WithAttribute(Type attributeType);
+        IJoinFilterWhereExcludeIncludeBindSyntax WithAttribute(Type attributeType);
 
         /// <summary>
         /// Selects the types without the specified attribute.
         /// </summary>
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>()
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
+        IJoinFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>()
             where T : Attribute;
 
         /// <summary>
@@ -151,7 +161,7 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <param name="predicate">A function to test if an attribute matches.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>(Func<T, bool> predicate)
+        IJoinFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>(Func<T, bool> predicate)
             where T : Attribute;
 
         /// <summary>
@@ -159,18 +169,18 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <param name="attributeType">The type of the attribute.</param>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax WithoutAttribute(Type attributeType);
+        IJoinFilterWhereExcludeIncludeBindSyntax WithoutAttribute(Type attributeType);
 
         /// <summary>
         /// Selects the types that are generic.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax WhichAreGeneric();
+        IJoinFilterWhereExcludeIncludeBindSyntax WhichAreGeneric();
 
         /// <summary>
         /// Selects the types that are not generic.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IFromFilterWhereExcludeIncludeBindSyntax WhichAreNotGeneric();
+        IJoinFilterWhereExcludeIncludeBindSyntax WhichAreNotGeneric();
     }
 }

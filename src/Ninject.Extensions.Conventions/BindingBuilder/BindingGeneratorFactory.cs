@@ -35,7 +35,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     /// <summary>
     /// Factory for binding generators.
     /// </summary>
-    public class BindingGeneratorFactory : NinjectComponent, IBindingGeneratorFactory
+    public class BindingGeneratorFactory : IBindingGeneratorFactory
     {
         /// <summary>
         /// Evaluator for base types nad interfaces.
@@ -71,7 +71,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             var regex = new Regex(pattern, options);
             return new SelectorBindingGenerator(
-                this.CreateMultiBindingCreator(), 
+                this.CreateSingleBindingCreator(), 
                 (_, serviceType) => serviceType.Where(t => regex.IsMatch(t.Name)),
                 this.bindableTypeSelector);
         }
@@ -82,7 +82,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         public IBindingGenerator CreateAllInterfacesBindingGenerator()
         {
-            return new AllInterfacesBindingGenerator(this.bindableTypeSelector, this.CreateMultiBindingCreator());
+            return new AllInterfacesBindingGenerator(this.bindableTypeSelector, this.CreateSingleBindingCreator());
         }
 
         /// <summary>
@@ -100,7 +100,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         public IBindingGenerator CreateDefaultInterfaceBindingGenerator()
         {
-            return new DefaultInterfaceBindingGenerator(this.bindableTypeSelector, this.CreateMultiBindingCreator());
+            return new DefaultInterfaceBindingGenerator(this.bindableTypeSelector, this.CreateSingleBindingCreator());
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         public IBindingGenerator CreateDefaultInterfacesBindingGenerator()
         {
-            return new DefaultInterfacesBindingGenerator(this.bindableTypeSelector, this.CreateMultiBindingCreator());
+            return new DefaultInterfacesBindingGenerator(this.bindableTypeSelector, this.CreateSingleBindingCreator());
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         public IBindingGenerator CreateSelectorBindingGenerator(ServiceSelector selector)
         {
-            return new SelectorBindingGenerator(this.CreateMultiBindingCreator(), selector, this.bindableTypeSelector);
+            return new SelectorBindingGenerator(this.CreateSingleBindingCreator(), selector, this.bindableTypeSelector);
         }
 
 #if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
@@ -156,7 +156,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// Creates the multi binding creator.
         /// </summary>
         /// <returns>The newly created IMultiBindingCreator</returns>
-        protected virtual IBindingCreator CreateMultiBindingCreator()
+        protected virtual IBindingCreator CreateSingleBindingCreator()
         {
             return new SingleConfigurationBindingCreator();
         }

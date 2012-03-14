@@ -34,7 +34,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     /// <summary>
     /// Factory for binding generators.
     /// </summary>
-    public interface IBindingGeneratorFactory : INinjectComponent
+    public interface IBindingGeneratorFactory
     {
         /// <summary>
         /// Creates a regex binding generator.

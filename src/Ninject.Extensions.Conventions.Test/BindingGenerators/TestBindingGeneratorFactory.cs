@@ -33,7 +33,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             this.bindingCreator = bindingCreator;
         }
 
-        protected override IBindingCreator CreateMultiBindingCreator()
+        protected override IBindingCreator CreateSingleBindingCreator()
         {
             return this.bindingCreator;
         }

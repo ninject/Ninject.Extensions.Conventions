@@ -55,6 +55,8 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <typeparam name="T">The type that specifies the assembly.</typeparam>
         /// <returns>The fluent syntax.</returns>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
+            Justification = "Makes the API simpler.")]
         IIncludingNonePublicTypesSelectSyntax FromAssemblyContaining<T>();
 
         /// <summary>

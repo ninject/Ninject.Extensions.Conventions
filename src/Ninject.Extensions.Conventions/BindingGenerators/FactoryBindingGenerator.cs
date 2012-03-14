@@ -54,6 +54,11 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// </returns>
         public IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> CreateBindings(Type type, IBindingRoot bindingRoot)
         {
+            if (bindingRoot == null)
+            {
+                throw new ArgumentNullException("bindingRoot");
+            } 
+            
             var binding = bindingRoot.Bind(type);
             var bindingConfiguration = this.instanceProvider == null
                 ? binding.ToFactory(type)
