@@ -24,10 +24,12 @@ namespace Ninject.Extensions.Conventions.Syntax
     using System;
     using System.Collections.Generic;
 
+    using Ninject.Syntax;
+
     /// <summary>
     /// The fluent syntax to include some types
     /// </summary>
-    public interface IIncludeSyntax
+    public interface IIncludeSyntax : IFluentSyntax
     {
         /// <summary>
         /// Includes the given type

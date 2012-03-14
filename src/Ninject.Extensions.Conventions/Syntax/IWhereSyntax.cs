@@ -23,10 +23,12 @@ namespace Ninject.Extensions.Conventions.Syntax
 {
     using System;
 
+    using Ninject.Syntax;
+
     /// <summary>
     /// Fluent syntax to filter the selected types
     /// </summary>
-    public interface IWhereSyntax
+    public interface IWhereSyntax : IFluentSyntax
     {
         /// <summary>
         /// Filters the selected types.

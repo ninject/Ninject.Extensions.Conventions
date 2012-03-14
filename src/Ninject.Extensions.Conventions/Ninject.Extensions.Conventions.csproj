@@ -84,6 +84,12 @@
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
     <Compile Include="BindingBuilder\ConventionBindingBuilder.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntax.From.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntax.Select.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntax.Filter.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntax.IncludeExclude.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntax.Bind.cs" />
+    <Compile Include="BindingBuilder\ConventionSyntax.Configure.cs" />
     <Compile Include="BindingBuilder\IAssemblyFinder.cs" />
     <Compile Include="BindingBuilder\IConventionBindingBuilder.cs" />
     <Compile Include="BindingBuilder\IBindingCreator.cs" />

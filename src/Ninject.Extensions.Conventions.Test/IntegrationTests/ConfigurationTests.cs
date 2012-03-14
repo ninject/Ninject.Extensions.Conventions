@@ -22,9 +22,7 @@
 namespace Ninject.Extensions.Conventions.IntegrationTests
 {
     using FluentAssertions;
-
     using Ninject.Extensions.Conventions.Fakes;
-
     using Xunit;
 
     public class ConfigurationTests

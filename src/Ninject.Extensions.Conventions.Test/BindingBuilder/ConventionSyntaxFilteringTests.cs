@@ -25,7 +25,13 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     using System;
     using System.Collections.Generic;
     using System.Linq;
+
+    using FluentAssertions;
+
     using Moq;
+
+    using Ninject.Extensions.Conventions.Fakes;
+
     using Xunit;
 
     public class ConventionSyntaxFilteringTests
@@ -132,6 +138,34 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.testee.Excluding<object>();
 
             this.conventionBindingBuilderMock.Verify(b => b.Excluding(IsMatchingSequence(type)));
+        }
+
+        [Fact]
+        public void EndingWith()
+        {
+            Func<Type, bool> func = null;
+            this.conventionBindingBuilderMock.Setup(b => b.Where(It.IsAny<Func<Type, bool>>()))
+                .Callback<Func<Type, bool>>(f => func = f);
+
+            this.testee.EndingWith("Service");
+
+            func.Should().NotBeNull();
+            func(typeof(MultipleInterfaceCrazyService)).Should().BeTrue();
+            func(typeof(Foo)).Should().BeFalse();
+        }
+
+        [Fact]
+        public void StartingWith()
+        {
+            Func<Type, bool> func = null;
+            this.conventionBindingBuilderMock.Setup(b => b.Where(It.IsAny<Func<Type, bool>>()))
+                .Callback<Func<Type, bool>>(f => func = f);
+
+            this.testee.StartingWith("Multiple");
+
+            func.Should().NotBeNull();
+            func(typeof(MultipleInterfaceCrazyService)).Should().BeTrue();
+            func(typeof(Foo)).Should().BeFalse();
         }
         
         private static IEnumerable<T> IsMatchingSequence<T>(params T[] values)

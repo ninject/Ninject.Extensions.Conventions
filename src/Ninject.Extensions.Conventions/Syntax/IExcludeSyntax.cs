@@ -24,10 +24,12 @@ namespace Ninject.Extensions.Conventions.Syntax
     using System;
     using System.Collections.Generic;
 
+    using Ninject.Syntax;
+
     /// <summary>
     /// The syntax to define types that are excluded.
     /// </summary>
-    public interface IExcludeSyntax
+    public interface IExcludeSyntax : IFluentSyntax
     {
         /// <summary>
         /// Excludes the given type

@@ -38,7 +38,7 @@ namespace Ninject.Extensions.Conventions.Syntax
     /// <summary>
     /// The syntax to configure special instances
     /// </summary>
-    public interface IConfigureForSyntax
+    public interface IConfigureForSyntax : IFluentSyntax
     {
         /// <summary>
         /// Configures the bindings with the specified configuration.

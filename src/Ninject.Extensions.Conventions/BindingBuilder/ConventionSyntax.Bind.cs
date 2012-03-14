@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="IBindSyntax.cs" company="Ninject Project Contributors">
+// <copyright file="ConventionSyntax.Bind.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -19,31 +19,21 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Conventions.Syntax
+namespace Ninject.Extensions.Conventions.BindingBuilder
 {
     using System;
-    using System.Collections.Generic;
     using System.Text.RegularExpressions;
 
     using Ninject.Extensions.Conventions.BindingGenerators;
+    using Ninject.Extensions.Conventions.Syntax;
 #if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
     using Ninject.Extensions.Factory;
-    using Ninject.Syntax;
-
 #endif
 
     /// <summary>
-    /// Delegate to select the types for which a binding is created to the given type.
+    /// The syntax to configure the conventions
     /// </summary>
-    /// <param name="type">The type for which the bindings are created.</param>
-    /// <param name="baseTypes">The base types of the given type.</param>
-    /// <returns>The types for which a binding is created to the given type.</returns>
-    public delegate IEnumerable<Type> ServiceSelector(Type type, IEnumerable<Type> baseTypes);
-
-    /// <summary>
-    /// The syntax to define how the types are bound.
-    /// </summary>
-    public interface IBindSyntax : IFluentSyntax
+    public partial class ConventionSyntax
     {
         /// <summary>
         /// Bind using a custom binding generator.
@@ -52,67 +42,98 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <returns>The fluent syntax</returns>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "Makes the API simpler.")]
-        IConfigureSyntax BindWith<T>() where T : IBindingGenerator, new();
+        public IConfigureSyntax BindWith<T>() where T : IBindingGenerator, new()
+        {
+            return this.BindWith(new T());
+        }
 
         /// <summary>
         /// Bind using a custom binding generator.
         /// </summary>
         /// <param name="generator">The generator used to create the bindings.</param>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindWith(IBindingGenerator generator);
+        public IConfigureSyntax BindWith(IBindingGenerator generator)
+        {
+            this.bindingBuilder.BindWith(generator);
+            return this;
+        }
 
         /// <summary>
         /// Binds all interfaces of the given types to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToAllInterfaces();
+        public IConfigureSyntax BindToAllInterfaces()
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateAllInterfacesBindingGenerator());
+        }
 
         /// <summary>
         /// Binds the base type of the given types to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToBase();
+        public IConfigureSyntax BindToBase()
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateBaseBindingGenerator());
+        }
 
         /// <summary>
         /// Binds the default interface of the given types to the type.
         /// e.g. Foo : IFoo 
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToDefaultInterface();
+        public IConfigureSyntax BindToDefaultInterface()
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateDefaultInterfaceBindingGenerator());
+        }
 
         /// <summary>
         ///  Binds the default interface of the given types to the type.
         /// e.g. MyFoo matches IFoo, and SuperCrazyFoo matches ICrazyFoo and IFoo
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToDefaultInterfaces();
+        public IConfigureSyntax BindToDefaultInterfaces()
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateDefaultInterfacesBindingGenerator());
+        }
 
         /// <summary>
         /// Expects that the given type has a single interface.
         /// In this case the interface is bound to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToSingleInterface();
+        public IConfigureSyntax BindToSingleInterface()
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateSingleInterfaceBindingGenerator());
+        }
 
         /// <summary>
         /// Binds the type to itself.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToSelf();
+        public IConfigureSyntax BindToSelf()
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateSelfBindingGenerator());
+        }
 
         /// <summary>
         /// Binds the selected interfaces to the type.
         /// </summary>
         /// <param name="selector">The selector of the interfaces.</param>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToSelection(ServiceSelector selector);
+        public IConfigureSyntax BindToSelection(ServiceSelector selector)
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateSelectorBindingGenerator(selector));
+        }
 
         /// <summary>
         /// Bind the type to its interfaces matching the given regular expression.
         /// </summary>
         /// <param name="pattern">The regular expression.</param>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToRegex(string pattern);
+        public IConfigureSyntax BindToRegex(string pattern)
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateRegexBindingGenerator(pattern));
+        }
 
         /// <summary>
         /// Bind the type to its interfaces matching the given regular expression.
@@ -120,21 +141,30 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <param name="pattern">The regular expression.</param>
         /// <param name="options">The regex options.</param>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToRegex(string pattern, RegexOptions options);
+        public IConfigureSyntax BindToRegex(string pattern, RegexOptions options)
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateRegexBindingGenerator(pattern, options));
+        }
 
 #if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
         /// <summary>
         /// Binds interfaces to factory implementations using the factory extension.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToFactory();
+        public IConfigureSyntax BindToFactory()
+        {
+            return this.BindWith(this.bindingGeneratorFactory.FactoryBindingGenerator(null));
+        }
 
         /// <summary>
         /// Binds interfaces to factory implementations using the factory extension.
         /// </summary>
         /// <param name="instanceProvider">The instance provider.</param>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToFactory(Func<IInstanceProvider> instanceProvider);
+        public IConfigureSyntax BindToFactory(Func<IInstanceProvider> instanceProvider)
+        {
+            return this.BindWith(this.bindingGeneratorFactory.FactoryBindingGenerator(instanceProvider));
+        }
 #endif
     }
 }

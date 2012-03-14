@@ -20,10 +20,12 @@
 //-------------------------------------------------------------------------------
 namespace Ninject.Extensions.Conventions.Syntax
 {
+    using Ninject.Syntax;
+
     /// <summary>
     /// Syntax to allow multiple From.Select statements
     /// </summary>
-    public interface IJoinSyntax
+    public interface IJoinSyntax : IFluentSyntax
     {
         /// <summary>
         /// Gets the from syntax to select additional types from different assemblies
