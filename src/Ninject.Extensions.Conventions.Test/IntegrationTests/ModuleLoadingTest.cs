@@ -31,6 +31,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
 
     using Xunit;
 
+#if !SILVERLIGHT
     public class ModuleLoadingTest
     {
         [Fact]
@@ -57,4 +58,5 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             }
         }
     }
+#endif
 }

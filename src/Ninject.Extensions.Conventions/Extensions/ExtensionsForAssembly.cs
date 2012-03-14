@@ -24,6 +24,9 @@ namespace Ninject.Extensions.Conventions.Extensions
 {
     using System;
     using System.Collections.Generic;
+#if NETCF
+    using System.Linq;
+#endif
     using System.Reflection;
 
     /// <summary>

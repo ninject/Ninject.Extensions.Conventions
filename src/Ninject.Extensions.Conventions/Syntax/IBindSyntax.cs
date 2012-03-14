@@ -28,9 +28,8 @@ namespace Ninject.Extensions.Conventions.Syntax
     using Ninject.Extensions.Conventions.BindingGenerators;
 #if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
     using Ninject.Extensions.Factory;
-    using Ninject.Syntax;
-
 #endif
+    using Ninject.Syntax;
 
     /// <summary>
     /// Delegate to select the types for which a binding is created to the given type.
