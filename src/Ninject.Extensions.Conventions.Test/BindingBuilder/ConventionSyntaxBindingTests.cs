@@ -72,7 +72,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateAllInterfacesBindingGenerator()).Returns(generator);
 
-            this.testee.BindToAllInterfaces();
+            this.testee.BindAllInterfaces();
 
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
@@ -83,7 +83,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateBaseBindingGenerator()).Returns(generator);
 
-            this.testee.BindToBase();
+            this.testee.BindBase();
 
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
@@ -94,7 +94,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateDefaultInterfaceBindingGenerator()).Returns(generator);
 
-            this.testee.BindToDefaultInterface();
+            this.testee.BindDefaultInterface();
 
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
@@ -105,7 +105,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateDefaultInterfacesBindingGenerator()).Returns(generator);
 
-            this.testee.BindToDefaultInterfaces();
+            this.testee.BindDefaultInterfaces();
 
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
@@ -127,7 +127,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateSingleInterfaceBindingGenerator()).Returns(generator);
 
-            this.testee.BindToSingleInterface();
+            this.testee.BindSingleInterface();
 
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
@@ -139,7 +139,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateSelectorBindingGenerator(selector)).Returns(generator);
 
-            this.testee.BindToSelection(selector);
+            this.testee.BindSelection(selector);
 
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
@@ -151,7 +151,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateRegexBindingGenerator(Pattern)).Returns(generator);
 
-            this.testee.BindToRegex(Pattern);
+            this.testee.BindUsingRegex(Pattern);
 
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
@@ -164,7 +164,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateRegexBindingGenerator(Pattern, Options)).Returns(generator);
 
-            this.testee.BindToRegex(Pattern, Options);
+            this.testee.BindUsingRegex(Pattern, Options);
 
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }

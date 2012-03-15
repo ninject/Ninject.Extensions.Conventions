@@ -114,14 +114,14 @@ namespace Ninject.Extensions.Conventions.Syntax
         IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, Predicate<Assembly> filter);
 
         /// <summary>
-        /// Scans the assemblies matching the given pattern.
+        /// Scans the assemblies that matching one of the given assembly name pattern.
         /// </summary>
         /// <param name="patterns">The patterns to match the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
         IIncludingNonePublicTypesSelectSyntax FromAssembliesMatching(params string[] patterns);
         
         /// <summary>
-        /// Scans the assemblies matching the given pattern.
+        /// Scans the assemblies that matching one of the given assembly name pattern.
         /// </summary>
         /// <param name="patterns">The patterns to match the assemblies.</param>
         /// <returns>The fluent syntax.</returns>

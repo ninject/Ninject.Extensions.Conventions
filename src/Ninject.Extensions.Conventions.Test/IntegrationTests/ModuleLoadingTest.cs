@@ -54,7 +54,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 this.Bind(
                     x => x.From(Assembly.GetExecutingAssembly())
                           .SelectAllTypes()
-                          .BindToDefaultInterface());
+                          .BindDefaultInterface());
             }
         }
     }

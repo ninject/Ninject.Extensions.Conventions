@@ -39,7 +39,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.From(Assembly.GetExecutingAssembly())
                           .SelectAllTypes()
-                          .BindToDefaultInterface());
+                          .BindDefaultInterface());
                 var instance = kernel.Get<IDefaultConvention>();
 
                 instance.Should().NotBeNull();
@@ -55,7 +55,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .SelectAllTypes()
-                          .BindToDefaultInterface());
+                          .BindDefaultInterface());
                 var instance = kernel.Get<IDefaultConvention>();
 
                 instance.Should().NotBeNull();
@@ -72,7 +72,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.From("TestPlugin.dll")
                           .SelectAllTypes()
-                          .BindToDefaultInterface());
+                          .BindDefaultInterface());
                 var instance = kernel.Get<IDefaultConvention>();
 
                 instance.Should().NotBeNull();
@@ -88,7 +88,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.From("TestPlugin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
                           .SelectAllTypes()
-                          .BindToDefaultInterface());
+                          .BindDefaultInterface());
                 var instance = kernel.Get<IDefaultConvention>();
 
                 instance.Should().NotBeNull();
@@ -105,7 +105,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                     x => x.From("TestPlugin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null")
                           .SelectAllTypes()
                           .Join.FromThisAssembly().SelectAllClasses()
-                          .BindToDefaultInterface());
+                          .BindDefaultInterface());
                 var instances = kernel.GetAll<IDefaultConvention>();
 
                 instances.Count().Should().Be(2);

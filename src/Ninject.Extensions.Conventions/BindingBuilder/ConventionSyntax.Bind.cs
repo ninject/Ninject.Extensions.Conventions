@@ -62,7 +62,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// Binds all interfaces of the given types to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        public IConfigureSyntax BindToAllInterfaces()
+        public IConfigureSyntax BindAllInterfaces()
         {
             return this.BindWith(this.bindingGeneratorFactory.CreateAllInterfacesBindingGenerator());
         }
@@ -71,7 +71,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// Binds the base type of the given types to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        public IConfigureSyntax BindToBase()
+        public IConfigureSyntax BindBase()
         {
             return this.BindWith(this.bindingGeneratorFactory.CreateBaseBindingGenerator());
         }
@@ -81,7 +81,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// e.g. Foo : IFoo 
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        public IConfigureSyntax BindToDefaultInterface()
+        public IConfigureSyntax BindDefaultInterface()
         {
             return this.BindWith(this.bindingGeneratorFactory.CreateDefaultInterfaceBindingGenerator());
         }
@@ -91,7 +91,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// e.g. MyFoo matches IFoo, and SuperCrazyFoo matches ICrazyFoo and IFoo
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        public IConfigureSyntax BindToDefaultInterfaces()
+        public IConfigureSyntax BindDefaultInterfaces()
         {
             return this.BindWith(this.bindingGeneratorFactory.CreateDefaultInterfacesBindingGenerator());
         }
@@ -101,7 +101,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// In this case the interface is bound to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        public IConfigureSyntax BindToSingleInterface()
+        public IConfigureSyntax BindSingleInterface()
         {
             return this.BindWith(this.bindingGeneratorFactory.CreateSingleInterfaceBindingGenerator());
         }
@@ -120,7 +120,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="selector">The selector of the interfaces.</param>
         /// <returns>The fluent syntax</returns>
-        public IConfigureSyntax BindToSelection(ServiceSelector selector)
+        public IConfigureSyntax BindSelection(ServiceSelector selector)
         {
             return this.BindWith(this.bindingGeneratorFactory.CreateSelectorBindingGenerator(selector));
         }
@@ -130,7 +130,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <param name="pattern">The regular expression.</param>
         /// <returns>The fluent syntax</returns>
-        public IConfigureSyntax BindToRegex(string pattern)
+        public IConfigureSyntax BindUsingRegex(string pattern)
         {
             return this.BindWith(this.bindingGeneratorFactory.CreateRegexBindingGenerator(pattern));
         }
@@ -141,7 +141,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="pattern">The regular expression.</param>
         /// <param name="options">The regex options.</param>
         /// <returns>The fluent syntax</returns>
-        public IConfigureSyntax BindToRegex(string pattern, RegexOptions options)
+        public IConfigureSyntax BindUsingRegex(string pattern, RegexOptions options)
         {
             return this.BindWith(this.bindingGeneratorFactory.CreateRegexBindingGenerator(pattern, options));
         }

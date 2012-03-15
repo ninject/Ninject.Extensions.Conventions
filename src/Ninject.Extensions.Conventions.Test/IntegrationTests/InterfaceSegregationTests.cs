@@ -38,7 +38,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                     x => x.FromThisAssembly()
                           .SelectAllClasses()
                           .Where(t => t == typeof(Foo))
-                          .BindToAllInterfaces()
+                          .BindAllInterfaces()
                           .Configure(c => c.InSingletonScope()));
 
                 var instance1 = kernel.Get<IFoo>();
@@ -56,7 +56,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .Select(t => t == typeof(Foo))
-                          .BindToDefaultInterfaces()
+                          .BindDefaultInterfaces()
                           .Configure(c => c.InSingletonScope()));
 
                 var instance1 = kernel.Get<IFoo>();
@@ -74,7 +74,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .Select(t => t == typeof(Foo))
-                          .BindToSelection((ts, ti) => ti)
+                          .BindSelection((ts, ti) => ti)
                           .Configure(c => c.InSingletonScope()));
 
                 var instance1 = kernel.Get<IFoo>();
@@ -92,7 +92,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .Select(t => t == typeof(Foo))
-                          .BindToRegex(".*")
+                          .BindUsingRegex(".*")
                           .Configure(c => c.InSingletonScope()));
 
                 var instance1 = kernel.Get<IFoo>();

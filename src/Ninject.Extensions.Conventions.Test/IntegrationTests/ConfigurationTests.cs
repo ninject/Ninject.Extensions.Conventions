@@ -35,7 +35,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .SelectAllClasses().InNamespaceOf<Foo>()
-                          .BindToAllInterfaces()
+                          .BindAllInterfaces()
                           .Configure((c, s) => c.Named(s.Name)));
 
                 var instance = kernel.Get<IFoo>("Foo");

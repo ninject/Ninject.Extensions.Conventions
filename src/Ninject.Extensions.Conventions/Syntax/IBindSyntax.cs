@@ -64,34 +64,34 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// Binds all interfaces of the given types to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToAllInterfaces();
+        IConfigureSyntax BindAllInterfaces();
 
         /// <summary>
         /// Binds the base type of the given types to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToBase();
+        IConfigureSyntax BindBase();
 
         /// <summary>
         /// Binds the default interface of the given types to the type.
         /// e.g. Foo : IFoo 
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToDefaultInterface();
+        IConfigureSyntax BindDefaultInterface();
 
         /// <summary>
         ///  Binds the default interface of the given types to the type.
         /// e.g. MyFoo matches IFoo, and SuperCrazyFoo matches ICrazyFoo and IFoo
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToDefaultInterfaces();
+        IConfigureSyntax BindDefaultInterfaces();
 
         /// <summary>
         /// Expects that the given type has a single interface.
         /// In this case the interface is bound to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToSingleInterface();
+        IConfigureSyntax BindSingleInterface();
 
         /// <summary>
         /// Binds the type to itself.
@@ -104,14 +104,14 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// </summary>
         /// <param name="selector">The selector of the interfaces.</param>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToSelection(ServiceSelector selector);
+        IConfigureSyntax BindSelection(ServiceSelector selector);
 
         /// <summary>
         /// Bind the type to its interfaces matching the given regular expression.
         /// </summary>
         /// <param name="pattern">The regular expression.</param>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToRegex(string pattern);
+        IConfigureSyntax BindUsingRegex(string pattern);
 
         /// <summary>
         /// Bind the type to its interfaces matching the given regular expression.
@@ -119,7 +119,7 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <param name="pattern">The regular expression.</param>
         /// <param name="options">The regex options.</param>
         /// <returns>The fluent syntax</returns>
-        IConfigureSyntax BindToRegex(string pattern, RegexOptions options);
+        IConfigureSyntax BindUsingRegex(string pattern, RegexOptions options);
 
 #if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
         /// <summary>

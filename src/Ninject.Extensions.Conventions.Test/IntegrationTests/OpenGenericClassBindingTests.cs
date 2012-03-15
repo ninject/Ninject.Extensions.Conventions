@@ -38,7 +38,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .SelectAllClasses().InNamespaceOf(typeof(OpenGenericClassWithManyInterfaces<>))
-                          .BindToAllInterfaces());
+                          .BindAllInterfaces());
                 var instance = kernel.Get<IOpenGenericInterface<double>>();
 
                 instance.Should().BeAssignableTo<OpenGenericClassWithManyInterfaces<double>>();
@@ -53,7 +53,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .SelectAllClasses().InNamespaceOf(typeof(OpenGenericClassWithManyInterfaces<>))
-                          .BindToAllInterfaces());
+                          .BindAllInterfaces());
                 var instances = kernel.GetAll<IBaseOpenGenericInterface1<double>>();
 
                 instances.Select(i => i.GetType()).Should().BeEquivalentTo(
@@ -70,7 +70,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .Select(t => t == typeof(OpenGenericClassWithManyInterfaces<>))
-                          .BindToAllInterfaces());
+                          .BindAllInterfaces());
                 var instance = kernel.Get<IBaseOpenGenericInterface<double, int>>();
 
                 instance.Should().BeAssignableTo<OpenGenericClassWithManyInterfaces<double>>();

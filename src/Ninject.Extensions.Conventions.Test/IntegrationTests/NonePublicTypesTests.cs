@@ -39,7 +39,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                     x => x.From(Assembly.GetExecutingAssembly())
                           .IncludingNonePublicTypes()
                           .SelectAllTypes()
-                          .BindToAllInterfaces());
+                          .BindAllInterfaces());
                 var instance = kernel.Get<IInternalInterface>();
 
                 instance.Should().NotBeNull();

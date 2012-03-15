@@ -39,7 +39,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
-                          .BindToAllInterfaces());
+                          .BindAllInterfaces());
                 var instance = kernel.Get<INormalInterface>();
 
                 instance.Should().BeAssignableTo<ClassWithManyInterfaces>();
@@ -54,7 +54,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
-                          .BindToAllInterfaces());
+                          .BindAllInterfaces());
                 var instance = kernel.Get<IClosedGenericInterface<int>>();
 
                 instance.Should().BeAssignableTo<ClassWithManyInterfaces>();
@@ -69,7 +69,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
-                          .BindToSelection((ts, ti) => ti.Where(i => !i.IsInterface)));
+                          .BindSelection((ts, ti) => ti.Where(i => !i.IsInterface)));
                 var instances = kernel.GetAll<object>();
 
                 instances.Select(i => i.GetType()).Should().BeEquivalentTo(typeof(DefaultConvention), typeof(ClassWithManyInterfaces));
@@ -84,11 +84,26 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 kernel.Bind(
                     x => x.FromThisAssembly()
                           .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
-                          .BindToSelection((ts, ti) => ti.Where(i => !i.IsInterface)));
+                          .BindSelection((ts, ti) => ti.Where(i => !i.IsInterface)));
                 var instance = kernel.Get<GenericBaseClassWithManyInterfaces<int, int>>();
 
                 instance.Should().BeAssignableTo<ClassWithManyInterfaces>();
             }
-        }        
+        }
+
+        [Fact]
+        public void sdf()
+        {
+            using (IKernel kernel = new StandardKernel())
+            {
+                kernel.Bind(
+                    x => x.FromThisAssembly()
+                          .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
+                          .BindSelection((ts, ti) => ti.Where(i => !i.IsInterface)));
+                var instance = kernel.Get<GenericBaseClassWithManyInterfaces<int, int>>();
+
+                instance.Should().BeAssignableTo<ClassWithManyInterfaces>();
+            }
+        } 
     }
 }
