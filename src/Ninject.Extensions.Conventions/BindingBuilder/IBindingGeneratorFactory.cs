@@ -27,7 +27,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     using Ninject.Components;
     using Ninject.Extensions.Conventions.BindingGenerators;
     using Ninject.Extensions.Conventions.Syntax;
-#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35
     using Ninject.Extensions.Factory;
 #endif
 
@@ -94,7 +94,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         IBindingGenerator CreateSelectorBindingGenerator(ServiceSelector selector);
 
-#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35
         /// <summary>
         /// Creates a new FactoryBindingGenerator instance.
         /// </summary>
