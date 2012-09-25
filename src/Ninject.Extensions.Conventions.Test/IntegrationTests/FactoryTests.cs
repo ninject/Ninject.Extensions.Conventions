@@ -19,7 +19,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35
 namespace Ninject.Extensions.Conventions.IntegrationTests
 {
     using System;

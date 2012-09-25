@@ -26,7 +26,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
     using Ninject.Extensions.Conventions.BindingGenerators;
     using Ninject.Extensions.Conventions.Syntax;
-#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35
     using Ninject.Extensions.Factory;
 #endif
 
@@ -146,7 +146,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             return this.BindWith(this.bindingGeneratorFactory.CreateRegexBindingGenerator(pattern, options));
         }
 
-#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35
         /// <summary>
         /// Binds interfaces to factory implementations using the factory extension.
         /// </summary>

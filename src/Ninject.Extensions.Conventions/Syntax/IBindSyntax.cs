@@ -26,7 +26,7 @@ namespace Ninject.Extensions.Conventions.Syntax
     using System.Text.RegularExpressions;
 
     using Ninject.Extensions.Conventions.BindingGenerators;
-#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35
     using Ninject.Extensions.Factory;
 #endif
     using Ninject.Syntax;
@@ -121,7 +121,7 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <returns>The fluent syntax</returns>
         IConfigureSyntax BindUsingRegex(string pattern, RegexOptions options);
 
-#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35 && !MONO
+#if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35
         /// <summary>
         /// Binds interfaces to factory implementations using the factory extension.
         /// </summary>
