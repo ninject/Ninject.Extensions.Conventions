@@ -57,6 +57,12 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         IBindingGenerator CreateAllInterfacesBindingGenerator();
 
+		/// <summary>
+		/// Creates an all base binding generator.
+		/// </summary>
+		/// <returns>The newly created generator.</returns>
+		IBindingGenerator CreateAllBaseBindingGenerator();
+
         /// <summary>
         /// Creates a base binding generator.
         /// </summary>

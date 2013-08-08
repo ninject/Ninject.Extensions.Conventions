@@ -66,6 +66,12 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <returns>The fluent syntax</returns>
         IConfigureSyntax BindAllInterfaces();
 
+		/// <summary>
+		/// Binds the base type of the given types to the type.
+		/// </summary>
+		/// <returns>The fluent syntax</returns>
+		IConfigureSyntax BindAllBase();
+
         /// <summary>
         /// Binds the base type of the given types to the type.
         /// </summary>

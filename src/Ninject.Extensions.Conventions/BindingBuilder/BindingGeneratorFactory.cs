@@ -85,6 +85,15 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             return new AllInterfacesBindingGenerator(this.bindableTypeSelector, this.CreateSingleBindingCreator());
         }
 
+		/// <summary>
+		/// Creates a base binding generator.
+		/// </summary>
+		/// <returns>The newly created generator.</returns>
+		public IBindingGenerator CreateAllBaseBindingGenerator()
+		{
+			return new AllBaseBindingGenerator();
+		}
+
         /// <summary>
         /// Creates a base binding generator.
         /// </summary>

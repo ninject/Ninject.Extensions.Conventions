@@ -67,6 +67,15 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             return this.BindWith(this.bindingGeneratorFactory.CreateAllInterfacesBindingGenerator());
         }
 
+		/// <summary>
+		/// Binds the base type of the given types to the type.
+		/// </summary>
+		/// <returns>The fluent syntax</returns>
+		public IConfigureSyntax BindAllBase()
+		{
+			return this.BindWith(this.bindingGeneratorFactory.CreateAllBaseBindingGenerator());
+		}
+
         /// <summary>
         /// Binds the base type of the given types to the type.
         /// </summary>
