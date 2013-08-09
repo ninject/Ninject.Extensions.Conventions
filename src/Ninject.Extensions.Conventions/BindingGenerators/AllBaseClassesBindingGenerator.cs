@@ -57,11 +57,11 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
                 return Enumerable.Empty<IBindingWhenInNamedWithOrOnSyntax<object>>();
             }
             
-            var bindings = RecursivelyBindToAbstractBaseTypes(type, bindingRoot);
+            var bindings = RecursivelyBindToBaseTypes(type, bindingRoot);
             return bindings;
         }
 
-        private IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> RecursivelyBindToAbstractBaseTypes(Type type, IBindingRoot bindingRoot)
+        private IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> RecursivelyBindToBaseTypes(Type type, IBindingRoot bindingRoot)
         {
             Type baseType = type.BaseType;
             var bindings = new List<IBindingWhenInNamedWithOrOnSyntax<object>>();
