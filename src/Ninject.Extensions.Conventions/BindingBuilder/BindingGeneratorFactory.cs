@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------
 // <copyright file="BindingGeneratorFactory.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
+//   Copyright (c) 2009-2013 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -83,6 +83,15 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         public IBindingGenerator CreateAllInterfacesBindingGenerator()
         {
             return new AllInterfacesBindingGenerator(this.bindableTypeSelector, this.CreateSingleBindingCreator());
+        }
+
+        /// <summary>
+        /// Creates a base binding generator.
+        /// </summary>
+        /// <returns>The newly created generator.</returns>
+        public IBindingGenerator CreateAllBaseClassesBindingGenerator()
+        {
+            return new AllBaseClassesBindingGenerator();
         }
 
         /// <summary>

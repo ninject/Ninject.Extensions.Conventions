@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="ClassWithManyInterfaces.cs" company="Ninject Project Contributors">
+// <copyright file="AbstractClassWithManyInterfaces.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2013 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -19,17 +19,11 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Conventions.Fakes.NormalClasses
-{
-    using Ninject.Extensions.Conventions.Fakes.Interfaces;
-    using Ninject.Extensions.Conventions.Fakes.OpenGenerics;
 
-    public class ClassWithManyInterfaces :
-        GenericBaseClassWithManyInterfaces<int, int>,
-        INormalInterface,
-        IClosedGenericInterface<int>,
-        IDerivedInterface,
-        IDerivedGenericInterface<int>
+namespace Ninject.Extensions.Conventions.Fakes.AbstractInheritanceTree
+{
+    public abstract class BaseAbstractClass
     {
+        
     }
 }
