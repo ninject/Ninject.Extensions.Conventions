@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------
 // <copyright file="ConventionSyntaxBindingTests.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
+//   Copyright (c) 2009-2013 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -77,16 +77,16 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }
 
-		[Fact]
-		public void BindToAllBase()
-		{
-			var generator = new Mock<IBindingGenerator>().Object;
-			this.bindingGeneratorFactoryMock.Setup(g => g.CreateAllBaseBindingGenerator()).Returns(generator);
+        [Fact]
+        public void BindToAllBaseClasses()
+        {
+            var generator = new Mock<IBindingGenerator>().Object;
+            this.bindingGeneratorFactoryMock.Setup(g => g.CreateAllBaseClassesBindingGenerator()).Returns(generator);
 
-			this.testee.BindAllBase();
+            this.testee.BindAllBaseClasses();
 
-			this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
-		}
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
+        }
 
         [Fact]
         public void BindToBase()

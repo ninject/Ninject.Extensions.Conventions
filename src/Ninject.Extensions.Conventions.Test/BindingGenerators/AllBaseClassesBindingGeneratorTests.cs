@@ -1,5 +1,5 @@
 //-------------------------------------------------------------------------------
-// <copyright file="BaseBindingGeneratorTests.cs" company="Ninject Project Contributors">
+// <copyright file="AbstractClassWithManyInterfaces.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2013 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -19,28 +19,28 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-#if !SILVERLIGHT_30 && !SILVERLIGHT_20 && !NO_MOQ && !NO_GENERIC_MOQ
+using System.Diagnostics;
+
 namespace Ninject.Extensions.Conventions.BindingGenerators
 {
     using FluentAssertions;
-
     using Ninject.Extensions.Conventions.BindingBuilder;
     using Ninject.Extensions.Conventions.Fakes;
+    using Ninject.Extensions.Conventions.Fakes.AbstractInheritanceTree;
     using Ninject.Extensions.Conventions.Fakes.Interfaces;
     using Ninject.Extensions.Conventions.Fakes.NormalClasses;
-
     using Xunit;
 
-    public class BaseBindingGeneratorTests
+    public class AllBaseClassesBindingGeneratorTests
     {
         private readonly KernelMock kernelMock;
         private readonly IBindingGenerator testee;
 
-        public BaseBindingGeneratorTests()
+        public AllBaseClassesBindingGeneratorTests()
         {
             this.kernelMock = new KernelMock();
             var bindingGeneratorFactory = new BindingGeneratorFactory(null);
-            this.testee = bindingGeneratorFactory.CreateBaseBindingGenerator();
+            this.testee = bindingGeneratorFactory.CreateAllBaseClassesBindingGenerator();
         }
 
         [Fact]
@@ -69,9 +69,6 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             this.kernelMock.VerifyAllBindingsCreated(new[] { typeof(BaseService<int>) }, type);
         }
 
-        //// TODO: Open to Open allowed
-        //// TODO: Open To Closed no binding
-
         [Fact]
         public void SyntaxFormAllBindingsAreReturned()
         {
@@ -80,7 +77,26 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             var syntax = this.testee.CreateBindings(type, this.kernelMock.Object);
 
             syntax.Should().BeEquivalentTo(this.kernelMock.ReturnedSyntax);
+        }        
+
+        [Fact]
+        public void BindingForAnyInheritorOfAbstractTypeIsCreated()
+        {
+            var type = typeof(DerivedAbstractClassImpl);
+
+            this.testee.CreateBindings(type, this.kernelMock.Object);
+
+            this.kernelMock.VerifyAllBindingsCreated(new[] { typeof(BaseAbstractClass), typeof(DerivedAbstractClass) }, type);
+        }
+
+        [Fact]
+        public void BindingForAnyInheritorOfTypeIsCreated()
+        {
+            var type = typeof(LeafClass);
+
+            this.testee.CreateBindings(type, this.kernelMock.Object);
+            
+            this.kernelMock.VerifyAllBindingsCreated(new[] { typeof(BaseAbstractClass), typeof(DerivedAbstractClass), typeof(DerivedAbstractClassImpl) }, type);
         }
     }
 }
-#endif

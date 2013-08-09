@@ -1,6 +1,6 @@
 //-------------------------------------------------------------------------------
 // <copyright file="ConventionSyntax.Bind.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
+//   Copyright (c) 2009-2013 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -67,14 +67,14 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             return this.BindWith(this.bindingGeneratorFactory.CreateAllInterfacesBindingGenerator());
         }
 
-		/// <summary>
-		/// Binds the base type of the given types to the type.
-		/// </summary>
-		/// <returns>The fluent syntax</returns>
-		public IConfigureSyntax BindAllBase()
-		{
-			return this.BindWith(this.bindingGeneratorFactory.CreateAllBaseBindingGenerator());
-		}
+        /// <summary>
+        /// Binds the base type of the given types to the type.
+        /// </summary>
+        /// <returns>The fluent syntax</returns>
+        public IConfigureSyntax BindAllBaseClasses()
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateAllBaseClassesBindingGenerator());
+        }
 
         /// <summary>
         /// Binds the base type of the given types to the type.

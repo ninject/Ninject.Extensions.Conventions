@@ -1,7 +1,7 @@
 ﻿//-------------------------------------------------------------------------------
 // <copyright file="AbstractClassWithManyInterfaces.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
-//   Authors: Chuck Durfee (chuck@neontapir.com)
+//   Copyright (c) 2009-2013 Ninject Project Contributors
+//   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
 //   you may not use this file except in compliance with one of the Licenses.
@@ -21,8 +21,8 @@
 
 namespace Ninject.Extensions.Conventions.Fakes.AbstractInheritanceTree
 {
-	public class DerivedAbstractClassImpl : DerivedAbstractClass
-	{
-		
-	}
+    public class DerivedAbstractClassImpl : DerivedAbstractClass
+    {
+        
+    }
 }

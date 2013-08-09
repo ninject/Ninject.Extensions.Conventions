@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="BaseBindingGenerator.cs" company="Ninject Project Contributors">
+// <copyright file="AbstractClassWithManyInterfaces.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2013 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -24,13 +24,13 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
     using System;
     using System.Collections.Generic;
     using System.Linq;
-
-    using Ninject.Syntax;
+    
+	using Ninject.Syntax;
 
     /// <summary>
-    /// Binds a type to its base type.
+    /// Binds a type to any non-Object base types in its inheritance tree.
     /// </summary>
-    public class BaseBindingGenerator : IBindingGenerator
+    public class AllBaseClassesBindingGenerator : IBindingGenerator
     {
         /// <summary>
         /// Creates the bindings for a type.
@@ -50,14 +50,40 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             if (bindingRoot == null)
             {
                 throw new ArgumentNullException("bindingRoot");
-            } 
+            }
             
             if (type.IsInterface || type.IsAbstract)
             {
                 return Enumerable.Empty<IBindingWhenInNamedWithOrOnSyntax<object>>();
             }
+            
+            var bindings = RecursivelyBindToAbstractBaseTypes(type, bindingRoot);
+            return bindings;
+        }
 
-            return new[] { bindingRoot.Bind(type.BaseType).To(type) };
+        private IEnumerable<IBindingWhenInNamedWithOrOnSyntax<object>> RecursivelyBindToAbstractBaseTypes(Type type, IBindingRoot bindingRoot)
+        {
+            Type baseType = type.BaseType;
+            var bindings = new List<IBindingWhenInNamedWithOrOnSyntax<object>>();
+            if (baseType != null)
+            {
+                bindings.Add(bindingRoot.Bind(baseType).To(type));
+                if (ShouldBeBound(baseType))
+                {
+                    var ancestor = baseType.BaseType;
+                    while (ancestor != null && ShouldBeBound(ancestor))
+                    {
+                        bindings.Add(bindingRoot.Bind(ancestor).To(type));
+                        ancestor = ancestor.BaseType;
+                    }
+                }
+            }
+            return bindings;
+        }
+
+        private static bool ShouldBeBound(Type type)
+        {
+            return type.IsClass && type != typeof(object);
         }
     }
 }

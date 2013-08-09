@@ -99,7 +99,7 @@
     <Compile Include="BindingBuilder\SingleConfigurationBindingCreator.cs" />
     <Compile Include="BindingBuilder\TypeSelector.cs" />
     <Compile Include="BindingGenerators\AbstractInterfaceBindingGenerator.cs" />
-    <Compile Include="BindingGenerators\AllBaseBindingGenerator.cs" />
+    <Compile Include="BindingGenerators\AllBaseClassesBindingGenerator.cs" />
     <Compile Include="BindingGenerators\BindableTypeSelector.cs" />
     <Compile Include="BindingBuilder\BindingGeneratorFactory.cs" />
     <Compile Include="BindingGenerators\FactoryBindingGenerator.cs" />

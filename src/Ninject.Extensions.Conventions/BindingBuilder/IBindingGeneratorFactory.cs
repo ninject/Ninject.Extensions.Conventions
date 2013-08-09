@@ -1,6 +1,6 @@
 ﻿//-------------------------------------------------------------------------------
 // <copyright file="IBindingGeneratorFactory.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
+//   Copyright (c) 2009-2013 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -57,11 +57,11 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The newly created generator.</returns>
         IBindingGenerator CreateAllInterfacesBindingGenerator();
 
-		/// <summary>
-		/// Creates an all base binding generator.
-		/// </summary>
-		/// <returns>The newly created generator.</returns>
-		IBindingGenerator CreateAllBaseBindingGenerator();
+        /// <summary>
+        /// Creates an all base classes binding generator.
+        /// </summary>
+        /// <returns>The newly created generator.</returns>
+        IBindingGenerator CreateAllBaseClassesBindingGenerator();
 
         /// <summary>
         /// Creates a base binding generator.
