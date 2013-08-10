@@ -19,8 +19,7 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-using System.Diagnostics;
-
+#if !SILVERLIGHT_30 && !SILVERLIGHT_20 && !NO_MOQ && !NO_GENERIC_MOQ
 namespace Ninject.Extensions.Conventions.BindingGenerators
 {
     using FluentAssertions;
@@ -100,3 +99,4 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         }
     }
 }
+#endif
