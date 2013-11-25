@@ -96,7 +96,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
                 return (string)arguments[0];
             }
 
-            protected override Parameters.ConstructorArgument[] GetConstructorArguments(System.Reflection.MethodInfo methodInfo, object[] arguments)
+            protected override Parameters.IConstructorArgument[] GetConstructorArguments(System.Reflection.MethodInfo methodInfo, object[] arguments)
             {
                 return base.GetConstructorArguments(methodInfo, arguments).Skip(1).ToArray();
             }
