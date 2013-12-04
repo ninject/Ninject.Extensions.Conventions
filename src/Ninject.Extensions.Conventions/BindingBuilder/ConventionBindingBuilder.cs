@@ -238,8 +238,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             {
                 this.UnionTypes();
                 this.types = this.allTypes.Distinct().ToList();
-                this.allTypes = null;
-                this.currentTypes = null;
+                this.allTypes = Enumerable.Empty<Type>();
+                this.currentTypes = Enumerable.Empty<Type>();
             }
         }
     }
