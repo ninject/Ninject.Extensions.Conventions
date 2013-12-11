@@ -24,9 +24,9 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
     using System.Linq;
     using System.Reflection;
     using FluentAssertions;
-
     using Ninject.Extensions.Conventions.Fakes.Interfaces;
     using Ninject.Extensions.Conventions.Fakes.NormalClasses;
+    using Ninject.Extensions.Conventions.Fakes.OpenGenerics;
     using Xunit;
 
     public class AssemblyLoadingTests
@@ -60,6 +60,32 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
 
                 instance.Should().NotBeNull();
                 instance.Should().BeOfType<DefaultConvention>();
+            }
+        }
+
+        [Fact]
+        public void MultipleAssembliesInOneBind() {
+            using (IKernel kernel = new StandardKernel()) {
+                kernel.Bind(
+                    x => {
+                        x.From(Assembly.GetExecutingAssembly())
+                            .SelectAllTypes()
+                            .InNamespaceOf<DefaultConvention>()
+                            .BindDefaultInterface();
+
+                        x.From(Assembly.GetExecutingAssembly())
+                            .SelectAllTypes()
+                            .InNamespaceOf<OpenGenericClassWithManyInterfaces<int>>()
+                            .BindAllInterfaces();
+                    });
+                var instance = kernel.Get<IDefaultConvention>();
+
+                instance.Should().NotBeNull();
+                instance.Should().BeOfType<DefaultConvention>();
+
+                var i = kernel.Get<IOpenGenericInterface<int>>();
+                i.Should().NotBeNull();
+                i.Should().BeOfType<OpenGenericClassWithManyInterfaces<int>>();
             }
         }
 
