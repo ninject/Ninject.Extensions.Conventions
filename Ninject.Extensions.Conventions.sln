@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Conventions", "Ninject.Extensions.Conventions\Ninject.Extensions.Conventions.csproj", "{C9016F7B-68CE-46A7-80A7-A4592B6F0EAC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Conventions", "src\Ninject.Extensions.Conventions\Ninject.Extensions.Conventions.csproj", "{C9016F7B-68CE-46A7-80A7-A4592B6F0EAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Conventions.Tests", "Ninject.Extensions.Conventions.Test\Ninject.Extensions.Conventions.Tests.csproj", "{861737AD-F1E6-4D67-9A6C-26642BA9F267}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninject.Extensions.Conventions.Tests", "src\Ninject.Extensions.Conventions.Test\Ninject.Extensions.Conventions.Tests.csproj", "{861737AD-F1E6-4D67-9A6C-26642BA9F267}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPlugin", "TestPlugin\TestPlugin.csproj", "{F4A41F6B-087A-4557-B306-C6188320F290}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestPlugin", "src\TestPlugin\TestPlugin.csproj", "{F4A41F6B-087A-4557-B306-C6188320F290}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

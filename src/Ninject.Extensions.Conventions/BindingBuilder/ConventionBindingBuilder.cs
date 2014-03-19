@@ -43,6 +43,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         private IEnumerable<Type> allTypes = Enumerable.Empty<Type>();
         private IEnumerable<Type> currentTypes = Enumerable.Empty<Type>();
         private List<Type> types;
+        private bool selectionComplete;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ConventionBindingBuilder"/> class.
@@ -61,6 +62,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="assemblies">The assemblies from which the types are selected.</param>
         public void SelectAllTypesFrom(IEnumerable<Assembly> assemblies)
         {
+            if (this.selectionComplete) this.Reset();
             this.selectedAssemblies = assemblies;
             this.UnionTypes();
             this.currentTypes = this.typeSelector.GetExportedTypes(this.selectedAssemblies);
@@ -132,6 +134,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="generator">The generator to use to create the bindings.</param>
         public void BindWith(IBindingGenerator generator)
         {
+            this.selectionComplete = true;
             if (generator == null)
             {
                 throw new ArgumentNullException("generator");
@@ -241,6 +244,16 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
                 this.allTypes = null;
                 this.currentTypes = null;
             }
+        }
+
+        private void Reset()
+        {
+            this.bindingSyntax.Clear();
+            this.selectedAssemblies = null;
+            this.allTypes = Enumerable.Empty<Type>();
+            this.currentTypes = Enumerable.Empty<Type>();
+            this.types = null;
+            this.selectionComplete = false;
         }
     }
 }

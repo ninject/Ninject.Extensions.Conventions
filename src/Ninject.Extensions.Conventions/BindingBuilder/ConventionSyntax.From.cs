@@ -19,6 +19,8 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
+using System.Resources;
+
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
     using System;
@@ -112,7 +114,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The fluent syntax.</returns>
         public IIncludingNonePublicTypesSelectSyntax From(IEnumerable<string> assemblies)
         {
-            return From(assemblies, filter => true);
+            return this.From(assemblies, filter => true);
         }
 
         /// <summary>

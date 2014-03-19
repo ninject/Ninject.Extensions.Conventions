@@ -19,6 +19,8 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
+using Ninject.Extensions.Conventions.Fakes;
+
 namespace Ninject.Extensions.Conventions.IntegrationTests
 {
     using System.Linq;
@@ -92,17 +94,27 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
         }
 
         [Fact]
-        public void sdf()
+        public void CanHaveMultipleStatementsInBind()
         {
             using (IKernel kernel = new StandardKernel())
             {
                 kernel.Bind(
-                    x => x.FromThisAssembly()
-                          .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
-                          .BindSelection((ts, ti) => ti.Where(i => !i.IsInterface)));
-                var instance = kernel.Get<GenericBaseClassWithManyInterfaces<int, int>>();
+                    x =>
+                    {
+                        x.FromThisAssembly()
+                            .SelectAllClasses().InNamespaceOf<ClassWithManyInterfaces>()
+                            .BindAllInterfaces();
+                        x.FromThisAssembly()
+                            .SelectAllClasses().InheritedFrom<IService>()
+                            .BindAllInterfaces();
+                    });
 
-                instance.Should().BeAssignableTo<ClassWithManyInterfaces>();
+                var instance1 = kernel.Get<INormalInterface>();
+                var instance2 = kernel.Get<IService>();
+
+
+                instance1.Should().BeAssignableTo<ClassWithManyInterfaces>();
+                instance2.Should().BeAssignableTo<MultipleInterfaceCrazyService>();
             }
         } 
     }
