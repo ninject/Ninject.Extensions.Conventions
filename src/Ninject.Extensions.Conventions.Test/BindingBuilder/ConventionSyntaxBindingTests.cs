@@ -71,7 +71,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         public void BindGeneric()
         {
             Type serviceType = typeof(string);
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock
                 .Setup(g => g.CreateSpecificTypesBindingGenerator(serviceType))
                 .Returns(generator);
@@ -85,7 +85,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         public void Bind()
         {
             Type[] serviceTypes = { typeof(string), typeof(object) };
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock
                 .Setup(g => g.CreateSpecificTypesBindingGenerator(serviceTypes))
                 .Returns(generator);
@@ -98,7 +98,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Fact]
         public void BindToAllInterfaces()
         {
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateAllInterfacesBindingGenerator()).Returns(generator);
 
             this.testee.BindAllInterfaces();
@@ -109,7 +109,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Fact]
         public void BindToAllBaseClasses()
         {
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateAllBaseClassesBindingGenerator()).Returns(generator);
 
             this.testee.BindAllBaseClasses();
@@ -120,7 +120,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Fact]
         public void BindToBase()
         {
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateBaseBindingGenerator()).Returns(generator);
 
             this.testee.BindBase();
@@ -131,7 +131,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Fact]
         public void BindToDefaultInterface()
         {
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateDefaultInterfaceBindingGenerator()).Returns(generator);
 
             this.testee.BindDefaultInterface();
@@ -142,7 +142,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Fact]
         public void BindToDefaultInterfaces()
         {
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateDefaultInterfacesBindingGenerator()).Returns(generator);
 
             this.testee.BindDefaultInterfaces();
@@ -153,7 +153,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Fact]
         public void BindToSelf()
         {
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateSelfBindingGenerator()).Returns(generator);
 
             this.testee.BindToSelf();
@@ -164,7 +164,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [Fact]
         public void BindToSingleInterface()
         {
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateSingleInterfaceBindingGenerator()).Returns(generator);
 
             this.testee.BindSingleInterface();
@@ -176,7 +176,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         public void BindToSelection()
         {
             ServiceSelector selector = (t1, t2) => t2;
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateSelectorBindingGenerator(selector)).Returns(generator);
 
             this.testee.BindSelection(selector);
@@ -188,7 +188,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         public void BindToRegex()
         {
             const string Pattern = "ThePattern";
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateRegexBindingGenerator(Pattern)).Returns(generator);
 
             this.testee.BindUsingRegex(Pattern);
@@ -201,7 +201,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             const string Pattern = "ThePattern";
             const RegexOptions Options = RegexOptions.Multiline;
-            var generator = Mock.Of<IBindingGenerator>();
+            var generator = new Mock<IBindingGenerator>().Object;
             this.bindingGeneratorFactoryMock.Setup(g => g.CreateRegexBindingGenerator(Pattern, Options)).Returns(generator);
 
             this.testee.BindUsingRegex(Pattern, Options);
