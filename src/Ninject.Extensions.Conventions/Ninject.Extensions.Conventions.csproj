@@ -112,6 +112,7 @@
     <Compile Include="BindingGenerators\SelectorBindingGenerator.cs" />
     <Compile Include="BindingGenerators\SelfBindingGenerator.cs" />
     <Compile Include="BindingGenerators\SingleInterfaceBindingGenerator.cs" />
+    <Compile Include="BindingGenerators\SpecificTypesBindingGenerator.cs" />
     <Compile Include="Extensions\ExtensionsForIKernel.cs" />
     <Compile Include="Extensions\ExtensionsForAssembly.cs" />
     <Compile Include="BindingBuilder\ConventionSyntax.cs" />

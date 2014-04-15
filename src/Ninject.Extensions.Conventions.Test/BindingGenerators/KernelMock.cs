@@ -58,50 +58,59 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
 
         public void VerifyBindingCreated<TInterface, TImplementation>()
         {
-            this.VerifyBindingCreated(typeof(TInterface), typeof(TImplementation));
+            this.VerifyBindingCreated(new[] { typeof(TInterface) }, typeof(TImplementation));
         }
 
-        public void VerifyBindingCreated(Type interfaceType, Type implementationType)
+        public void VerifyBindingCreated(Type[] interfaceTypes, Type implementationType)
         {
-            this.Bindings.Should().Contain(new Binding(interfaceType, implementationType));
+            this.Bindings.Should().Contain(new Binding(interfaceTypes, implementationType));
         }
 
         public void VerifyAllBindingsCreated(IEnumerable<Type> interfaceTypes, Type implementationType)
         {
             this.Bindings.Count.Should().Be(interfaceTypes.Count());
 
-            foreach (var interfaceType in interfaceTypes)
+            foreach (Type interfaceType in interfaceTypes)
             {
-                this.VerifyBindingCreated(interfaceType, implementationType);
+                this.VerifyBindingCreated(new[] { interfaceType }, implementationType);
             }
         }
         
         private IBindingToSyntax<object> CreateBindToMock(Type[] interfaceTypes)
         {
-            var interfaceType = interfaceTypes.Single();
             var bindToMock = new Mock<IBindingToSyntax<object>>();
-            bindToMock.Setup(m => m.To(It.IsAny<Type>())).Returns<Type>(implementationType => this.CreateConfigSyntax(interfaceType, implementationType));
-            bindToMock.Setup(m => m.ToSelf()).Returns(() => this.CreateConfigSyntax(interfaceType, interfaceType));
+            bindToMock.Setup(m => m.To(It.IsAny<Type>())).Returns<Type>(implementationType => this.CreateConfigSyntax(interfaceTypes, implementationType));
+
+            if (interfaceTypes.Length == 1)
+            {
+                bindToMock.Setup(m => m.ToSelf()).Returns(() => this.CreateConfigSyntax(interfaceTypes, interfaceTypes.Single()));
+            }
+            else
+            {
+                bindToMock.Setup(m => m.ToSelf())
+                    .Throws(new Exception(".Bind(type1, type2,..).ToSelf() is not supported. To self is only supported for .Bind(oneType).ToSelf()"));
+            }
+
             return bindToMock.Object;
         }
 
-        private IBindingWhenInNamedWithOrOnSyntax<object> CreateConfigSyntax(Type interfaceType, Type implementationType)
+        private IBindingWhenInNamedWithOrOnSyntax<object> CreateConfigSyntax(Type[] interfaceTypes, Type implementationType)
         {
             var configSyntax = new Mock<IBindingWhenInNamedWithOrOnSyntax<object>>().Object;
             this.ReturnedSyntax.Add(configSyntax);
-            this.Bindings.Add(new Binding(interfaceType, implementationType));
+            this.Bindings.Add(new Binding(interfaceTypes, implementationType));
             return configSyntax;
         }
 
         public class Binding
         {
-            public Binding(Type interfaceType, Type implementationType)
+            public Binding(Type[] interfaceTypes, Type implementationType)
             {
-                this.InterfaceType = interfaceType;
+                this.InterfaceTypes = interfaceTypes;
                 this.ImplementationType = implementationType;
             }
 
-            public Type InterfaceType { get; private set; }
+            public Type[] InterfaceTypes { get; private set; }
 
             public Type ImplementationType { get; private set; }
 
@@ -115,12 +124,12 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
 
                 return 
                     this.ImplementationType.Equals(other.ImplementationType) && 
-                    this.InterfaceType.Equals(other.InterfaceType);
+                    this.InterfaceTypes.SequenceEqual(other.InterfaceTypes);
             }
 
             public override int GetHashCode()
             {
-                return this.ImplementationType.GetHashCode() + (13 * this.InterfaceType.GetHashCode());
+                return this.ImplementationType.GetHashCode() + (13 * this.InterfaceTypes.GetHashCode());
             }
         }
     }

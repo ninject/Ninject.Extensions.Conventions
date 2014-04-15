@@ -98,6 +98,7 @@
     <Compile Include="BindingBuilder\TypeSelectorTests.cs" />
     <Compile Include="BindingBuilder\TypeFilterTests.cs" />
     <Compile Include="BindingGenerators\AllBaseClassesBindingGeneratorTests.cs" />
+    <Compile Include="BindingGenerators\SpecificTypesBindingGeneratorTests.cs" />
     <Compile Include="BindingGenerators\TestBindingGeneratorFactory.cs" />
     <Compile Include="Fakes\AbstractInheritanceTree\BaseAbstractClass.cs" />
     <Compile Include="Fakes\AbstractInheritanceTree\DerivedAbstractClassImpl.cs" />
