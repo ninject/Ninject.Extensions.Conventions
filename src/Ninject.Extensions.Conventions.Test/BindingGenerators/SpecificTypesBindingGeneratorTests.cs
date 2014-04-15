@@ -53,7 +53,8 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             exception.Message.Should()
                 .Contain(type.FullName)
                 .And.Contain(typeof(IBar).FullName)
-                .And.Contain(typeof(IService).FullName);
+                .And.Contain(typeof(IService).FullName)
+                .And.NotContain(typeof(IFoo).FullName);
         }
 
         [Fact]
