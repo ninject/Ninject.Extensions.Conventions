@@ -1,3 +1,11 @@
+Version 3.2.0.1
+-------------
+- Add: Support for combination of assembly pattern matching and filter
+  i.e.
+  kernel.Bind(x => x
+     .FromAssembliesMatching(IEnumerable<string> patterns, Predicate<Assembly> filter)
+	 ...);
+
 Version 3.2.0
 -------------
 - Add: Support for multiple configurations in one BindWith

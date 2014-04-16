@@ -126,6 +126,14 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <param name="patterns">The patterns to match the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
         IIncludingNonePublicTypesSelectSyntax FromAssembliesMatching(IEnumerable<string> patterns);
+
+        /// <summary>
+        /// Scans the assemblies that matching one of the given assembly name pattern.
+        /// </summary>
+        /// <param name="patterns">The patterns to match the assemblies.</param>
+        /// <param name="filter">The filter for filtering the assemblies.</param>
+        /// <returns>The fluent syntax.</returns>
+        IIncludingNonePublicTypesSelectSyntax FromAssembliesMatching(IEnumerable<string> patterns, Predicate<Assembly> filter);
 #endif        
     }
 }
