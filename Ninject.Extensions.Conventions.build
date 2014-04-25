@@ -47,6 +47,8 @@
 		<property name="defines" value="${build.defines}" unless="${teamcity}"/>
 		<csc noconfig="true" nostdlib="true" warnaserror="true" target="library" debug="${build.debug}" optimize="${build.optimize}" define="${defines}"
 		 output="${current.path.test}/${product.assembly.test}">
+      <arg value="-sdk:2" if="${string::contains(build.platform, 'mono-3.5')}"/>
+      <arg value="-sdk:4" if="${string::contains(build.platform, 'mono-4.0')}"/>
 			<sources basedir="${path.src}">
 				<include name="${product.name}.Test/**/*.cs"/>
 			</sources>
