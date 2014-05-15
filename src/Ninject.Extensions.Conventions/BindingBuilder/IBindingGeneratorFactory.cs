@@ -24,7 +24,6 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     using System;
     using System.Text.RegularExpressions;
 
-    using Ninject.Components;
     using Ninject.Extensions.Conventions.BindingGenerators;
     using Ninject.Extensions.Conventions.Syntax;
 #if !SILVERLIGHT_20 && !WINDOWS_PHONE && !NETCF_35
@@ -36,6 +35,13 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     /// </summary>
     public interface IBindingGeneratorFactory
     {
+        /// <summary>
+        /// Creates a specific types binding generator.
+        /// </summary>
+        /// <param name="serviceTypes">The service types the generator should create bindings for.</param>
+        /// <returns>The newly created generator.</returns>
+        IBindingGenerator CreateSpecificTypesBindingGenerator(params Type[] serviceTypes);
+
         /// <summary>
         /// Creates a regex binding generator.
         /// </summary>

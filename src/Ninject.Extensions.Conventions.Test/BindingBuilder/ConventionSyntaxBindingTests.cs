@@ -22,6 +22,7 @@
 #if !NO_MOQ
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
+    using System;
     using System.Text.RegularExpressions;
     using Moq;
     using Ninject.Extensions.Conventions.BindingGenerators;
@@ -62,6 +63,34 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             var generator = new Mock<IBindingGenerator>().Object;
 
             this.testee.BindWith(generator);
+
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
+        }
+
+        [Fact]
+        public void BindGeneric()
+        {
+            Type serviceType = typeof(string);
+            var generator = new Mock<IBindingGenerator>().Object;
+            this.bindingGeneratorFactoryMock
+                .Setup(g => g.CreateSpecificTypesBindingGenerator(serviceType))
+                .Returns(generator);
+
+            this.testee.Bind<string>();
+
+            this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
+        }
+
+        [Fact]
+        public void Bind()
+        {
+            Type[] serviceTypes = { typeof(string), typeof(object) };
+            var generator = new Mock<IBindingGenerator>().Object;
+            this.bindingGeneratorFactoryMock
+                .Setup(g => g.CreateSpecificTypesBindingGenerator(serviceTypes))
+                .Returns(generator);
+
+            this.testee.Bind(serviceTypes);
 
             this.conventionBindingBuilderMock.Verify(b => b.BindWith(generator));
         }

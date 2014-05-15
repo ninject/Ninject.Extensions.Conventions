@@ -59,6 +59,26 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         /// <summary>
+        /// Binds <typeparamref name="T"/> to the type.
+        /// </summary>
+        /// <typeparam name="T">The type to bind.</typeparam>
+        /// <returns>The fluent syntax</returns>
+        public IConfigureSyntax Bind<T>()
+        {
+            return this.Bind(typeof(T));
+        }
+
+        /// <summary>
+        /// Binds <paramref name="types"/> to the type.
+        /// </summary>
+        /// <param name="types">The types to bind.</param>
+        /// <returns>The fluent syntax</returns>
+        public IConfigureSyntax Bind(params Type[] types)
+        {
+            return this.BindWith(this.bindingGeneratorFactory.CreateSpecificTypesBindingGenerator(types));
+        }
+
+        /// <summary>
         /// Binds all interfaces of the given types to the type.
         /// </summary>
         /// <returns>The fluent syntax</returns>

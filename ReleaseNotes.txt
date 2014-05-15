@@ -1,4 +1,14 @@
-Version 3.2.0
+Version 3.2.0.1
+-------------
+- Add: Support for specific service type binding IBindSyntax.Bind<
+  E.g.
+  kernel.Bind(x => x
+     .FromThisAssembly()
+	 .SelectAllClasses()
+	 .InheritedFrom<IFoo>()
+	 .Bind<IFoo>());
+
+Version 3.2.0.0
 -------------
 - Add: Support for multiple configurations in one BindWith
   E.g.
