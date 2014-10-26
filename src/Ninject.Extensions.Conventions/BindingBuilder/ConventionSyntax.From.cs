@@ -19,7 +19,6 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
-using System.Resources;
 
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
@@ -167,6 +166,17 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         public IIncludingNonePublicTypesSelectSyntax FromAssembliesMatching(IEnumerable<string> patterns)
         {
             return this.From(this.assemblyFinder.FindAssembliesMatching(patterns));
+        }
+
+        /// <summary>
+        /// Scans the assemblies matching the given pattern.
+        /// </summary>
+        /// <param name="patterns">The patterns to match the assemblies.</param>
+        /// <param name="filter">The filter for filtering the assemblies.</param>
+        /// <returns>The fluent syntax.</returns>
+        public IIncludingNonePublicTypesSelectSyntax FromAssembliesMatching(IEnumerable<string> patterns, Predicate<Assembly> filter)
+        {
+            return this.From(this.assemblyFinder.FindAssembliesMatching(patterns), filter);
         }
 #endif
     }

@@ -212,6 +212,22 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
             this.conventionBindingBuilderMock.Verify(b => b.SelectAllTypesFrom(IsMatchingSequence(assemblies)));
         }
+
+        [Fact]
+        public void FromAssembliesMatchingWithFilter_CallBuilder_WithAllAssembliesGivenByTheAssemblyFinder()
+        {
+            Predicate<Assembly> filter = a => true;
+            var patterns = new[] { "Pattern1", "Pattern2" };
+            var assemblyNames = new[] { "Assembly" };
+            var assemblies = new[] { Assembly.GetCallingAssembly() };
+
+            this.SetupFindAssembliesMatching(assemblyNames, patterns);
+            this.SetupFindAssemblies(filter, assemblies, assemblyNames);
+
+            this.testee.FromAssembliesMatching(patterns.AsEnumerable(), filter);
+
+            this.conventionBindingBuilderMock.Verify(b => b.SelectAllTypesFrom(IsMatchingSequence(assemblies)));
+        }
 #endif
 
 #if !NO_SKIP_VISIBILITY
