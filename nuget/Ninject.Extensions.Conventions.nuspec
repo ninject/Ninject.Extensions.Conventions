@@ -5,14 +5,15 @@
     <version></version>
     <authors>Ninject Project Contributors</authors>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
-	<licenseUrl>https://github.com/ninject/ninject.extensions.conventions/raw/master/LICENSE.txt</licenseUrl>
+    <licenseUrl>https://github.com/ninject/ninject.extensions.conventions/raw/master/LICENSE.txt</licenseUrl>
     <description>Extension for convention based binding for Ninject</description>
+    <releaseNotes>https://github.com/ninject/Ninject.Extensions.Conventions/blob/master/ReleaseNotes.md</releaseNotes>
     <language>en-US</language>
-	<tags>Ninject ioc di</tags>
-	<iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>
-	<projectUrl>http://www.ninject.org</projectUrl>
+    <tags>Ninject ioc di</tags>
+    <iconUrl>https://github.com/ninject/ninject/raw/master/logos/Ninject-Logo32.png</iconUrl>
+    <projectUrl>http://www.ninject.org</projectUrl>
     <dependencies>
       <dependency id="Ninject" version="" />
-    </dependencies> 
+    </dependencies>
   </metadata>
 </package>
