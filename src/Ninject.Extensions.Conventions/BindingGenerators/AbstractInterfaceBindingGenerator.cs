@@ -34,12 +34,12 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
     public abstract class AbstractInterfaceBindingGenerator : IBindingGenerator
     {
         /// <summary>
-        /// Gets the types that are binddabe to a given type.
+        /// Gets the types that are bindable to a given type.
         /// </summary>
         private readonly IBindableTypeSelector bindableTypeSelector;
 
         /// <summary>
-        /// Creator for multiple bindins for one type.
+        /// Creator for multiple bindings for one type.
         /// </summary>
         private readonly IBindingCreator bindingCreator;
 
@@ -52,7 +52,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// Initializes a new instance of the <see cref="AbstractInterfaceBindingGenerator"/> class.
         /// </summary>
         /// <param name="bindableTypeSelector">The bindable type selector.</param>
-        /// <param name="bindingCreator">Creator for multiple bindins for one type.</param>
+        /// <param name="bindingCreator">Creator for multiple bindings for one type.</param>
         /// <param name="filter">The filter used to decide if a binding for the interface type is created.</param>
         protected AbstractInterfaceBindingGenerator(
             IBindableTypeSelector bindableTypeSelector, 

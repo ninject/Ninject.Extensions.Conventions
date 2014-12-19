@@ -32,7 +32,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         /// Initializes a new instance of the <see cref="AllInterfacesBindingGenerator"/> class.
         /// </summary>
         /// <param name="bindableTypeSelector">The bindable type selector.</param>
-        /// <param name="bindingCreator">Creator for multiple bindins for one type.</param>
+        /// <param name="bindingCreator">Creator for multiple bindings for one type.</param>
         public AllInterfacesBindingGenerator(IBindableTypeSelector bindableTypeSelector, IBindingCreator bindingCreator)
             : base(bindableTypeSelector, bindingCreator, (ts, ti) => true)
         {
