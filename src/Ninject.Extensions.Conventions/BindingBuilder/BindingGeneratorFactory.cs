@@ -38,7 +38,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
     public class BindingGeneratorFactory : IBindingGeneratorFactory
     {
         /// <summary>
-        /// Evaluator for base types nad interfaces.
+        /// Evaluator for base types and interfaces.
         /// </summary>
         private readonly IBindableTypeSelector bindableTypeSelector;
 
