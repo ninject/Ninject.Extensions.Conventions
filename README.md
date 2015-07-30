@@ -11,7 +11,7 @@ kernel.Bind(x =>
     {
         x.FromThisAssembly() // Scans currently assembly
          .SelectAllClasses() // Retrieve all non-abstract classes
-         .BindDefaultInterface() // Binds the default interface to them;
+         .BindDefaultInterface(); // Binds the default interface to them;
     });
 ```
 
@@ -25,7 +25,7 @@ kernel.Bind(x =>
     {
         x.FromThisAssembly() // Scans currently assembly
          .SelectAllClasses() // Retrieve all non-abstract classes
-         .BindSingleInterface() // Binds the default interface to them;
+         .BindSingleInterface(); // Binds the default interface to them;
     });
 ```
 
