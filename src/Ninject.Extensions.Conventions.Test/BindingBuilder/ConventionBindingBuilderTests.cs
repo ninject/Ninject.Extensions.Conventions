@@ -19,6 +19,8 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
+using Ninject.Extensions.Conventions.Fakes;
+
 #if !NO_MOQ
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
@@ -210,6 +212,57 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             {
                 bindingMock.Verify(b => b.InSingletonScope());
             }
+        }
+
+        [Fact]
+        public void ConfigureScopesFromAttributes()
+        {
+            var types = new[] { typeof(SingletonScopedService), typeof(ThreadScopedService), typeof(TransientScopedService) };
+            var generatorMock = new Mock<IBindingGenerator>();
+            var singletonScopedBindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+            var threadScopedBindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+            var transientScopedBindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+
+            this.SetupTypeFilterGetTypes(types);
+            generatorMock.Setup(g => g.CreateBindings(typeof(SingletonScopedService), this.bindingRoot)).Returns(singletonScopedBindingMocks.Select(b => b.Object));
+            generatorMock.Setup(g => g.CreateBindings(typeof(ThreadScopedService), this.bindingRoot)).Returns(threadScopedBindingMocks.Select(b => b.Object));
+            generatorMock.Setup(g => g.CreateBindings(typeof(TransientScopedService), this.bindingRoot)).Returns(transientScopedBindingMocks.Select(b => b.Object));
+
+            this.testee.SelectAllTypesFrom(new Assembly[0]);
+            this.testee.BindWith(generatorMock.Object);
+            this.testee.ConfigureScopesFromAttributes();
+
+            foreach (var bindingMock in singletonScopedBindingMocks)
+            {
+                bindingMock.Verify(b => b.InSingletonScope());
+            }
+
+            foreach (var bindingMock in threadScopedBindingMocks)
+            {
+                bindingMock.Verify(b => b.InThreadScope());
+            }
+
+            foreach (var bindingMock in transientScopedBindingMocks)
+            {
+                bindingMock.Verify(b => b.InTransientScope());
+            }
+        }
+
+        [Fact]
+        public void ConfigureScopesFromAttributesThrowsIfServiceHasMultipleScopes()
+        {
+            var types = new[] { typeof(ServiceWithMultipleScopes) };
+            var generatorMock = new Mock<IBindingGenerator>();
+            var bindingMocks = new[] { CreateBindingMock(), CreateBindingMock() };
+
+            this.SetupTypeFilterGetTypes(types);
+            generatorMock.Setup(g => g.CreateBindings(typeof(ServiceWithMultipleScopes), this.bindingRoot)).Returns(bindingMocks.Select(b => b.Object));
+
+            this.testee.SelectAllTypesFrom(new Assembly[0]);
+            this.testee.BindWith(generatorMock.Object);
+
+
+            Assert.Throws<InvalidOperationException>(() => this.testee.ConfigureScopesFromAttributes());
         }
 
         [Fact]
