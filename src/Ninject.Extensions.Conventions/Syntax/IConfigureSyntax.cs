@@ -39,5 +39,11 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// <param name="configuration">The configuration.</param>
         /// <returns>The fluent syntax.</returns>
         IConfigureForSyntax Configure(ConfigurationActionWithService configuration);
+
+        /// <summary>
+        /// Evaluates scope attributes for all types.
+        /// </summary>
+        /// <returns>The fluent syntax.</returns>
+        IConfigureForSyntax ConfigureScopesFromAttributes();
     }
 }

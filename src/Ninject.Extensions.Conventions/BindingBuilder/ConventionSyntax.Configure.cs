@@ -77,5 +77,15 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.bindingBuilder.Configure(configuration);
             return this;
         }
+
+        /// <summary>
+        /// Evaluates scope attributes for all types.
+        /// </summary>
+        /// <returns>The fluent syntax.</returns>
+        public IConfigureForSyntax ConfigureScopesFromAttributes()
+        {
+            this.bindingBuilder.ConfigureScopesFromAttributes();
+            return this;
+        }
     }
 }

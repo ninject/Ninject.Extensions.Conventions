@@ -19,6 +19,8 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
+using Ninject.Extensions.Conventions.Attributes;
+
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
     using System;
@@ -227,6 +229,26 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             foreach (var syntax in this.bindingSyntax[type])
             {
                 configuration(syntax, type);
+            }
+        }
+
+        /// <summary>
+        /// Evaluates scope attributes for all types.
+        /// </summary>
+        public void ConfigureScopesFromAttributes()
+        {
+            foreach (var bindingSyntaxEntry in this.bindingSyntax)
+            {
+                var scopeAttribute =
+                    bindingSyntaxEntry.Key.GetCustomAttributes(false).OfType<ScopeAttribute>().SingleOrDefault();
+
+                if (scopeAttribute != null)
+                {
+                    foreach (var syntax in bindingSyntaxEntry.Value)
+                    {
+                        scopeAttribute.Configure(syntax);
+                    }
+                }
             }
         }
 

@@ -80,6 +80,10 @@
     <Compile Include="..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="Attributes\ScopeAttribute.cs" />
+    <Compile Include="Attributes\SingletonScopedAttribute.cs" />
+    <Compile Include="Attributes\ThreadScopedAttribute.cs" />
+    <Compile Include="Attributes\TransientScopedAttribute.cs" />
     <Compile Include="BindingBuilder\ConventionBindingBuilder.cs" />
     <Compile Include="BindingBuilder\ConventionSyntax.From.cs" />
     <Compile Include="BindingBuilder\ConventionSyntax.Select.cs" />

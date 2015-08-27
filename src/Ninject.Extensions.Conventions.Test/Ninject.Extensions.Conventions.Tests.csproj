@@ -144,6 +144,10 @@
     <Compile Include="Fakes\IMultipleInterfaceCrazyService.cs" />
     <Compile Include="Fakes\IService.cs" />
     <Compile Include="Fakes\MultipleInterfaceCrazyService.cs" />
+    <Compile Include="Fakes\ServiceWithMultipleScopes.cs" />
+    <Compile Include="Fakes\TransientScopedService.cs" />
+    <Compile Include="Fakes\ThreadScopedService.cs" />
+    <Compile Include="Fakes\SingletonScopedService.cs" />
     <Compile Include="Fakes\TestAttribute.cs" />
     <Compile Include="IntegrationTests\AssemblyLoadingTests.cs" />
     <Compile Include="IntegrationTests\ConfigurationTests.cs" />

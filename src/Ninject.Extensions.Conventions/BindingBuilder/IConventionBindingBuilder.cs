@@ -96,5 +96,10 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
             Justification = "Makes the API simpler.")]
         void ConfigureFor<T>(ConfigurationActionWithService configuration);
+
+        /// <summary>
+        /// Evaluates scope attributes for all types.
+        /// </summary>
+        void ConfigureScopesFromAttributes();
     }
 }
