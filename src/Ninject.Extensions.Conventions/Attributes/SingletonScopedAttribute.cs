@@ -23,8 +23,14 @@ using Ninject.Syntax;
 
 namespace Ninject.Extensions.Conventions.Attributes
 {
+    /// <summary>
+    /// Type is a singleton
+    /// </summary>
     public class SingletonScopedAttribute : ScopeAttribute
     {
+        /// <summary>
+        /// Adds singleton-scope configuration to binding
+        /// </summary>
         public override void Configure(IBindingWhenInNamedWithOrOnSyntax<object> binding)
         {
             binding.InSingletonScope();

@@ -23,8 +23,14 @@ using Ninject.Syntax;
 
 namespace Ninject.Extensions.Conventions.Attributes
 {
+    /// <summary>
+    /// Type is thread scoped
+    /// </summary>
     public class ThreadScopedAttribute : ScopeAttribute
     {
+        /// <summary>
+        /// Adds thread-scope configuration to binding
+        /// </summary>
         public override void Configure(IBindingWhenInNamedWithOrOnSyntax<object> binding)
         {
             binding.InThreadScope();

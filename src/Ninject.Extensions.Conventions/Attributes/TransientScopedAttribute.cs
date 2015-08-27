@@ -23,8 +23,14 @@ using Ninject.Syntax;
 
 namespace Ninject.Extensions.Conventions.Attributes
 {
+    /// <summary>
+    /// Type is transient scoped
+    /// </summary>
     public class TransientScopedAttribute : ScopeAttribute
     {
+        /// <summary>
+        /// Adds transient-scope configuration to binding
+        /// </summary>
         public override void Configure(IBindingWhenInNamedWithOrOnSyntax<object> binding)
         {
             binding.InTransientScope();

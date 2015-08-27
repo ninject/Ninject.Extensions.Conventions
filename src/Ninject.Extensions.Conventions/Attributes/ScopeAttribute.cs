@@ -24,9 +24,15 @@ using Ninject.Syntax;
 
 namespace Ninject.Extensions.Conventions.Attributes
 {
+    /// <summary>
+    /// Scope attributes have to inherit from this class
+    /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = true)]
     public abstract class ScopeAttribute : Attribute
     {
+        /// <summary>
+        /// Add scope configuration to binding
+        /// </summary>
         public abstract void Configure(IBindingWhenInNamedWithOrOnSyntax<object> binding);
     }
 }
