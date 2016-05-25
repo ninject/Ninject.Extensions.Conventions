@@ -19,6 +19,8 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
+using System.IO;
+
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
     using System;
@@ -45,6 +47,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="path">The path to search.</param>
         /// <returns>The names of the detected assemblies.</returns>
         IEnumerable<string> FindAssembliesInPath(string path);
+        IEnumerable<string> FindAssembliesInPath(string path, SearchOption searchOptions);
 
         /// <summary>
         /// Searches for assemblies that match one of the given pattern.

@@ -20,6 +20,8 @@
 //-------------------------------------------------------------------------------
 
 
+using System.IO;
+
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
     using System;
@@ -138,6 +140,28 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         /// <summary>
+        /// Scans the assemblies in the given path and enables scanning of all sub directories .
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="searchOptions">Specifies whether to search the current directory, or the current directory and all subdirectories.</param>
+        /// <returns>The fluent syntax.</returns>
+        public IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, SearchOption searchOptions)
+        {
+            return this.FromAssembliesInPath(path, searchOptions, filter => true);
+        }
+        /// <summary>
+        /// Scans the assemblies in the given path.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <param name="searchOptions">Specifies whether to search the current directory, or the current directory and all subdirectories.</param>
+        /// <param name="filter">The filter used to filter the assemblies.</param>
+        /// <returns>The fluent syntax.</returns>
+        public IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, SearchOption searchOptions, Predicate<Assembly> filter)
+        {
+            return this.From(this.assemblyFinder.FindAssembliesInPath(path, searchOptions), filter);
+        }
+
+        /// <summary>
         /// Scans the assemblies in the given path.
         /// </summary>
         /// <param name="path">The path.</param>
@@ -145,7 +169,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The fluent syntax.</returns>
         public IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, Predicate<Assembly> filter)
         {
-            return this.From(this.assemblyFinder.FindAssembliesInPath(path), filter);
+            return this.FromAssembliesInPath(path, SearchOption.TopDirectoryOnly, filter);
         }
 
         /// <summary>
