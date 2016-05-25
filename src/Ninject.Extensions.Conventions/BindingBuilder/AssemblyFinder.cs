@@ -75,7 +75,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
         public IEnumerable<string> FindAssembliesInPath(string path, SearchOption searchOptions)
         {
-            return Directory.GetFiles(path, "*", SearchOption.AllDirectories).Where(IsAssemblyFile);
+            return Directory.GetFiles(path, "*", searchOptions).Where(IsAssemblyFile);
         }
         /// <summary>
         /// Searches for assemblies that match one of the given pattern.
