@@ -143,22 +143,22 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// Scans the assemblies in the given path and enables scanning of all sub directories .
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <param name="searchOptions">Specifies whether to search the current directory, or the current directory and all subdirectories.</param>
+        /// <param name="searchOption">Specifies whether to search the current directory, or the current directory and all subdirectories.</param>
         /// <returns>The fluent syntax.</returns>
-        public IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, SearchOption searchOptions)
+        public IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, SearchOption searchOption)
         {
-            return this.FromAssembliesInPath(path, searchOptions, filter => true);
+            return this.FromAssembliesInPath(path, searchOption, filter => true);
         }
         /// <summary>
         /// Scans the assemblies in the given path.
         /// </summary>
         /// <param name="path">The path.</param>
-        /// <param name="searchOptions">Specifies whether to search the current directory, or the current directory and all subdirectories.</param>
+        /// <param name="searchOption">Specifies whether to search the current directory, or the current directory and all subdirectories.</param>
         /// <param name="filter">The filter used to filter the assemblies.</param>
         /// <returns>The fluent syntax.</returns>
-        public IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, SearchOption searchOptions, Predicate<Assembly> filter)
+        public IIncludingNonePublicTypesSelectSyntax FromAssembliesInPath(string path, SearchOption searchOption, Predicate<Assembly> filter)
         {
-            return this.From(this.assemblyFinder.FindAssembliesInPath(path, searchOptions), filter);
+            return this.From(this.assemblyFinder.FindAssembliesInPath(path, searchOption), filter);
         }
 
         /// <summary>
