@@ -70,9 +70,19 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <returns>The names of the detected assemblies.</returns>
         public IEnumerable<string> FindAssembliesInPath(string path)
         {
-            return Directory.GetFiles(path).Where(IsAssemblyFile);
+            return FindAssembliesInPath(path, SearchOption.TopDirectoryOnly);
         }
 
+        /// <summary>
+        /// Searches for assemblies in the given path.
+        /// </summary>
+        /// <param name="path">The path to search.</param>
+        /// <param name="searchOption">Specifies whether to search the current directory, or the current directory and all subdirectories.</param>
+        /// <returns>The names of the detected assemblies.</returns>
+        public IEnumerable<string> FindAssembliesInPath(string path, SearchOption searchOption)
+        {
+            return Directory.GetFiles(path, "*", searchOption).Where(IsAssemblyFile);
+        }
         /// <summary>
         /// Searches for assemblies that match one of the given pattern.
         /// </summary>

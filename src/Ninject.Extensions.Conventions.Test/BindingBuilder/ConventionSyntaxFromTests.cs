@@ -19,6 +19,8 @@
 // </copyright>
 //-------------------------------------------------------------------------------
 
+using System.IO;
+
 #if !NO_MOQ
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
@@ -167,6 +169,21 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         }
 
         [Fact]
+        public void FromAssembliesInPathWithSearchOption_CallsBuilder_WithAllAssembliesGivenByTheAssemblyFinder()
+        {
+            const SearchOption searchOption = System.IO.SearchOption.TopDirectoryOnly;
+            const string Path = "ThePath";
+            var assemblyNames = new[] { "Assembly" };
+            var assemblies = new[] { Assembly.GetCallingAssembly() };
+            this.SetupFindAssembliesInPath(assemblyNames, Path, searchOption);
+            this.SetupFindAssemblies(assemblies, assemblyNames);
+
+            this.testee.FromAssembliesInPath(Path, searchOption);
+
+            this.conventionBindingBuilderMock.Verify(b => b.SelectAllTypesFrom(IsMatchingSequence(assemblies)));
+        }
+
+        [Fact]
         public void FromAssembliesInPathWithFilter_CallsBuilder_WithAllAssembliesGivenByTheAssemblyFinder()
         {
             const string Path = "ThePath";
@@ -178,6 +195,23 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.SetupFindAssemblies(filter, assemblies, assemblyNames);
 
             this.testee.FromAssembliesInPath(Path, filter);
+
+            this.conventionBindingBuilderMock.Verify(b => b.SelectAllTypesFrom(IsMatchingSequence(assemblies)));
+        }
+
+        [Fact]
+        public void FromAssembliesInPathWithSearchOptionAndFilter_CallsBuilder_WithAllAssembliesGivenByTheAssemblyFinder()
+        {
+            const SearchOption searchOption = System.IO.SearchOption.TopDirectoryOnly;
+            const string Path = "ThePath";
+            var assemblyNames = new[] { "Assembly" };
+            var assemblies = new[] { Assembly.GetCallingAssembly() };
+            var filter = new Predicate<Assembly>(a => true);
+
+            this.SetupFindAssembliesInPath(assemblyNames, Path, searchOption);
+            this.SetupFindAssemblies(filter, assemblies, assemblyNames);
+
+            this.testee.FromAssembliesInPath(Path, searchOption, filter);
 
             this.conventionBindingBuilderMock.Verify(b => b.SelectAllTypesFrom(IsMatchingSequence(assemblies)));
         }
@@ -258,6 +292,10 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         private void SetupFindAssembliesInPath(IEnumerable<string> assemblyNames, string path)
         {
             this.assemblyFinderMock.Setup(f => f.FindAssembliesInPath(path)).Returns(assemblyNames);
+        }
+        private void SetupFindAssembliesInPath(IEnumerable<string> assemblyNames, string path, SearchOption searchOption)
+        {
+            this.assemblyFinderMock.Setup(f => f.FindAssembliesInPath(path, searchOption)).Returns(assemblyNames);
         }
 
         private void SetupFindAssemblies(IEnumerable<Assembly> assemblies, IEnumerable<string> assemblyNames)
