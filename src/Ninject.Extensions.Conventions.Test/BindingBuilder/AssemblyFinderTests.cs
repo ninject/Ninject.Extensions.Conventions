@@ -72,7 +72,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             
             var assemblies = this.testee.FindAssembliesInPath(path);
 
-            assemblies.Select(a => a.ToLower()).Should().BeEquivalentTo(new[] { expectedAssembly.Location.ToLower() });
+            assemblies.Select(a => a.ToLower()).Should().Contain(expectedAssembly.Location.ToLower());
         }
     
         [Fact]

@@ -1,23 +1,9 @@
-//-------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 // <copyright file="ConventionBindingBuilder.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2013 Ninject Project Contributors
-//   Authors: Remo Gloor (remo.gloor@gmail.com)
-//           
-//   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
-//   you may not use this file except in compliance with one of the Licenses.
-//   You may obtain a copy of the License at
-//
-//       http://www.apache.org/licenses/LICENSE-2.0
-//   or
-//       http://www.microsoft.com/opensource/licenses.mspx
-//
-//   Unless required by applicable law or agreed to in writing, software
-//   distributed under the License is distributed on an "AS IS" BASIS,
-//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//   See the License for the specific language governing permissions and
-//   limitations under the License.
+//   Copyright (c) 2009-2017 Ninject Project Contributors
+//   Licensed under the Apache License, Version 2.0.
 // </copyright>
-//-------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
@@ -62,7 +48,11 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <param name="assemblies">The assemblies from which the types are selected.</param>
         public void SelectAllTypesFrom(IEnumerable<Assembly> assemblies)
         {
-            if (this.selectionComplete) this.Reset();
+            if (this.selectionComplete)
+            {
+                this.Reset();
+            }
+
             this.selectedAssemblies = assemblies;
             this.UnionTypes();
             this.currentTypes = this.typeSelector.GetExportedTypes(this.selectedAssemblies);
@@ -77,7 +67,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             this.currentTypes = this.typeSelector.GetAllTypes(this.selectedAssemblies);
         }
 #endif
-        
+
         /// <summary>
         /// Selects the types matching the specified filter from the current selected types.
         /// </summary>
@@ -96,8 +86,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             if (includedTypes == null)
             {
                 throw new ArgumentNullException("includedTypes");
-            } 
-            
+            }
+
             this.CreateTypeList();
 
             foreach (var type in includedTypes)
@@ -118,8 +108,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             if (excludedTypes == null)
             {
                 throw new ArgumentNullException("excludedTypes");
-            } 
-            
+            }
+
             this.CreateTypeList();
 
             foreach (var type in excludedTypes)
@@ -138,10 +128,10 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             if (generator == null)
             {
                 throw new ArgumentNullException("generator");
-            } 
-            
+            }
+
             this.CreateTypeList();
-            
+
             foreach (var type in this.types)
             {
                 this.bindingSyntax[type] = generator.CreateBindings(type, this.bindingRoot).ToList();
@@ -157,8 +147,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
-            } 
-            
+            }
+
             foreach (var bindingSyntaxEntry in this.bindingSyntax)
             {
                 foreach (var syntax in bindingSyntaxEntry.Value)
@@ -177,8 +167,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
-            } 
-            
+            }
+
             foreach (var bindingSyntaxEntry in this.bindingSyntax)
             {
                 foreach (var syntax in bindingSyntaxEntry.Value)
@@ -193,36 +183,32 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type to be configured.</typeparam>
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "Makes the API simpler.")]
         public void ConfigureFor<T>(ConfigurationAction configuration)
         {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
-            } 
-            
+            }
+
             var type = typeof(T);
             foreach (var syntax in this.bindingSyntax[type])
             {
                 configuration(syntax);
             }
         }
-        
+
         /// <summary>
         /// Configures the binding of the specified type using the specified configuration.
         /// </summary>
         /// <typeparam name="T">The type to be configured.</typeparam>
         /// <param name="configuration">The configuration that is applies to the bindings.</param>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "Makes the API simpler.")]
         public void ConfigureFor<T>(ConfigurationActionWithService configuration)
         {
             if (configuration == null)
             {
                 throw new ArgumentNullException("configuration");
-            } 
-            
+            }
+
             var type = typeof(T);
             foreach (var syntax in this.bindingSyntax[type])
             {

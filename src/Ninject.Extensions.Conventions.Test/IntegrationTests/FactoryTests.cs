@@ -44,11 +44,11 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
 
         public FactoryTests()
         {
-#if !NO_ASSEMBLY_SCANNING
-            this.kernel = new StandardKernel();
-#else
+//#if !NO_ASSEMBLY_SCANNING
+//            this.kernel = new StandardKernel();
+//#else
             this.kernel = new StandardKernel(new FuncModule());
-#endif
+//#endif
         }
 
         public void Dispose()

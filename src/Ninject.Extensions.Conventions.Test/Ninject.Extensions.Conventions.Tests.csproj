@@ -1,192 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{861737AD-F1E6-4D67-9A6C-26642BA9F267}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Ninject.Extensions.Conventions</RootNamespace>
-    <AssemblyName>Ninject.Extensions.Conventions.Tests</AssemblyName>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
+    <TargetFrameworks>netcoreapp2.0;net452</TargetFrameworks>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\build\debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\build\release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Castle.Core">
-      <HintPath>..\..\lib\Ninject.Extensions.Factory\net-4.0\DynamicProxy\lib\Castle.Core.3.2.0\lib\net40-client\Castle.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentAssertions">
-      <HintPath>..\..\tools\FluentAssertions\Net-3.5\FluentAssertions.dll</HintPath>
-    </Reference>
-    <Reference Include="Moq">
-      <HintPath>..\..\tools\moq\NET40\Moq.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\..\lib\Ninject\net-3.5\Ninject.dll</HintPath>
-    </Reference>
-    <Reference Include="Ninject.Extensions.Factory, Version=3.0.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
-      <HintPath>..\..\lib\Ninject.Extensions.Factory\net-4.0\Ninject.Extensions.Factory.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
-    </Reference>
+    <PackageReference Include="FluentAssertions" Version="4.19.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="Moq" Version="4.7.99" />
+    <PackageReference Include="xunit" Version="2.3.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net452' ">
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml.Linq">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Xml" />
-    <Reference Include="xunit">
-      <HintPath>..\..\tools\xunit.net\xunit.dll</HintPath>
-    </Reference>
-    <Reference Include="xunit.extensions">
-      <HintPath>..\..\tools\xunit.net\xunit.extensions.dll</HintPath>
-    </Reference>
+    <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="BindingBuilder\AssemblyFinderTests.cs" />
-    <Compile Include="BindingBuilder\ConventionBindingBuilderTests.cs" />
-    <Compile Include="BindingBuilder\ConventionSyntaxBindingTests.cs" />
-    <Compile Include="BindingBuilder\ConventionSyntaxFilteringTests.cs" />
-    <Compile Include="BindingBuilder\ConventionSyntaxFromTests.cs" />
-    <Compile Include="BindingBuilder\ConventionSyntaxSelectTests.cs" />
-    <Compile Include="BindingBuilder\TypeSelectorTests.cs" />
-    <Compile Include="BindingBuilder\TypeFilterTests.cs" />
-    <Compile Include="BindingGenerators\AllBaseClassesBindingGeneratorTests.cs" />
-    <Compile Include="BindingGenerators\TestBindingGeneratorFactory.cs" />
-    <Compile Include="Fakes\AbstractInheritanceTree\BaseAbstractClass.cs" />
-    <Compile Include="Fakes\AbstractInheritanceTree\DerivedAbstractClassImpl.cs" />
-    <Compile Include="Fakes\AbstractInheritanceTree\DerivedAbstractClass.cs" />
-    <Compile Include="Fakes\AbstractInheritanceTree\LeafClass.cs" />
-    <Compile Include="Fakes\IBar{T1,T2}.cs" />
-    <Compile Include="Fakes\IBar{T}.cs" />
-    <Compile Include="Fakes\IFoo{T}.cs" />
-    <Compile Include="Fakes\IInternalInterface.cs" />
-    <Compile Include="Fakes\InternalType.cs" />
-    <Compile Include="Fakes\IService{T}.cs" />
-    <Compile Include="Fakes\NormalClasses\AbstractClassWithManyInterfaces.cs" />
-    <Compile Include="BindingGenerators\AllInterfacesBindingGeneratorTests.cs" />
-    <Compile Include="BindingGenerators\BaseBindingGeneratorTests.cs" />
-    <Compile Include="BindingGenerators\BindableTypeSelectorTest.cs" />
-    <Compile Include="Fakes\NormalClasses\ClassWithManyInterfaces.cs" />
-    <Compile Include="BindingGenerators\DefaultInterfacesBindingGeneratorTests.cs" />
-    <Compile Include="BindingGenerators\DefaultInterfaceBindingGeneratorTests.cs" />
-    <Compile Include="Fakes\OpenGenerics\GenericBaseClassWithManyInterfaces{T1,T2}.cs" />
-    <Compile Include="Fakes\OpenGenerics\GenericBaseClassWithManyInterfaces{T}.cs" />
-    <Compile Include="Fakes\OpenGenerics\OpenGenericClassWithManyInterfaces.cs" />
-    <Compile Include="Fakes\Interfaces\IBaseClosedGenericInterface.cs" />
-    <Compile Include="Fakes\Interfaces\IBaseNormalInterface.cs" />
-    <Compile Include="Fakes\Interfaces\IBaseOfDerivedGenericInterface.cs" />
-    <Compile Include="Fakes\Interfaces\IBaseOfDerivedInterface.cs" />
-    <Compile Include="Fakes\Interfaces\IBaseOpenGenericInterface.cs" />
-    <Compile Include="Fakes\Interfaces\IBaseOpenGenericInterface1.cs" />
-    <Compile Include="Fakes\Interfaces\IBaseOpenGenericInterface2.cs" />
-    <Compile Include="Fakes\Interfaces\IClosedGenericInterface.cs" />
-    <Compile Include="Fakes\Interfaces\IDerivedGenericInterface.cs" />
-    <Compile Include="Fakes\Interfaces\IDerivedInterface.cs" />
-    <Compile Include="Fakes\Interfaces\IOpenGenericInterface.cs" />
-    <Compile Include="Fakes\Interfaces\INormalInterface.cs" />
-    <Compile Include="BindingGenerators\KernelMock.cs" />
-    <Compile Include="BindingGenerators\SelectorBindingGeneratorTests.cs" />
-    <Compile Include="BindingGenerators\SelfBindingGeneratorTests.cs" />
-    <Compile Include="BindingGenerators\SingleInterfaceBindingGeneratorTests.cs" />
-    <Compile Include="Fakes\Bar.cs" />
-    <Compile Include="Fakes\BaseService.cs" />
-    <Compile Include="Fakes\Foo.cs" />
-    <Compile Include="Fakes\IBar.cs" />
-    <Compile Include="Fakes\ICrazyService.cs" />
-    <Compile Include="Fakes\IFoo.cs" />
-    <Compile Include="Fakes\IMultipleInterfaceCrazyService.cs" />
-    <Compile Include="Fakes\IService.cs" />
-    <Compile Include="Fakes\MultipleInterfaceCrazyService.cs" />
-    <Compile Include="Fakes\TestAttribute.cs" />
-    <Compile Include="IntegrationTests\AssemblyLoadingTests.cs" />
-    <Compile Include="IntegrationTests\ConfigurationTests.cs" />
-    <Compile Include="IntegrationTests\FactoryTests.cs" />
-    <Compile Include="IntegrationTests\InterfaceSegregationTests.cs" />
-    <Compile Include="IntegrationTests\ModuleLoadingTest.cs" />
-    <Compile Include="IntegrationTests\NonePublicTypesTests.cs" />
-    <Compile Include="IntegrationTests\NormalClassBindingTests.cs" />
-    <Compile Include="IntegrationTests\OpenGenericClassBindingTests.cs" />
-    <Compile Include="Fakes\NormalClasses\DefaultConvention.cs" />
-    <Compile Include="Fakes\Interfaces\IDefaultConvention.cs" />
-    <Compile Include="IntegrationTests\SpecialConfigurations.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <ProjectReference Include="..\Ninject.Extensions.Conventions\Ninject.Extensions.Conventions.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
-      <Visible>False</Visible>
-      <ProductName>Windows Installer 3.1</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Ninject.Extensions.Conventions\Ninject.Extensions.Conventions.csproj">
-      <Project>{c9016f7b-68ce-46a7-80a7-a4592b6f0eac}</Project>
-      <Name>Ninject.Extensions.Conventions</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

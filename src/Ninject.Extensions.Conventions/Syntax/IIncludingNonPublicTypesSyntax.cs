@@ -1,22 +1,23 @@
 ﻿// -------------------------------------------------------------------------------------------------
-// <copyright file="IJoinSyntax.cs" company="Ninject Project Contributors">
+// <copyright file="IIncludingNonPublicTypesSyntax.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2017 Ninject Project Contributors
 //   Licensed under the Apache License, Version 2.0.
 // </copyright>
 // -------------------------------------------------------------------------------------------------
+
 namespace Ninject.Extensions.Conventions.Syntax
 {
-    using Ninject.Syntax;
-
     /// <summary>
-    /// Syntax to allow multiple From.Select statements
+    /// The syntax to specify that none public types shall be included.
     /// </summary>
-    public interface IJoinSyntax : IFluentSyntax
+    public interface IIncludingNonPublicTypesSyntax
     {
+#if !NO_SKIP_VISIBILITY
         /// <summary>
-        /// Gets the from syntax to select additional types from different assemblies
+        /// Specifies that none public types shall be included.
         /// </summary>
-        /// <value>The fluent syntax.</value>
-        IFromSyntax Join { get; }
+        /// <returns>The fluent syntax.</returns>
+        ISelectSyntax IncludingNonePublicTypes();
+#endif
     }
 }

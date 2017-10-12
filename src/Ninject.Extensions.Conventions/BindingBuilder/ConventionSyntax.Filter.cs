@@ -1,23 +1,9 @@
-//-------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 // <copyright file="ConventionSyntax.Filter.cs" company="Ninject Project Contributors">
-//   Copyright (c) 2009-2011 Ninject Project Contributors
-//   Authors: Remo Gloor (remo.gloor@gmail.com)
-//           
-//   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
-//   you may not use this file except in compliance with one of the Licenses.
-//   You may obtain a copy of the License at
-//
-//       http://www.apache.org/licenses/LICENSE-2.0
-//   or
-//       http://www.microsoft.com/opensource/licenses.mspx
-//
-//   Unless required by applicable law or agreed to in writing, software
-//   distributed under the License is distributed on an "AS IS" BASIS,
-//   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-//   See the License for the specific language governing permissions and
-//   limitations under the License.
+//   Copyright (c) 2009-2017 Ninject Project Contributors
+//   Licensed under the Apache License, Version 2.0.
 // </copyright>
-//-------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------
 
 namespace Ninject.Extensions.Conventions.BindingBuilder
 {
@@ -66,8 +52,6 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type defining the namespace.</typeparam>
         /// <returns>The fluent syntax</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "Makes the API simpler.")]
         public IJoinFilterWhereExcludeIncludeBindSyntax InNamespaceOf<T>()
         {
             return this.InNamespaceOf(typeof(T));
@@ -108,8 +92,6 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type defining the namespace.</typeparam>
         /// <returns>The fluent syntax</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "Makes the API simpler.")]
         public IJoinFilterWhereExcludeIncludeBindSyntax NotInNamespaceOf<T>()
         {
             return this.NotInNamespaceOf(typeof(T));
@@ -150,8 +132,6 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The ancestor type.</typeparam>
         /// <returns>The fluent syntax</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "Makes the API simpler.")]
         public IJoinFilterWhereExcludeIncludeBindSyntax InheritedFrom<T>()
         {
             return this.InheritedFrom(typeof(T));
@@ -162,9 +142,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <returns>The fluent syntax</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "Makes the API simpler.")]
-        public IJoinFilterWhereExcludeIncludeBindSyntax WithAttribute<T>() where T : Attribute
+        public IJoinFilterWhereExcludeIncludeBindSyntax WithAttribute<T>()
+            where T : Attribute
         {
             return this.WithAttribute(typeof(T));
         }
@@ -175,9 +154,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <param name="predicate">A function to test if an attribute matches.</param>
         /// <returns>The fluent syntax</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "Makes the API simpler.")]
-        public IJoinFilterWhereExcludeIncludeBindSyntax WithAttribute<T>(Func<T, bool> predicate) where T : Attribute
+        public IJoinFilterWhereExcludeIncludeBindSyntax WithAttribute<T>(Func<T, bool> predicate)
+            where T : Attribute
         {
             return this.SelectTypes(t => this.typeFilter.HasAttribute(t, predicate));
         }
@@ -197,9 +175,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// </summary>
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <returns>The fluent syntax</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1004:GenericMethodsShouldProvideTypeParameter",
-            Justification = "Makes the API simpler.")]
-        public IJoinFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>() where T : Attribute
+        public IJoinFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>()
+            where T : Attribute
         {
             return this.WithoutAttribute(typeof(T));
         }
@@ -210,7 +187,8 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <typeparam name="T">The type of the attribute</typeparam>
         /// <param name="predicate">A function to test if an attribute matches.</param>
         /// <returns>The fluent syntax</returns>
-        public IJoinFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>(Func<T, bool> predicate) where T : Attribute
+        public IJoinFilterWhereExcludeIncludeBindSyntax WithoutAttribute<T>(Func<T, bool> predicate)
+            where T : Attribute
         {
             return this.SelectTypes(t => !this.typeFilter.HasAttribute(t, predicate));
         }
@@ -262,6 +240,5 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         {
             return this.SelectTypes(t => t.Name.StartsWith(prefix));
         }
-
     }
 }
