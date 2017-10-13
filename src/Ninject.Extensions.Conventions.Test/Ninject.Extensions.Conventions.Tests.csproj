@@ -5,8 +5,8 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.0|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0;NO_ASSEMBLY_SCANNING</DefineConstants>
+  <PropertyGroup Condition="'$(TargetFramework)'=='netcoreapp2.0'">
+    <DefineConstants>$(DefineConstants);NO_ASSEMBLY_SCANNING</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>
