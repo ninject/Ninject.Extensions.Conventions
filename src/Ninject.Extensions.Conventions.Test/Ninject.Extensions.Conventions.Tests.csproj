@@ -5,10 +5,6 @@
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netcoreapp2.0|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0;NO_ASSEMBLY_SCANNING</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
