@@ -65,7 +65,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <summary>
         /// Includes none public types.
         /// </summary>
-        void IncludingNonePublicTypes();
+        void IncludingNonPublicTypes();
 #endif
 
         /// <summary>

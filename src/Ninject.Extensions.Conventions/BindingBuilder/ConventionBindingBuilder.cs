@@ -62,7 +62,7 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
         /// <summary>
         /// Includes none public types.
         /// </summary>
-        public void IncludingNonePublicTypes()
+        public void IncludingNonPublicTypes()
         {
             this.currentTypes = this.typeSelector.GetAllTypes(this.selectedAssemblies);
         }

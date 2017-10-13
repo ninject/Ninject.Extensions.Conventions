@@ -232,11 +232,11 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
 #if !NO_SKIP_VISIBILITY
         [Fact]
-        public void IncludingNonePublicTypes_CallsBuilder()
+        public void IncludingNonPublicTypes_CallsBuilder()
         {
-            this.testee.IncludingNonePublicTypes();
+            this.testee.IncludingNonPublicTypes();
 
-            this.conventionBindingBuilderMock.Verify(b => b.IncludingNonePublicTypes());
+            this.conventionBindingBuilderMock.Verify(b => b.IncludingNonPublicTypes());
         }
 #endif
 

@@ -92,9 +92,9 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
 #if !NO_SKIP_VISIBILITY
         /// <inheritdoc />
-        public ISelectSyntax IncludingNonePublicTypes()
+        public ISelectSyntax IncludingNonPublicTypes()
         {
-            this.bindingBuilder.IncludingNonePublicTypes();
+            this.bindingBuilder.IncludingNonPublicTypes();
             return this;
         }
 #endif

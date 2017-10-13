@@ -17,7 +17,7 @@ namespace Ninject.Extensions.Conventions.Syntax
         /// Specifies that none public types shall be included.
         /// </summary>
         /// <returns>The fluent syntax.</returns>
-        ISelectSyntax IncludingNonePublicTypes();
+        ISelectSyntax IncludingNonPublicTypes();
 #endif
     }
 }

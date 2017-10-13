@@ -1,5 +1,5 @@
 ﻿//-------------------------------------------------------------------------------
-// <copyright file="NonePublicTypesTests.cs" company="Ninject Project Contributors">
+// <copyright file="NonPublicTypesTests.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2011 Ninject Project Contributors
 //   Authors: Remo Gloor (remo.gloor@gmail.com)
 //           
@@ -28,7 +28,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
     using Ninject.Extensions.Conventions.Fakes;
     using Xunit;
 
-    public class NonePublicTypesTests
+    public class NonPublicTypesTests
     {
         [Fact]
         public void AssemblyCanBeSpecifiedUsingFrom()
@@ -37,7 +37,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
             {
                 kernel.Bind(
                     x => x.From(Assembly.GetExecutingAssembly())
-                          .IncludingNonePublicTypes()
+                          .IncludingNonPublicTypes()
                           .SelectAllTypes()
                           .BindAllInterfaces());
                 var instance = kernel.Get<IInternalInterface>();

@@ -62,12 +62,12 @@ namespace Ninject.Extensions.Conventions.BindingBuilder
 
 #if !NO_SKIP_VISIBILITY
         [Fact]
-        public void IncludingNonePublicTypesPassesAssembliesToTypeFilterGetTypesToReceiveAllTypes()
+        public void IncludingNonPublicTypesPassesAssembliesToTypeFilterGetTypesToReceiveAllTypes()
         {
             var assemblies = new[] { Assembly.GetExecutingAssembly(), Assembly.GetCallingAssembly() };
 
             this.testee.SelectAllTypesFrom(assemblies);
-            this.testee.IncludingNonePublicTypes();
+            this.testee.IncludingNonPublicTypes();
 
             this.typeSelectorMock.Verify(tf => tf.GetAllTypes(assemblies));
         }
