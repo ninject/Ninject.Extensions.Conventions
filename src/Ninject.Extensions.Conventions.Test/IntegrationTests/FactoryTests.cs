@@ -44,7 +44,7 @@ namespace Ninject.Extensions.Conventions.IntegrationTests
 
         public FactoryTests()
         {
-#if !NO_ASSEMBLY_SCANNING
+#if !NETCOREAPP2_0 // workaround as dotnet core UT does't copy package dependencies to the output
             this.kernel = new StandardKernel();
 #else
             this.kernel = new StandardKernel(new FuncModule());
