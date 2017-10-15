@@ -85,7 +85,14 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
             }
 
             var genericMarkerPosition = name.IndexOf("`", StringComparison.Ordinal);
-            return name.Substring(0, genericMarkerPosition);
+            if (genericMarkerPosition > -1)
+            {
+                return name.Substring(0, genericMarkerPosition);
+            }
+            else
+            {
+                return name;
+            }
         }
     }
 }

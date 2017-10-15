@@ -21,7 +21,10 @@
 
 namespace Ninject.Extensions.Conventions.Fakes
 {
-    public class Bar<T> : IBar<T>, IBar, IBar<int, int>
+    public class ParentBar<T>
     {
+        public class Bar<T> : IBar<T>, IBar, IBar<int, int>
+        {
+        }
     }
 }

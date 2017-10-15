@@ -71,7 +71,7 @@ namespace Ninject.Extensions.Conventions.BindingGenerators
         [Fact]
         public void GenericInterfacesWithTheSameNameAreBound()
         {
-            var type = typeof(Bar<int>);
+            var type = typeof(ParentBar<int>.Bar<int>);
             var interfaces = new[] { typeof(IFoo), typeof(IBar), typeof(IBar<int>), typeof(IBar<>) };
             var expectedInterfaes = interfaces.Where(i => i.Name.StartsWith("IBar"));
             this.bindableInterfaceSelectorMock.Setup(s => s.GetBindableInterfaces(type)).Returns(interfaces);
