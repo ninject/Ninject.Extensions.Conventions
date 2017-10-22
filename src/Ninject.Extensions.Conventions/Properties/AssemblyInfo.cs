@@ -1,5 +1,5 @@
-// -------------------------------------------------------------------------------------------------
-// <copyright file="IJoinWhereExcludeIncludeBindSyntax.cs" company="Ninject Project Contributors">
+﻿// -------------------------------------------------------------------------------------------------
+// <copyright file="AssemblyInfo.cs" company="Ninject Project Contributors">
 //   Copyright (c) 2009-2017 Ninject Project Contributors. All rights reserved.
 //
 //   Dual-licensed under the Apache License, Version 2.0, and the Microsoft Public License (Ms-PL).
@@ -18,12 +18,6 @@
 // </copyright>
 // -------------------------------------------------------------------------------------------------
 
-namespace Ninject.Extensions.Conventions.Syntax
-{
-    /// <summary>
-    /// From, Where, Exclude, Include, Bind syntax
-    /// </summary>
-    public interface IJoinWhereExcludeIncludeBindSyntax : IJoinExcludeIncludeBindSyntax, IWhereSyntax
-    {
-    }
-}
+using System;
+
+[assembly: CLSCompliant(true)]
